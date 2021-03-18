@@ -30,6 +30,12 @@ class CustomDelegateViewController: UIViewController {
       performSegue(withIdentifier: "ComposeSegue", sender: nil)
    }
    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination.childViewControllers.first as? ComposeViewController {
+            vc.delegate = self
+        }
+    }
+    
    override func viewDidLoad() {
       super.viewDidLoad()
       
@@ -37,7 +43,15 @@ class CustomDelegateViewController: UIViewController {
    }
 }
 
-
+extension CustomDelegateViewController: ComposeDelegate {
+    func composer(_ vc: UIViewController, didInput value: String?) {
+        valueLabel.text = value
+    }
+    
+    func composerDidCancel(_ vc: UIViewController) {
+        valueLabel.text = "Cancel"
+    }
+}
 
 
 
