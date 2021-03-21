@@ -26,6 +26,11 @@ import UIKit
 class TagViewController: UIViewController {
     
     @IBAction func changeColor(_ sender: Any) {
-        
+        if let v = view.viewWithTag(326) {
+            v.backgroundColor = .blue
+        }
+        if let v = view.viewWithTag(99) {
+            v.backgroundColor = .systemRed
+        }
     }
 }

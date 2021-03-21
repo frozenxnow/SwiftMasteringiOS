@@ -108,3 +108,132 @@ struct CGPoint {
 frame은 슈퍼뷰의 지역좌표에서 뷰의 크기와 위치를 나타내는 속성이고
 
 bounds는 현재 뷰의 지역좌표에서 뷰의 크기를 저장하는 속성입니다. origin의 기본값으로는 0이 저장되어 있고, size는 프레임의 크기가 저장되어 있습니다.
+
+# 3. UIView #2
+
+UIView를 추가하는 방법에는 두가지가 있습니다. 우선 Root View의 존재를 알아야합니다. Scene에서 화면을 구성할 때에는 Root View에 SubView를 추가합니다. 
+
+스토리보드에서는 drag&drop 으로 서브뷰를 생성하고, 그 서브뷰를 루트뷰에 추가합니다.
+
+코드로 작성할 때에는 이 모든 작업을 따로 실행합니다.
+
+```jsx
+import UIKit
+
+class CreatingViewObjectViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let frame = CGRect(x: 50, y: 50, width: 100, height: 100)
+        let v = UIView(frame: frame)
+        
+        view.addSubview(v)
+    }
+}
+```
+
+1. 우선 뷰의 위치와 크기를 저장하는 frame을 선언합니다.
+2. 그 frame을 값으로 가지는 (서브)뷰를 생성합니다.
+3. 루트뷰인 view에 addSubview(view:)를 사용해 서브뷰를 추가합니다.
+
+## Image View
+
+Image View는 UIImageView 클래스로 이루어져있고 이 클래스는 UIView 클래스를 상속합니다. 
+
+Content Mode란 이미지뷰 프레임 내 이미지가 위치하는 모습을 설정하는 속성으로 다양한 설정 조건이 존재합니다.
+
+- Aspect Fit : 프레임 내부에서 원본 비율을 유지합니다.
+- Aspect Fill : 원본 비율을 유지하며 프레임에 빈 공간이 없도록 위치하기 때문에 프레임보다 이미지가 커질 수 있습니다.
+- Scale To Fill : 비율을 유지하지 않고 프레임에 꽉 채우도록 이미지가 변형됩니다.
+- Redraw : 캐시에 저장된 이미지를 사용하지 않고 이미지를 무조건 다시 그립니다. 따라서 그리기 성능이 매우 저하되며 꼭 필요한 상황이 아니라면 사용하지 않습니다.
+- 나머지는 원본 이미지를 그대로 유지하며 용어에 따라 프레임에서 이미지의 위치를 고정합니다.
+
+# 4. UIView #3
+
+## View Tagging
+
+View의 속성 중 Tag라는 속성에 대해 알아보겠습니다. 뷰에 접근하는 방법으로 Outlet을 사용하지만, 태그를 이용하면 Outlet 없이 속성에 접근할 수 있습니다. 기본값은 0이고 0이 아닌 다른 숫자로 지정했을 경우 코드에서 그 숫자를 사용해 뷰에 접근합니다. 이러한 방법을 `View Tagging`이라고 합니다. 
+
+```jsx
+@IBAction func changeColor(_ sender: Any) {
+    if let v = view.viewWithTag(0) {
+        v.backgroundColor = .black
+    }
+}
+```
+
+Scene의 버튼을 IBAction으로 연결했습니다. 이 버튼을 클릭할 경우 배경이 바뀌도록 구현했습니다. 
+
+루트뷰에는 현재 서로 다른 색상의 뷰가 두 개 있고, 두 뷰의 태그 속성값은 0입니다.
+
+위와 같이 구현한 후 버튼을 탭하면 루트뷰의 바탕 색이 검정색으로 변합니다.
+
+여기에서 viewWithTag() 함수에 대해 살펴보겠습니다. 이 함수는 view.viweWithTag(0)으로 앞에 붙어있는 view는 RootView를 의미합니다. 이 함수를 실행하면 루트뷰부터 태그가 0인 뷰를 찾게 되고, 루트뷰의 태그값 또한 0이기 때문에 루트뷰의 배경 색을 검정으로 변경한 후 함수의 실행이 종료됩니다.
+
+그렇다면 색상을 바꾸고자 하는 뷰의 태그 속성값을 변경하고, 이 속성값을 통해 해당 뷰의 배경색을 변경하면 될 것 같습니다. 그렇게 구현하고 다시 실행하겠습니다. 각 뷰의 태그값을 326, 99로 변경하고(viewWithTag()함수의 파라미터는 Int를 필요로 합니다.) 위 함수에서 0이 아닌 326과 99를 입력, 배경 색을 다른 색으로 변경하도록 구현했더니 올바르게 실행되었습니다. 루트뷰도 태그값을 가지고 있고, 이 또한 0이라고 생각하면 될것 같습니다. 
+
+```jsx
+// 수정한 코드
+class TagViewController: UIViewController {
+    
+    @IBAction func changeColor(_ sender: Any) {
+        if let v = view.viewWithTag(326) {
+            v.backgroundColor = .blue
+        }
+        if let v = view.viewWithTag(99) {
+            v.backgroundColor = .systemRed
+        }
+    }
+}
+```
+
+`viewWithTag()` 함수를 제대로 사용하기 위해서는 뷰마다 `고유한 태그값`을 지정해주어야 합니다. 만약 동일한 값을 가진 뷰 모두에 적용되는 것이 아니라 **먼저 검색된 하나의 뷰에만 영향을 미치기 때문에** 주의해야합니다.
+
+## Interaction
+
+뷰의 속성을 살펴보면 Interaction 속성에 체크박스가 두 개 있는것을 확인할 수 있습니다.
+
+- [ ]  User Interaction Enabled
+- [ ]  Multiple Touch
+
+기본적으로 User Interaction Enabled에는 체크가 되어있고 Multiple Touch에는 체크가 되어있지 않습니다. 
+
+User Interaction Enabled는 사용자의 터치 이벤트를 인식하는 것이고 
+
+Multiple Touch는 여러 개의 터치를 인식하는 것입니다. 만약 Multiple Touch에 터치가 되어있지 않은 상태에서 두 개 이상의 터치 이벤트가 발생한다면 먼저 터치된 값만 인식합니다. 
+
+# 5. UIView #4
+
+## Alpha
+
+투명도입니다. `0.0 ~ 1.0` 까지의 값을 가지고 있고, 0.0은 완전히 투명하게 설정됩니다. 
+
+이때 서브뷰의 알파값은 슈퍼뷰에 영향을 미치지 않으며, 반대로 슈퍼뷰의 알파값은 서브뷰에 영향을 미칩니다.
+
+## Background color
+
+스토리보드에서 변경하는 것은 어렵지 않습니다. 색을 직접 선택할 수도 있고 컬러 팔레트를 사용할 수도 있습니다.
+
+그러나 코드에서 직접 변경할 때는 UIColor를 사용해야 하고 알아야 할 내용도 상당히 많기 때문에 뒤에서 학습하도록 하겠습니다.
+
+## Hidden
+
+히든 속성을 체크할 경우 스토리보드에는 희미하게 표시가 되어있으나 실제로 실행하면 보이지도 않고 이벤트를 처리할수도 없게 됩니다.
+
+## Clip to Bounds
+
+슈퍼뷰와 서브뷰가 있을 때 서브뷰는 슈퍼뷰의 프레임 밖에 위치할 수도 있습니다. 이때 Clip to Bounds 속성에 체크하게 되면 슈퍼뷰의 프레임 밖으로 벗어난 서브뷰의 이미지는 숨김처리되어 노출되지 않습니다.
+
+## Opaque
+
+기본으로 체크되어 있습니다. 두 뷰가 겹쳐져있고 알파값이 1이 아닐때 겹쳐진 부분에서는 색의 합성값을 계산하는 과정이 필요합니다. 
+
+체크되어 있을 경우 이 과정을 무시하고 색상을 합성하지 않습니다. (알파값이 1.0일 때 체크합니다.)
+
+체크되지 않았을 경우 색을 합성하는 과정이 추가되어 상대적으로 느려집니다. (알파값이 1.0 미만일 때 체크를 해제합니다.)
+
+## Clears Graphics Context
+
+체크되어 있을 경우 뷰가 그리기 코드를 실행하기 전 그리기 버퍼를 알파값이 0.0인 검정색으로 초기화합니다. 새로운 내용을 그리기 전 이전 내용을 완전 삭제하는 과정입니다. 
+
+체크되지 않았을 경우 위 과정이 무시되어 그리기 성능이 향상되지만, 구현에 따라 이전 내용이 표시될 수 있습니다.

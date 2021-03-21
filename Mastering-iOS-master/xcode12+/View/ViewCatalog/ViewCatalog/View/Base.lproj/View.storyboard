@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EsI-KY-Q9L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EsI-KY-Q9L">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -253,7 +253,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJU-KV-kpv">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJU-KV-kpv">
                                 <rect key="frame" x="75" y="358" width="240" height="128"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.1450980392" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -513,11 +513,11 @@
                                     <action selector="changeColor:" destination="R2N-wq-Bgj" eventType="touchUpInside" id="oJ8-id-gU5"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Meb-ew-XZB">
+                            <view tag="326" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Meb-ew-XZB">
                                 <rect key="frame" x="67" y="333" width="255" height="128"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqJ-2v-Kep">
+                            <view tag="326" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqJ-2v-Kep">
                                 <rect key="frame" x="67" y="137" width="255" height="128"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.1450980392" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -553,7 +553,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="w53-Af-Plk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="w53-Af-Plk">
                                 <rect key="frame" x="95" y="322" width="200" height="200"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.1450980392" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -607,6 +607,17 @@
                     <view key="view" contentMode="scaleToFill" id="4SW-hg-0kX">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQx-DZ-LWd">
+                                <rect key="frame" x="75" y="155" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLP-dF-lnb">
+                                <rect key="frame" x="75" y="358" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Bsa-X4-I6p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
