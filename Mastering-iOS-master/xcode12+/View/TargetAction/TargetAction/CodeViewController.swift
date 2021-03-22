@@ -29,7 +29,6 @@ class CodeViewController: UIViewController {
     
     @IBOutlet weak var slider: UISlider!
     
-    
     @objc func action(_ sender: Any) {
         print(#function)
     }
@@ -41,8 +40,7 @@ class CodeViewController: UIViewController {
         let sel = #selector(action(_:))
         // 버튼과 액션 연결 : addTarget method 사용
         btn.addTarget(self, action: sel, for: .touchUpInside)
-        slider.addTarget(self, action: sel, for: .valueChanged)
-        
     }
     
 }
+
