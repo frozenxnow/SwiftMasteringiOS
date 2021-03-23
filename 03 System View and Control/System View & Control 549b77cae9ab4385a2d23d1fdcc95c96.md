@@ -46,3 +46,51 @@ Name은 생성되는 함수의 이름이며 이에 대한 파라미터는 가장
 이제 타겟과 액션을 연결해야하는데, 타겟과 액션을 연결할 때는 viewDidLoad() 함수 안에서 addTarget() 함수를 이용해 구현합니다. 첫번째 파라미터는 메서드가 구현되어 있는 객체 즉, 자기 자신을 입력합니다. 두번째 파라미터로는 Seletor 타입의 액션이 필요한데, 이를 위해 Selector로의 변환 과정(#selector(action(_:))이 필요합니다. 마지막 파라미터로는 어떤 동작이 있을 때 함수가 실행되는지 입력합니다. 
 
 # 2. Button #1. Text Button
+
+`Button`은 탭 이벤트를 처리하는 가장 기본적인 컨트롤입니다. Touch up inside가 기본이며, target-action 패턴을 따르고 있습니다. 미리 정의된 타입은 여섯가지이며 기본 타입 외 커스텀 타입을 구현할 수 있습니다.
+
+1. system
+2. detail disclosure
+3. info light
+4. info dark
+5. add contact
+6. close
+7.  + custom
+
+여기에서 2,3,4는 육안으로 보았을 때 구분이 불가능합니다. 
+
+## State
+
+버튼의 상태에는 네 가지가 있습니다.
+
+1. default
+2. highlighted
+3. selecte
+4. desabled
+
+코드 인스펙터에서 다른 상태를 선택해도 버튼의 설정이 바뀌지 않습니다. 버튼이 해당 상태일때의 속성값을 각각 다르게 변경할 수 있도록 선택하는 것이며, 버튼의 설정을 바꾸고자 한다면 control의 state option에서 체크박스를 사용해야합니다.
+
+체크박스는 `selected`, `enabled`, `highlighted` 총 세가지가 있고 중복 선택이 가능합니다.
+
+처음 버튼을 생성했을 때는 default 상태이고 enabled에 선택이 되어있습니다.
+
+반대로 disabled 상태로 변경하고자 할 경우 enabled의 체크를 해제합니다.
+
+버튼의 상태를 변경하는 코드를 작성할 경우 버튼의 각 isEnabled, isHighlited, isSelected 를 true/false로 설정하거나, 혹은 toggle()하는 방식으로 작성합니다. 단, 초기화할 경우 세가지 속성을 모두 구현해야합니다.
+
+## Text Button Attribute
+
+텍스트 버튼의 속성은 코드 인스펙터에서 설정할 수 있습니다. 앞서 설명했듯 각 상태별 타이틀과 색상 등을 다르게 설정할 수 있으며 이 또한 코드로 작성이 가능합니다.
+
+```jsx
+btn.titleLabel?.backgroundColor = .systemYellow
+btn.setTitle("Check States", for: .normal)
+btn.setTitle("Haha Highlighted", for: .highlighted)
+btn.setTitleColor(.systemRed, for: btn.state)
+```
+
+btn이라는 이름의 버튼을 아울렛으로 연결해 속성에 접근했습니다. 
+
+titleLabel을 통해 배경색을 변경할 수 있지만, text나 color(font)는 변경이 불가능합니다. 이를 변경하기 위해서는 `UIButton클래스`에 정의된 함수인 `setTitle`과 `setTitleColor` 함수를 사용합니다. 주로 첫 파라미터에는 사용하고자 하는 텍스트와 컬러를 입력하고 두번째 파라미터로는 상태 속성을 전달합니다. 
+
+# 3. Button #2. Image Button

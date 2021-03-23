@@ -29,7 +29,15 @@ class TextButtonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        btn.titleLabel?.text = "Swift" // 허용하지 않음
+//        btn.titleLabel?.textColor = .systemRed // 허용하지 않음
         
+//        UIButton class가 제공하는 함수를 이용해야함
+        
+        btn.titleLabel?.backgroundColor = .systemYellow
+        btn.setTitle("Check States", for: .normal)
+        btn.setTitle("Haha Highlighted", for: .highlighted)
+        btn.setTitleColor(.systemRed, for: btn.state)
         
     }
 }
