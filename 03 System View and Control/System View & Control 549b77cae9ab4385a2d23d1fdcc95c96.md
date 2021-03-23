@@ -94,3 +94,50 @@ btn이라는 이름의 버튼을 아울렛으로 연결해 속성에 접근했�
 titleLabel을 통해 배경색을 변경할 수 있지만, text나 color(font)는 변경이 불가능합니다. 이를 변경하기 위해서는 `UIButton클래스`에 정의된 함수인 `setTitle`과 `setTitleColor` 함수를 사용합니다. 주로 첫 파라미터에는 사용하고자 하는 텍스트와 컬러를 입력하고 두번째 파라미터로는 상태 속성을 전달합니다. 
 
 # 3. Button #2. Image Button
+
+코드 인스펙터에서 버튼의 이미지 속성을 변경할 경우 버튼이 System(기본)타입에서 `Custom` 타입으로 변경됩니다. 텍스트 컬러는 초기 `default` 값인 system 컬러로 설정되며 커스텀 타입으로 변경될 경우 default 컬러가 변경되어 이미지와 함께 출력되는 텍스트의 색상이 변경됩니다. 이 때 직접 색상을 직접 다른 색으로 변경할 수 있습니다. 
+
+만약 루트뷰의 틴트 컬러를 특정한 색상으로 설정하고 (system타입)버튼을 추가하면 텍스트 색상은 루트뷰의 틴트 컬러를 따라가지만, 이 또한 직접 색상을 변경할 수 있습니다. 
+
+버튼은 이미지를 텍스트의 왼쪽에 배치합니다. 이미지를 원하는 위치에 배치하는 방법을 제공하지 않지만 `transform` 속성을 조작할 경우 가능해집니다. attribute에서 semantic option을 변경해 force~ 를 선택하여 변경할 수 있지만 이렇게 변경할 경우 제대로 동작하지 않는 일이 발생할 수 있어 추천하지 않습니다. 
+
+**이미지뷰, 레이블, 버튼, 스택뷰를 사용해 원하는 레이아웃을 구현할 수 있습니다.**
+
+1. 화면에 이미지뷰와 레이블을 추가합니다. 이미지뷰를 특정 이미지로 선택합니다.
+2. 이미지뷰와 레이블을 함께 선택한 후 스택뷰를 선택하면 각 레이블이 스택뷰에 임베드됩니다. 
+이 경우 각 이미지와 레이블에 따라 자동으로 크기가 설정되는데 제약을 추가함으로써 사이즈를 조절할 수 있습니다. 
+3. 스택뷰를 선택한 상태에서 뷰를 클릭하면 스택뷰가 일반 뷰에 임베드됩니다. 
+4. 다시 한번 스택뷰를 선택하고 영역 전체를 추가하도록 제약을 추가합니다. (상하좌우0)
+5. 버튼은 스택뷰 내부가 아니라 스택뷰 위에 와야합니다. 스택뷰와 동일한 계층으로 추가할 수 있도록 도큐먼트 아웃라인을 이용합니다. 
+6. 버튼의 텍스트를 삭제하고 도큐먼트를 선택합니다. 제약에서 리딩(좌)과 바텀(하)의 값을 0으로 설정합니다. 
+7. 이렇게 생성된 버튼 이미지에서는 도큐먼트 아웃라인에서 순서를 바꾸어주면 좌우 혹은 상하 위치를 쉽게 변경할 수 있고, 스택뷰를 선택해 Axis(축)을 변경하면 이미지와 레이블을 가로로 나열할지 세로로 나열할지 결정할 수 있습니다.
+
+## background-image
+
+background-image를 설정하기 위해 width, height 제약을 추가합니다. background-image를 선택할 경우 종횡비가 망가지기 때문에 이를 수정하기 위해 content mode를 변경해야하는데, 코드 인스펙터에 있는 content mode는 버튼 자체에 대한 속성입니다. 이미지를 수정하기 위해서는 버튼의 이미지뷰에 접근해야하는데, 배경 이미지에 접근하는 속성은 제공하지 않습니다. 
+
+그래서 위에서 사용한 방법을 통해 버튼을 새롭게 생성해야합니다. (스택뷰 이용)
+
+## code
+
+```jsx
+class ImageButtonViewController: UIViewController {
+    
+    @IBOutlet weak var btn: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let normalImage = UIImage(named: "plus-normal")
+        let highlightedImage = UIImage(named: "plus-highlighted")
+        
+        btn.setImage(normalImage, for: .normal)
+        btn.setImage(highlightedImage, for: .highlighted)
+
+    }
+}
+```
+
+이 외에도 background image를 설정하는 `setBackgroundImage()` 함수도 있습니다.
+
+# 4. Picker View #3. Text Picker

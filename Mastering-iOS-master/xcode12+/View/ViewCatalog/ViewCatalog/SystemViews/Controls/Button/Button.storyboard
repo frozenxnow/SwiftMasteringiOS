@@ -122,25 +122,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qm-0t-bcV">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HhC-ww-fdy">
+                                <rect key="frame" x="149.5" y="416" width="115.5" height="64"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IGq-sM-Cw9">
+                                        <rect key="frame" x="0.0" y="0.0" width="115.5" height="64"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwS-sV-Dqc">
+                                                <rect key="frame" x="0.0" y="22" width="41.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus-normal" translatesAutoresizingMaskIntoConstraints="NO" id="O3F-3F-f9A">
+                                                <rect key="frame" x="51.5" y="0.0" width="64" height="64"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOm-oA-UUs">
+                                        <rect key="frame" x="0.0" y="0.0" width="115.5" height="64"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nOm-oA-UUs" secondAttribute="trailing" id="0cA-nV-nTG"/>
+                                    <constraint firstAttribute="trailing" secondItem="IGq-sM-Cw9" secondAttribute="trailing" id="4RK-bF-3Es"/>
+                                    <constraint firstAttribute="bottom" secondItem="IGq-sM-Cw9" secondAttribute="bottom" id="Frw-pT-ayb"/>
+                                    <constraint firstItem="nOm-oA-UUs" firstAttribute="top" secondItem="HhC-ww-fdy" secondAttribute="top" id="GjG-fM-g3i"/>
+                                    <constraint firstItem="nOm-oA-UUs" firstAttribute="leading" secondItem="HhC-ww-fdy" secondAttribute="leading" id="Wiy-Hp-EfU"/>
+                                    <constraint firstItem="IGq-sM-Cw9" firstAttribute="top" secondItem="HhC-ww-fdy" secondAttribute="top" id="f2h-9K-DF4"/>
+                                    <constraint firstItem="IGq-sM-Cw9" firstAttribute="leading" secondItem="HhC-ww-fdy" secondAttribute="leading" id="kc4-RL-WZQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="nOm-oA-UUs" secondAttribute="bottom" id="ys0-6h-6jr"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wff-tj-teG">
+                                <rect key="frame" x="192" y="336" width="30" height="30"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DZ1-Ml-7jP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="9qm-0t-bcV" firstAttribute="centerX" secondItem="hJK-OK-BV0" secondAttribute="centerX" id="DNW-Ei-gEE"/>
-                            <constraint firstItem="9qm-0t-bcV" firstAttribute="centerY" secondItem="hJK-OK-BV0" secondAttribute="centerY" id="l2V-ys-6F7"/>
+                            <constraint firstItem="HhC-ww-fdy" firstAttribute="centerY" secondItem="hJK-OK-BV0" secondAttribute="centerY" id="She-2l-ycT"/>
+                            <constraint firstItem="HhC-ww-fdy" firstAttribute="top" secondItem="wff-tj-teG" secondAttribute="bottom" constant="50" id="VSX-ib-047"/>
+                            <constraint firstItem="wff-tj-teG" firstAttribute="centerX" secondItem="hJK-OK-BV0" secondAttribute="centerX" id="cmf-4e-Ago"/>
+                            <constraint firstItem="HhC-ww-fdy" firstAttribute="centerX" secondItem="hJK-OK-BV0" secondAttribute="centerX" id="t6b-TT-MUC"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btn" destination="9qm-0t-bcV" id="fgT-jK-KDZ"/>
+                        <outlet property="btn" destination="wff-tj-teG" id="YRK-cU-eti"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UcB-WD-HeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6832" y="-269"/>
+            <point key="canvasLocation" x="6831.884057971015" y="-269.19642857142856"/>
         </scene>
         <!--Text Button-->
         <scene sceneID="lko-Fz-btd">
@@ -416,6 +450,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus-normal" width="64" height="64"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
