@@ -265,4 +265,124 @@ func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent c
 }
 ```
 
-picker에 접근해 `selectedRow()`로 데이터의 순번을 가져와 변수에 저장하고, 순번이 0 이상일 경우 콘솔에 해당 데이터를 출력하도록 구현했습니다.
+picker에 접근해 `selectedRow()`로 데이터의 순번을 가져와 변수에 저장하고, 순번이 0 이상일 경우 콘솔에 해당 데이터를 출력하도록 구현했습니다. 
+
+## [Image Picker View Example] Slot Machine
+
+빠칭코의 슬롯머신은 휠이 세개가 있고, 세 이미지가 모두 동일할 경우 잭팟이 터집니다.
+
+이미지를 images 배열에 넣고, 셔플 버튼을 누를 때마다 이미지가 각 열에서 랜덤으로 배치되며, 세개가 모두 일치할 경우 알림창을 띄우는 애플리케이션을 만들었습니다.
+
+여기에서 신경써야할 조건이 여러개 있습니다.
+
+1. 슬롯의 이미지는 모두 연결되어 보여야 합니다. 첫 이미지나 마지막 이미지가 선택되었을 경우 이미지가 끊겨 보이지 않도록 합니다.
+2. 이미지의 사이즈를 원본 사이즈보다 조금 크게 만듭니다.
+3. 유저는 버튼 외 피커뷰를 직접 조작할 수 없습니다. 
+
+우선 알아야 할 사항이 있습니다. 이전 Text Picker View에서는 `→ String?` 형태였으나 이번에는 이미지를 리턴하는 `→ UIView` 메서드를 사용합니다. 문자열에 비해 비교적 크기 때문에 피커뷰를 조작할 때마다 이미지뷰를 생성하기보다는 이미 생성된 이미지뷰가 있다면 그것을 재사용하는 방향으로 사용합니다.
+
+```jsx
+// UIPickerViewDelegate 
+func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+	  if let imageView = view as? UIImageView {
+	      imageView.image = images[row % images.count]
+	      return imageView
+	  }
+	  let imageView = UIImageView()
+	  imageView.image = images[row % images.count]
+	  imageView.contentMode = .scaleAspectFit
+	  
+	  return imageView
+}
+```
+
+마지막 파라미터로 전달되는 `view`는 UIView? 형태입니다. 이미 만들어진 이미지뷰가 있는지 없는지를 확인하는 과정입니다. 이미 생성된 이미지뷰가 있다면 if let 구문을 실행해 해당 이미지뷰를 재사용합니다. 
+
+view가 UIImageView의 형태라면 그 view를 imageView라는 임시변수에 저장해 if let 구문을 수행합니다. 
+
+imageView의 이미지에 view의 번호에 해당하는 이미지를 넣고 그 이미지뷰를 리턴합니다.
+
+만약 생성된 이미지뷰가 없을 경우 아래의 코드를 실행합니다. 새로운 UIImageView를 생성하고 마찬가지로 전달받은 순번의 이미지를 imageView의 이미지에 삽입합니다. 이때 imageView에 이미지가 배치되는 contentMode를 설정해야합니다. 
+
+이미지뷰를 리턴합니다.
+
+복잡해보이지만 이게 기본적인 방식인 것 같고, 코드를 조금 더 자유자재로 사용한다면 아주아주 쉬운 코드일것 같습니다! 
+
+이미지 목록이 끊임없어 보이도록 하기 위해 출력되는 데이터의 수를 늘립니다. 우선 휠의 개수는 세개, 그리고 위/아래가 끊기지 않아 보이도록 우리는 중간에 있는 이미지만 사용자에게 보여줄 예정입니다. 
+
+```jsx
+extension ImagePickerViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return images.count * 3 // 무한 스크롤 효과
+    }
+}
+```
+
+이미지의 사이즈를 조절합니다.
+
+```jsx
+// UIPickerViewDelegate
+func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+	  return 60
+}
+```
+
+피커뷰에서의 터치 이벤트를 비활성화합니다.
+
+```jsx
+override func viewDidLoad() {
+	  super.viewDidLoad()
+	  picker.isUserInteractionEnabled = false
+}
+```
+
+셔플 버튼을 구현합니다.
+
+```jsx
+@IBAction func shuffle(_ sender: Any?) {
+    let firstIndex = Int.random(in: 0..<images.count) + images.count
+    let secondIndex = Int.random(in: 0..<images.count) + images.count
+    let thirdIndex = Int.random(in: 0..<images.count) + images.count
+    
+    // pickerView에서 특정한 항목을 선택하는 함수 selectRow()
+    picker.selectRow(firstIndex, inComponent: 0, animated: true)
+    picker.selectRow(secondIndex, inComponent: 1, animated: true)
+    picker.selectRow(thirdIndex, inComponent: 2, animated: true)
+}
+```
+
+셔플 버튼을 누르면 랜덤으로 두번째 이미지 목록 중 한 그림이 랜덤으로 나옵니다. 슬롯은 총 세개이므로 랜덤한 숫자를 세개 만들어야하는데, 0부터 images.count 미만의 숫자 중 하나를 랜덤으로 고르고 그 숫자에 images.count를 더해 두번째 이미지 목록에서의 이미지가 나오도록 구현합니다. 
+
+그리고 `selectRow()` 함수를 사용해 특정한 순번의 이미지가 선택되도록 코드를 구현합니다.
+
+이제 사용자는 셔플 버튼이 아닌 것을 조작할 수 없고, 이미지는 랜덤으로 출력되는 슬롯머신을 작동할 수 있습니다.
+
+도전과제로 잭팟이 터졌을 경우 게임을 종료하는 코드를 작성하라고 하셨는데, 저는 alert 창을 만들어 게임이 종료됨을 사용자에게 알려주었습니다.
+
+그리고 추가로 게임을 시작할 때 첫 이미지 목록을 동일하게 보여지도록 코드를 구현했습니다.
+
+```jsx
+@IBAction func shuffle(_ sender: Any?) {
+    // 세개가 일치하면 게임이 끝나는 알림창 띄우기
+    let alert = UIAlertController(title: "잭팟ㅋ", message: "ㅊㅋㅊㅋ!!", preferredStyle: UIAlertController.Style.alert)
+    let okAction = UIAlertAction(title: "OK", style: .default)
+    alert.addAction(okAction)
+    if firstIndex==secondIndex && secondIndex == thirdIndex {
+        present(alert, animated: false, completion: nil)
+    }    
+}
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    picker.isUserInteractionEnabled = false
+    
+    // 첫 선택 이미지를 두번째 바퀴의 첫번째 그림으로 설정
+    picker.selectRow(images.count, inComponent: 0, animated: true)
+    picker.selectRow(images.count, inComponent: 1, animated: true)
+    picker.selectRow(images.count, inComponent: 2, animated: true)
+}
+```
