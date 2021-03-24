@@ -141,3 +141,128 @@ class ImageButtonViewController: UIViewController {
 이 외에도 background image를 설정하는 `setBackgroundImage()` 함수도 있습니다.
 
 # 4. Picker View #3. Text Picker
+
+Cocoa touch에서 제공하는 기본 피커뷰는 두가지가 있습니다.
+
+1. Date Picker : UI와 Data가 자동으로 제공됩니다.
+2. Picker View : 표시할 데이터를 직접 입력하고 뷰를 구성해야합니다. 
+
+## Picker View
+
+피커뷰에서 데이터를 입력하고 뷰를 구성하기 위해서는 두 가지 프로토콜을 채용해야합니다.
+
+### [UIPickerViewDataSource Protocol]
+
+구현을 해야하는 필수 메서드가 두 개 있습니다.
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-24__5.57.21.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-24__5.57.21.png)
+
+- func numberOfComponents(in pickerView: UIPickerView) -> Int
+return n : 휠의 개수를 n개 리턴합니다.
+- func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+return m : 각 선택지 m개를 리턴합니다.
+
+### [UIPickerViewDelegate Protocol]
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-24__6.01.16.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-24__6.01.16.png)
+
+- 필수 메서드는 존재하지 않지만 적어도 하나를 구현해야 올바른 데이터가 피커뷰에 출력됩니다.
+- func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? : String
+ : 텍스트 형식의 데이터를 나타냅니다.
+- func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
+ : 커스텀 뷰를 나타냅니다.
+- func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) 
+: 특정 항목이 선택되었을 때 처리해야하는 이벤트를 구현합니다.
+
+```jsx
+class TextPickerViewController: UIViewController {   
+    let devTools = ["Xcode", "Postman", "SourceTree", "Zeplin", "Android Studio", "SublimeText"]
+    let fruits = ["Apple", "Orange", "Banana", "Kiwi", "Watermelon", "Peach", "Strawberry"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
+extension TextPickerViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1 // 휠의 수 리턴
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return devTools.count // 선택지 수(데이터의 개수) 리턴
+}
+extension TextPickerViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return devTools[row] // 선택지 내용 리턴
+}
+```
+
+protocol은 extension을 사용해 채용하며 UIPickerViewDataSource의 필수 함수를 모두 구현하고, 데이터 출력을 위해 UIPickerViewDelegate의 함수를 구현합니다. 데이터는 String 타입이기 때문에 String을 리턴하는 함수를 선택해 구현합니다. 
+
+만약 numberOfComponents() 함수에서 두 개 이상의 숫자를 리턴하는 경우 데이터의 개수와 데이터를 출력하는 함수에서는 switch문을 사용해 각 케이스별로 데이터를 전달합니다.
+
+```jsx
+func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    switch component {
+    case 0:
+        return devTools.count
+    case 1:
+        return fruits.count
+    default:
+        return 0
+    }
+}
+
+func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    switch component {
+    case 0:
+        return devTools[row]
+    case 1:
+        return fruits[row]
+    default:
+        return ""
+    }
+}
+```
+
+## Picker View - Action
+
+항목을 선택과 동시에 처리해야하는 이벤트와, 항목 선택 후 특정 액션을 취했을 때 처리해야하는 이벤트를 나누어 살펴보겠습니다. 
+
+앞서 설명했던 UIPickerViewDelegate Protocol의 함수 중 `func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)` 함수는 항목을 선택함과 동시에 처리되는 이벤트를 구현합니다.
+
+```jsx
+func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  switch component {
+  case 0:
+      label.text = devTools[row]
+      return
+  case 1:
+      label.text = fruits[row]
+      return
+  default:
+      return
+  }
+}
+```
+
+위 함수는 UIPickerViewDelegate 프로토콜에 존재하는 함수이기 때문에 프로토콜을 채용하는 extension에서 구현합니다. row는 선택된 데이터의 순번을 저장하고 component로 각 휠을 구분합니다. 
+
+예를 들어 항목선택 후 버튼을 클릭했을 때 일어나는 이벤트를 구현하고자 한다면 아래와 같이 구현합니다. 피커뷰는 outlet으로, 버튼은 action으로 연결합니다.
+
+```jsx
+@IBOutlet weak var picker: UIPickerView!
+    
+@IBAction func report(_ sender: Any) {
+		let fruitSelectedRow = picker.selectedRow(inComponent: 0)
+		let devToolsSelectedRow = picker.selectedRow(inComponent: 0)
+		guard fruitSelectedRow >= 0 && devToolsSelectedRow >= 0 else {
+		    print("not found")
+		    return
+		}
+		print(fruits[fruitSelectedRow], devTools[devToolsSelectedRow])
+}
+```
+
+picker에 접근해 `selectedRow()`로 데이터의 순번을 가져와 변수에 저장하고, 순번이 0 이상일 경우 콘솔에 해당 데이터를 출력하도록 구현했습니다.

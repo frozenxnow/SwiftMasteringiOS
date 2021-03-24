@@ -38,10 +38,24 @@ class ImagePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
 }
 
 
+extension ImagePickerViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return images.count * 3 // 무한 스크롤 효과
+    }
+}
+
+extension ImagePickerViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        <#code#>
+    }
+}
 
 

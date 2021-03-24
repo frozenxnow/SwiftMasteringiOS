@@ -36,7 +36,6 @@ class ImageButtonViewController: UIViewController {
         btn.setImage(normalImage, for: .normal)
         btn.setImage(highlightedImage, for: .highlighted)
         
-        btn.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
 
     }
 }

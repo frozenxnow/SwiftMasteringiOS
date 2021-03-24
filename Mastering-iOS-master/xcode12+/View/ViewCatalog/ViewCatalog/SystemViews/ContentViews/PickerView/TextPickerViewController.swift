@@ -24,6 +24,30 @@
 import UIKit
 
 class TextPickerViewController: UIViewController {
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var picker: UIPickerView!
+    
+    @IBAction func report(_ sender: Any) {
+        
+//        let row = picker.selectedRow(inComponent: 0)
+//        guard row >= 0 else {
+//            print("not found")
+//            return
+//        }
+//
+//        print(devTools[row])
+        
+        let fruitSelectedRow = picker.selectedRow(inComponent: 0)
+        let devToolsSelectedRow = picker.selectedRow(inComponent: 0)
+        guard fruitSelectedRow >= 0 && devToolsSelectedRow >= 0 else {
+            print("not found")
+            return
+        }
+        print(fruits[fruitSelectedRow], devTools[devToolsSelectedRow])
+        
+        // 피커뷰에서 항목 선택 후 다른 이벤트가 발생한 다음 이루어져야하는 액션은 이렇게 구현한다
+        
+    }
     let devTools = ["Xcode", "Postman", "SourceTree", "Zeplin", "Android Studio", "SublimeText"]
     let fruits = ["Apple", "Orange", "Banana", "Kiwi", "Watermelon", "Peach", "Strawberry"]
     
@@ -33,15 +57,51 @@ class TextPickerViewController: UIViewController {
     }
 }
 
+extension TextPickerViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2 // 휠의 수 리턴
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return devTools.count // 선택지 수 리턴
+        case 1:
+            return fruits.count
+        default:
+            return 0
+        }
+    }
+}
 
 
+extension TextPickerViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return devTools[row] // 선택지 내용 리턴
+        case 1:
+            return fruits[row]
+        default:
+            return ""
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            label.text = devTools[row]
+            return
+        case 1:
+            label.text = fruits[row]
+            return
+        default:
+            return
+        }
+        // 항목을 선택하자마자 일어나는 이벤트를 처리하는 방법에는 이 메서드를 사용함
+    }
 
-
-
-
-
-
-
+}
 
 
 
