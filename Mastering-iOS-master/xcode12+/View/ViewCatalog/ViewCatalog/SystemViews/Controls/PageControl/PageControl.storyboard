@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B4K-0b-dEY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B4K-0b-dEY">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -42,12 +42,22 @@
                                     <outlet property="delegate" destination="B4K-0b-dEY" id="5PI-qV-hYR"/>
                                 </connections>
                             </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="TH9-5k-JiF">
+                                <rect key="frame" x="145.5" y="834" width="123" height="28"/>
+                                <color key="pageIndicatorTintColor" systemColor="systemGray5Color"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="systemPinkColor"/>
+                                <connections>
+                                    <action selector="pageChanged:" destination="B4K-0b-dEY" eventType="valueChanged" id="i03-Iw-zKW"/>
+                                </connections>
+                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6jc-mx-sgM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ll0-hh-8PW" firstAttribute="leading" secondItem="6jc-mx-sgM" secondAttribute="leading" id="1Vb-ps-uE0"/>
                             <constraint firstItem="6jc-mx-sgM" firstAttribute="bottom" secondItem="Ll0-hh-8PW" secondAttribute="bottom" constant="86" id="IUJ-Sf-ItU"/>
+                            <constraint firstItem="TH9-5k-JiF" firstAttribute="centerX" secondItem="0np-pU-R5o" secondAttribute="centerX" id="NiY-Ml-0bc"/>
+                            <constraint firstItem="TH9-5k-JiF" firstAttribute="bottom" secondItem="6jc-mx-sgM" secondAttribute="bottom" id="bvt-uV-dv6"/>
                             <constraint firstItem="Ll0-hh-8PW" firstAttribute="top" secondItem="6jc-mx-sgM" secondAttribute="top" id="cRJ-Yl-4nz"/>
                             <constraint firstItem="Ll0-hh-8PW" firstAttribute="trailing" secondItem="6jc-mx-sgM" secondAttribute="trailing" id="yof-1m-pM8"/>
                         </constraints>
@@ -55,6 +65,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="listCollectionView" destination="Ll0-hh-8PW" id="oKq-bi-7ol"/>
+                        <outlet property="pager" destination="TH9-5k-JiF" id="DLE-Be-96C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CuB-x6-XZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,6 +76,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

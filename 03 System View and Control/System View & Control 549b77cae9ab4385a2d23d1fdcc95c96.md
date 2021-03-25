@@ -386,3 +386,61 @@ override func viewDidLoad() {
     picker.selectRow(images.count, inComponent: 2, animated: true)
 }
 ```
+
+# 5. Page Control #1
+
+페이지 컨트롤은 바탕화면에서 찾아볼 수 있습니다. 페이지 컨트롤은 페이지의 개수와 현재 페이지를 표시하는 `page indicator`를 가지고 있습니다. 
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-25__2.45.06.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-25__2.45.06.png)
+
+이 인디케이터는 두가지 색상으로 이루어져있으며
+
+기본 색상인 `Tint color`와
+
+현재 페이지를 타나내는 `Current color`를
+
+설정할 수 있습니다.
+
+1. 페이지컨트롤 레이블을 추가해 Outlet으로 코드와 연결합니다.
+2. viewDidLoad() 함수 내에서 페이지 컨트롤을 초기화합니다. 
+(생성할 페이지 인디케이터의 개수와 색상 등을 설정할 수 있습니다.)
+3. 페이지 컨트롤과 컬렉션뷰 페이지를 연결합니다.
+→ 코드와 연결한다고 해서 자동으로 페이지를 인식하는것이 아니라 현재 컬렉션뷰와 페이지컨트롤은 별개입니다. 이를 연결한 후 컬렉션뷰를 스크롤할 때마다 현재 페이지를 계산해 current page에 저장하도록 구현합니다.
+4. 페이지 컨트롤을 Action으로 연결해 인디케이터를 탭할 때 페이지가 이동하는 Value Change Action을 구현합니다. 이 때 Action의 타입은 UIPageController로 선택합니다. 
+
+```jsx
+// 1.
+@IBOutlet weak var pager: UIPageControl!
+
+// 2.
+override func viewDidLoad() {
+    super.viewDidLoad()
+    pager.numberOfPages = list.count
+    pager.currentPage = 0
+    
+    pager.pageIndicatorTintColor = UIColor.systemGray3 // 기본 컬러 저장 
+    pager.currentPageIndicatorTintColor = UIColor.systemRed // current Page 컬러 저장
+    
+}
+
+// 3.
+extension PageControlViewController: UIScrollViewDelegate { // UIScrollViewDelegate 채용
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.bounds.size.width // 페이지 계산을 위한 너비 저장 
+        let x = scrollView.contentOffset.x + (width/2) // 현재 스크롤한 x좌표 저장, 보정을 위해 너비의 절반을 더합니다.
+        
+        let newPage = Int(x/width) // 새로운 페이지 계산 후 저장 
+        if pager.currentPage != newPage { // 해당 페이지로 이동 
+            pager.currentPage = newPage
+        }
+    }
+}
+
+// 4.
+@IBAction func pageChanged(_ sender: UIPageControl) {
+    let indexPath = IndexPath(item: sender.currentPage, section: 0)
+    listCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+}
+```
+
+마지막 4번 함수의 경우 실제로 인디케이터를 탭했을 때 좌우로 이동하는 페이지를 확인할 수 있지만, 해당 인디케이터를 터치한다고 해서 그 페이지로 이동하는 것이 아니라, 가운데를 기준으로 좌우로만 페이지가 넘어가는 것을 확인할 수 있습니다. 이는 터치 영역이 매우 작기 때문에 생기는 한계입니다.

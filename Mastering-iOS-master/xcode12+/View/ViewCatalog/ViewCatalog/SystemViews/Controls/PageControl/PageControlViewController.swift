@@ -26,19 +26,40 @@ import UIKit
 class PageControlViewController: UIViewController {
     @IBOutlet weak var listCollectionView: UICollectionView!
     
+    @IBOutlet weak var pager: UIPageControl!
     
     
+    @IBAction func pageChanged(_ sender: UIPageControl) {
+        let indexPath = IndexPath(item: sender.currentPage, section: 0)
+        listCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+    }
     
     let list = [UIColor.red, UIColor.green, UIColor.blue, UIColor.gray, UIColor.black]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pager.numberOfPages = list.count
+        pager.currentPage = 0
         
+        pager.pageIndicatorTintColor = UIColor.systemGray3
+        pager.currentPageIndicatorTintColor = UIColor.systemRed
         
     }
 }
 
 
+extension PageControlViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.bounds.size.width
+        let x = scrollView.contentOffset.x + (width/2)
+        
+        let newPage = Int(x/width)
+        if pager.currentPage != newPage {
+            pager.currentPage = newPage
+        }
+        
+    }
+}
 
 
 extension PageControlViewController: UICollectionViewDataSource {
