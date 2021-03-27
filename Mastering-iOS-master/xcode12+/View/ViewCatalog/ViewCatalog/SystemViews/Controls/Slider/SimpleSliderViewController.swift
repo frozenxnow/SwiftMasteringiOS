@@ -26,16 +26,33 @@ import UIKit
 class SimpleSliderViewController: UIViewController {
     
     @IBOutlet weak var redSlider: UISlider!
-    
     @IBOutlet weak var greenSlider: UISlider!
-    
     @IBOutlet weak var blueSlider: UISlider!
     
+    
+    @IBAction func colorChanged(_ sender: Any) {
+        
+        let r = CGFloat(redSlider.value)
+        // UI값으로 사용할 때에는 CGFloat값으로 바꾸어야합니다.
+        let g = CGFloat(greenSlider.value)
+        let b = CGFloat(blueSlider.value)
+        
+        let newColor = UIColor(red: r, green: g, blue: b, alpha: 1)
+        
+        view.backgroundColor = newColor
+        
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        redSlider.value = 1.0
+//        greenSlider.value = 1.0
+//        blueSlider.value = 1.0
         
+        redSlider.setValue(0.5, animated: true)
+        greenSlider.setValue(0.5, animated: true)
+        blueSlider.setValue(0.5, animated: true)
         
     }
 }
