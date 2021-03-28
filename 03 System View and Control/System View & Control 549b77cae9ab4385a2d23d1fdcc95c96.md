@@ -444,3 +444,191 @@ extension PageControlViewController: UIScrollViewDelegate { // UIScrollViewDeleg
 ```
 
 마지막 4번 함수의 경우 실제로 인디케이터를 탭했을 때 좌우로 이동하는 페이지를 확인할 수 있지만, 해당 인디케이터를 터치한다고 해서 그 페이지로 이동하는 것이 아니라, 가운데를 기준으로 좌우로만 페이지가 넘어가는 것을 확인할 수 있습니다. 이는 터치 영역이 매우 작기 때문에 생기는 한계입니다.
+
+# 6. Slider #1
+
+thumb를 수평으로 드래그하여 지정된 범위 내의 값을 선택하는 컨트롤입니다.
+
+코드 인스펙터에서 최소값과 최대값, 초기값을 설정할 수 있으며 thumb를 움직일 때마다 value changed 이벤트가 반복적으로 전달됩니다. 이 이벤트는 target-action pattern으로 처리합니다.
+
+슬라이더를 세개 추가하고, RGB color를 변경해 배경 색으로 지정하는 코드를 만들기 위해 슬라이더를 아울렛으로 각각 연결하고, @IBAction을 추가합니다. 이 함수는 슬라이더 세개가 동작할 때마다 실행되어야하기 때문에 함수를 구현하는 코드 생성 후 한 함수를 모두 세 슬라이더에 연결합니다. 
+
+RGB 값을 모두 입력받아 각각을 변수에 저장하는데, UIColor를 사용한 색을 얻기 위해서는 이 값을 CGFloat로 바꾸어야합니다. 
+
+```jsx
+let r = CGFloat(redSlider.value)
+let g = CGFloat(greenSlider.value)
+let b = CGFloat(blueSlider.value)
+```
+
+그리고 이렇게 구한 r,g,b를 사용해 배경색으로 지정합니다. root-view인 view를 이용합니다.
+
+```jsx
+let newColor = UIColor(red: r, green: g, blue: b, alpha: 1)
+view.backgroundColor = newColor
+```
+
+여기에서 만든 이 함수는 슬라이더가 동작할 때마다 valueChanged 이벤트가 반복적으로 전달될 때마다 실행되기 때문에 슬라이더를 동작함과 동시에 바탕화면의 color가 변하는 것을 확인할 수 있습니다.
+
+코드 인스펙터가 아니라 코드를 사용해 초기 값과 최소값, 최대값을 지정할 수 있습니다.
+
+# 7. Slider #2
+
+슬라이더의 틴트컬러와 이미지 속성은 배타적인 요소로 둘 중 하나만 설정이 가능합니다. 
+
+thumb의 이미지는 코드를 사용해 변경이 가능합니다.
+
+```jsx
+let img = UIImage(systemName: "lightbulb") 
+slider.setThumbImage(img, for: .normal)
+slider.minimumTrackTintColor = UIColor.systemRed
+slider.maximumTrackTintColor = UIColor.black
+
+slider.thumbTintColor = UIColor.blue
+slider.setMinimumTrackImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+slider.setMaximumTrackImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+```
+
+`slider.setThumbImage(img, for: .normal)` : img에 저장된 이미지를 thumb 이미지로 사용합니다. 두번째 파라미터는 상태를 입력하는데, 실제로 앱을 만들 때에는 모든 상태에 대하여 설정합니다.
+
+`slider.minimumTrackTintColor`, `slider.maximumTrackTintColor` : 슬라이더의 막대 색상을 지정합니다.
+
+`slider.thumbTintColor` : thumb의 색을 설정합니다.
+
+`slider.setMinimumTrackImage()`, `slider.setMaximumTrackImage()` : 최소, 최대의 이미지를 설정합니다.
+
+코드 인스펙터의 events를 살펴보면 `Continuous Updates`에 체크가 되어있습니다. 이 경우 thumb를 움직일 때마다 value changed 이벤트가 반복적으로 실행되며, 체크를 해제하면 thumb에서 손을 떼는 순간에만 value changed 이벤트가 실행됩니다. 
+
+# 8. Segmented Control
+
+두개 이상의 버튼을 하나로 묶어둔 형태로, 연관된 옵션 중 하나만을 선택할 수 있는 컨트롤입니다. 
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-28__8.22.28.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-28__8.22.28.png)
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-28__8.27.55.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-28__8.27.55.png)
+
+- State의 Momentary에 기본적으로 체크가 해제되어 있고, 체크할 경우 선택한 상태를 유지하지 않습니다.
+- Segments의 수를 직접 지정하고 그 이름을 Title에 저장할 수 있습니다.
+- Segments의 수는 1일 경우 Segmented Control을 사용하는 의미가 없기 때문에 그 수로 1을 지정할 수 없습니다.
+- segmented control을 사용하기 위해서는 @UIAction을 추가해야합니다.
+
+Label의 Textalignment를 변경하는 코드를 작성합니다. segments의 수는 left, center, right의 세 가지이며 각 값을 선택할 때 Label의 textalignment 속성이 변경됩니다. 
+
+```jsx
+@IBOutlet weak var label: UILabel!
+@IBOutlet weak var segmentedControl: UISegmentedControl!
+
+@IBAction func alignmentChanged(_ sender: UISegmentedControl) {
+
+	  label.textAlignment = NSTextAlignment(rawValue: sender.selectedSegmentIndex) ?? .center
+
+}
+
+override func viewDidLoad() {
+
+    super.viewDidLoad()
+    segmentedControl.selectedSegmentIndex = label.textAlignment.rawValue 
+
+}
+```
+
+`label.textAlignment = NSTextAlignment(rawValue: sender.selectedSegmentIndex) ?? .center`
+
+레이블의 정렬을 sender(segmented control)에서 선택된 index값을 NSTextAlignment로 바꾸어 변경합니다. 만약 선택된 값이 nil이라면 `.center`를 리턴합니다.
+
+`segmentedControl.selectedSegmentIndex = label.textAlignment.rawValue`
+
+segmentedControl에서 선택되는 초기 값을 label의 초기 Alignment의 rawValue 값으로 저장합니다. 
+
+momentary 속성은 코드로도 제어가 가능합니다. 스위치를 토글하여 momentary 속성을 true/false로 제어하는 방법입니다.
+
+```jsx
+@IBOutlet weak var momentarySwitch: UISwitch!
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    segmentedControl.selectedSegmentIndex = label.textAlignment.rawValue
+    momentarySwitch.isOn = segmentedControl.isMomentary
+}
+
+@IBAction func toggleMomentary(_ sender: UISwitch) {
+    segmentedControl.isMomentary = sender.isOn
+}
+```
+
+`@IBOutlet weak var momentarySwitch: UISwitch!` 우선 스위치를 @IBOutlet으로 연결한 후,
+
+`momentarySwitch.isOn = segmentedControl.isMomentary` viewDidLoad()에서 초기 값을 설정합니다.
+
+Momentary 속성에 체크되어 있을 경우 스위치가 On, momentary에 체크되어있지 않은 경우 스위치가 Off됩니다.
+
+그 다음 스위치와 연결한 @IBAction을 구현합니다. 스위치의 상태에 따라 Control의 momentary 속성의 상태가 변경됩니다.
+
+```jsx
+segmentedControl.setTitle("왼쪽", forSegmentAt: 0)
+segmentedControl.setTitle("중앙", forSegmentAt: 1)
+segmentedControl.setTitle("오른쪽", forSegmentAt: 2)
+```
+
+물론 viewDidLoad() 내에서 각 segments의 타이틀을 위와 같은 함수를 사용해 변경할 수 있습니다.
+
+Segmented Control의 Segment를 추가하고 지우는 함수가 존재합니다.
+
+```jsx
+@IBAction func insertSegment(_ sender: Any) {
+    guard let title = titleField.text, title.count > 0 else {
+        return
+    }
+    segmentedControl.insertSegment(withTitle: title, at: segmentedControl.numberOfSegments, animated: true)
+    titleField.text = nil
+    
+}
+
+@IBAction func removeSegment(_ sender: Any) {
+    guard let title = titleField.text, title.count > 0 else {
+        return
+    }
+    for i in 0..<segmentedControl.numberOfSegments {
+        if let currentTitle = segmentedControl.titleForSegment(at: i), currentTitle == title {
+            segmentedControl.removeSegment(at: i, animated: true)
+        }
+    }
+    titleField.text = nil
+}
+```
+
+화면에는 segmented control과 텍스트를 입력하는 titleField와 두 버튼이 있습니다. 이 버튼들은 액션으로 연결되어 있고 titleField에 입력된 이름의 segment를 추가하거나 찾아서 삭제하는 메서드입니다.
+
+우선 `guard let`을 사용해 title에 입력받은 값을 저장합니다. 
+
+insert 버튼을 클릭했을 때 title에 입력된 값이 있다면 그 title을 insertSegment 함수를 사용해 가장 끝(segmentedControl.numberOfSegments)에 추가합니다.
+
+remove 버튼을 클릭했을 때 title에 입력된 값이 있다면 그 title을 removeSegment 함수를 사용해 삭제합니다. 우선 일치하는 텍스트를 찾기 위해 for in문을 사용해 비교하는 작업을 segmentedControl의 Segments 수만큼 반복합니다. 첫번째 segments부터 currentTitle에 저장하고, title과 같다면 그 인덱스에 해당하는 segment를 삭제하는 코드입니다. 
+
+두 버튼은 모두 실행 후 titleField에 입력된 값을 삭제합니다. 
+
+UISegmentedControl 클래스가 제공하는 method를 사용해 Segmented control의 UI를 변경할 수 있습니다.
+
+```jsx
+let normalImage = UIImage(named: "segment_normal")
+let selectedImage = UIImage(named: "segment_selected")
+
+segmentedControl.setBackgroundImage(normalImage, for: .normal, barMetrics: .default)
+segmentedControl.setBackgroundImage(selectedImage, for: .selected, barMetrics: .default)
+```
+
+이미지를 변수에 저장하고, setBackgroundImage를 사용해 상태별로 배경을 지정합니다. 각 segments 사이가 부자연스럽기 때문에 이에 맞는 이미지를 사용해 dividerImage를 설정합니다.
+
+```jsx
+segmentedControl.setDividerImage(UIImage(named: "segment_normal_normal"), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+segmentedControl.setDividerImage(UIImage(named: "segment_normal_selected"), forLeftSegmentState: .normal, rightSegmentState: .selected, barMetrics: .default)
+segmentedControl.setDividerImage(UIImage(named: "segment_selected_normal"), forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
+```
+
+setDividerImage를 사용해 사이사이의 이미지를 변경했습니다. 왼쪽과 오른쪽이 각각 normal, selected일 때를 모두 고려하여 세 가지 경우의 코드를 작성합니다. 
+
+dividerImage를 설정해서 양 끝 텍스트 alignment가 부자연스럽습니다. 이를 보완하기 위해 특정 이미지의 너비를 조작해 양 끝 너비를 조절해야하고, highlighted에 대한 설정이 없어 부자연스러운 부분이 생기는데, 이 또한 highlighted 상태에 normal 이미지를 나타내도록 구현해야합니다.
+
+이 모든것을 조작한 후에도 부자연스러운 부분이 발생합니다. 때문에 이는 최대한 작게 만들어야 하며, 보통 이런 방법보다는 다른 방법을 사용해 구현합니다. 
+
+정리하지 않겠습니다

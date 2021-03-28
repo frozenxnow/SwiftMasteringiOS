@@ -27,18 +27,27 @@ class SegmentedControlViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     @IBOutlet weak var momentarySwitch: UISwitch!
     
-    @IBAction func toggleMomentary(_ sender: UISwitch) {
-        
+    @IBAction func alignmentChanged(_ sender: UISegmentedControl) {
+        label.textAlignment = NSTextAlignment(rawValue: sender.selectedSegmentIndex) ?? .center
     }
     
-    
+    @IBAction func toggleMomentary(_ sender: UISwitch) {
+        segmentedControl.isMomentary = sender.isOn
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        segmentedControl.selectedSegmentIndex = label.textAlignment.rawValue
         
+        momentarySwitch.isOn = segmentedControl.isMomentary
+        segmentedControl.setTitle("왼쪽", forSegmentAt: 0)
+        segmentedControl.setTitle("중앙", forSegmentAt: 1)
+        segmentedControl.setTitle("오른쪽", forSegmentAt: 2)
     }
 }
 
