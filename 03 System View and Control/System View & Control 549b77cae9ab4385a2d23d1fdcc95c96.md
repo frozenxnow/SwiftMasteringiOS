@@ -632,3 +632,54 @@ dividerImage를 설정해서 양 끝 텍스트 alignment가 부자연스럽습�
 이 모든것을 조작한 후에도 부자연스러운 부분이 발생합니다. 때문에 이는 최대한 작게 만들어야 하며, 보통 이런 방법보다는 다른 방법을 사용해 구현합니다. 
 
 정리하지 않겠습니다
+
+# 9. Switch
+
+스위치는 ON/OFF 상태를 구현하는 컨트롤입니다. 다른 컨트롤에 비해 아주 간단하며, 인스펙터에서 조작할 수 있는 항목도 다섯가지 뿐입니다. 그중 title과 style은 iOS 앱개발에서 사용하지 않으므로, 조작할 수 있는 항목은 총 세가지입니다. On, Off의 상태를 선택하고 상태별 색상을 선택할 수 있습니다. 
+
+스위치는 @IBAction으로 연결해 스위치가 가지고 있는 isOn 속성을 조작합니다. 
+
+```jsx
+class SwitchViewController: UIViewController {
+    @IBOutlet weak var bulbImageView: UIImageView!
+    @IBOutlet weak var testSwitch: UISwitch!
+    
+    @IBAction func changedValue(_ sender: UISwitch) {
+        bulbImageView.isHighlighted = sender.isOn
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        testSwitch.isOn = bulbImageView.isHighlighted
+    }
+}
+```
+
+우선 viewDidLoad()에서 스위치를 초기화합니다. `testSwitch.isOn = bulbImageView.isHighlighted` 스위치가 On 상태일 때 bulbImageView는 highlighted 상태의 이미지를 보여주는 것입니다. 이미지뷰의 속성에서 Normal 상태의 이미지와 Highlighted 상태의 이미지를 각각 저장해둔 상태입니다. 
+
+그리고 ChangedValue() 함수에서 이미지뷰가 변경되도록 구현합니다. sender(switch)의 상태가 isOn일 경우 highlighted 이미지뷰를 전달합니다.
+
+toggle이라는 이름의 버튼을 추가했습니다. 해당 버튼으로 스위치를 조작할 수 있지만, `testSwitch.isOn.toggle()`을 사용할 경우 두가지 문제가 발생합니다. 부자연스러운 움직임과, 스위치는 조작되지만 연결된 액션 메서드는 실행되지 않는다는 점입니다.
+
+```jsx
+@IBAction func toggle(_ sender: Any) {
+    testSwitch.setOn(!testSwitch.isOn, animated: true)
+    changedValue(testSwitch)
+} 
+```
+
+위와같이 코드를 작성한다면 두 가지 문제점을 해결할 수 있습니다.
+
+`testSwitch.setOn(!testSwitch.isOn, animated: true)`
+
+제공되는 setOn() 함수를 사용합니다. 첫번째 파라미터로는 현재 스위치의 반대되는 값을 저장하고, 두번째 animate는 부드럽게 동작하도록 true를 전달합니다. 
+
+다음은 이미지가 업데이트 될 수 있도록 이전에 구현한 changedValue() 액션을 호출합니다. 파라미터로는 스위치를 전달합니다.
+
+결과적으로 토글 버튼을 누를 경우에도 이미지가 전환되고, 스위치가 부드럽게 전환되는 것을 확인할 수 있습니다. 
+
+setOn() 함수에 대해 알아야겠다고 생각했는데, 개발자문서를 읽어봐도 아직 이해하지 못하겠습니다.
+
+추후에 수정하겠습니다.
+
+# 10. Stepper

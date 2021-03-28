@@ -29,15 +29,20 @@ class SwitchViewController: UIViewController {
     
     @IBOutlet weak var testSwitch: UISwitch!
     
+    @IBAction func changedValue(_ sender: UISwitch) {
+        bulbImageView.isHighlighted = sender.isOn
+        
+    }
     
     
     @IBAction func toggle(_ sender: Any) {
-        
+//        testSwitch.isOn.toggle()
+        testSwitch.setOn(!testSwitch.isOn, animated: true)
+        changedValue(testSwitch)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        testSwitch.isOn = bulbImageView.isHighlighted
     }
 }
