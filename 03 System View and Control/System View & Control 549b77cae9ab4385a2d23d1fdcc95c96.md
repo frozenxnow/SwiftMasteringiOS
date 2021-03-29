@@ -683,3 +683,114 @@ setOn() 함수에 대해 알아야겠다고 생각했는데, 개발자문서를 
 추후에 수정하겠습니다.
 
 # 10. Stepper
+
+Stepper는 지정된 범위 내의 숫자를 증가시키고 감소하는 두개의 버튼을 가진 컨트롤입니다.
+
+인스페겉를 살펴보면 초기값을 설정하는 value, 최소값, 최대값을 설정하는 minimum, maximim이 있습니다. 그리고 체크박스 세 개가 있는데, autorepeat는 터치하는동안 반복적으로 해당 버튼이 눌리도록 하며 continuous는 터치가 반복적으로 실행되는동안 값 변화를 보일지 보이지 않을지에 대해 설정합니다. 마지막으로 wrap은 값의 순환을 설정합니다. 값이 On일 경우 값은 순환합니다. 
+
+각 체크박스를 스위치버튼으로 연결하고, 토글하는 메서드를 연결했습니다. 그리고 stepper에 저장된 value를 label에 표기하고, 스위치의 활성화에 따라 stepper의 `.autorepeat`, `.isContinuous`, `.wraps` 속성을 변경합니다.
+
+```jsx
+@IBOutlet weak var valueLabel: UILabel!
+@IBOutlet weak var valueStepper: UIStepper!
+@IBOutlet weak var autorepeatSwitch: UISwitch!
+@IBOutlet weak var continuousSwitch: UISwitch!
+@IBOutlet weak var wrapSwitch: UISwitch!
+
+@IBAction func toggleAutorepeat(_ sender: UISwitch) {
+    valueStepper.autorepeat = sender.isOn
+}
+
+@IBAction func toggleContinuous(_ sender: UISwitch) {
+    valueStepper.isContinuous = sender.isOn
+}
+
+@IBAction func toggleWrap(_ sender: UISwitch) {
+    valueStepper.wraps = sender.isOn
+}
+
+@IBAction func valueChanged(_ sender: UIStepper) {
+    valueLabel.text = "\(sender.value)"
+}
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    autorepeatSwitch.isOn = valueStepper.autorepeat
+    continuousSwitch.isOn = valueStepper.isContinuous
+    wrapSwitch.isOn = valueStepper.wraps
+}
+```
+
+# 11. Activity Indicator View
+
+Activity Indicator View는 작업 완료 시점을 정확히 알 수 없는 상태에서 사용자에게 `작업이 진행중임`을 나타냅니다.
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-29__7.56.53.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-29__7.56.53.png)
+
+Style은 activity indicator의 스타일을 지정하고, Color은 색상을 지정합니다.
+
+Animating에 체크를 할 경우 빙글빙글 돌아가는듯 움직이며 Hides When Stopped를 체크하면 작업이 종료될 때 activity indicator view가 사라집니다. 
+
+주로 Animating, Hides When Stopped 속성은 모두 체크된 상태로 실행합니다.
+
+위 상태를 제어하는 코드를 작성하겠습니다. 
+
+```jsx
+@IBOutlet weak var loading: UIActivityIndicatorView!
+@IBOutlet weak var hiddenSwitch: UISwitch!
+
+@IBAction func toggleHidden(_ sender: UISwitch) {
+    loading.hidesWhenStopped = sender.isOn
+}
+
+@IBAction func start(_ sender: Any) {
+    if !loading.isAnimating {
+	    loading.startAnimating()
+    }
+}
+
+@IBAction func stop(_ sender: Any) {
+    if loading.isAnimating {
+        loading.stopAnimating()
+    }
+}
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    loading.startAnimating()
+    hiddenSwitch.isOn = loading.hidesWhenStopped
+}
+```
+
+toggleHidden 스위치가 on 상태일때 loading의 hides when stopped 속성이 활성화됩니다. 이 때 stop 버튼을 클릭해 animating을 중지하면 loading은 화면에서 보이지 않게 됩니다. 
+
+start 버튼을 탭할 경우 loading이 animating 상태가 아닐 때 animating을 시작합니다.
+
+반대로 stop 버튼을 탭할 경우 loading이 animating 상태일 때 animating 동작을 중지합니다. 
+
+# 12. Progress View
+
+Activity Indicator View와는 달리 작업 진행 속도와 작업완료 시점을 알 때 사용자에게 이를 보여주기 위해 사용합니다.
+
+상태바는 tint color, progress tint color를 각각 설정할 수 있고, 처음 입력되는 progress는 0.0 ~ 1.0 사이의 값으로 설정할 수 있습니다. 코드 인스펙터에서 설정할 수 있지만 코드로도 구현이 가능합니다. 
+
+```jsx
+@IBOutlet weak var progressBar: UIProgressView!
+  
+@IBAction func update(_ sender: Any) {
+//  progressBar.progress = 0.8 // 부자연스럽게 변화합니다 
+    progressBar.setProgress(0.8, animated: true)
+}
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    progressBar.progress = 0.0
+    progressBar.progressTintColor = UIColor.systemRed
+    progressBar.tintColor = UIColor.systemGray
+    
+}
+```
+
+초기 설정은 viewDidLoad()에서 설정합니다. progress는 처음 0.0이고, 틴트컬러는 회색, 진행 컬러는 빨간색으로 설정했습니다. 버튼을 클릭하면 progress가 0.8로 업데이트 되는 action을 구현하는데, progress 속성을 바로 0.8로 변경하는 코드는 시각적으로 매우 부자연스럽기 때문에 setProgress를 통해 애니메이션을 함께 전달합니다.

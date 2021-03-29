@@ -25,9 +25,19 @@ import UIKit
 
 class ProgressViewViewController: UIViewController {
     
+    @IBOutlet weak var progressBar: UIProgressView!
     
+    @IBAction func update(_ sender: Any) {
+//        progressBar.progress = 0.8
+        progressBar.setProgress(0.8, animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        progressBar.progress = 0.0
+        progressBar.progressTintColor = UIColor.systemRed
+        progressBar.tintColor = UIColor.systemGray
+        
     }
+    
 }

@@ -32,24 +32,30 @@ class StepperViewController: UIViewController {
     @IBOutlet weak var wrapSwitch: UISwitch!
     
     @IBAction func toggleAutorepeat(_ sender: UISwitch) {
-        
+        valueStepper.autorepeat = sender.isOn
     }
     
     @IBAction func toggleContinuous(_ sender: UISwitch) {
-        
+        valueStepper.isContinuous = sender.isOn
     }
     
     @IBAction func toggleWrap(_ sender: UISwitch) {
-        
+        valueStepper.wraps = sender.isOn
     }
     
-    
+    @IBAction func valueChanged(_ sender: UIStepper) {
+        valueLabel.text = "\(sender.value)"
+        
+    }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        autorepeatSwitch.isOn = valueStepper.autorepeat
+        continuousSwitch.isOn = valueStepper.isContinuous
+        wrapSwitch.isOn = valueStepper.wraps
         
     }
 }

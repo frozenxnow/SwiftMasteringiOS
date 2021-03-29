@@ -25,25 +25,31 @@ import UIKit
 
 class ActivityIndicatorViewViewController: UIViewController {
     
+    @IBOutlet weak var loading: UIActivityIndicatorView!
     
     @IBOutlet weak var hiddenSwitch: UISwitch!
     
     @IBAction func toggleHidden(_ sender: UISwitch) {
-        
+        loading.hidesWhenStopped = sender.isOn
     }
     
     @IBAction func start(_ sender: Any) {
-        
+        if !loading.isAnimating {
+        loading.startAnimating()
+        }
     }
     
     @IBAction func stop(_ sender: Any) {
-        
+        if loading.isAnimating {
+            loading.stopAnimating()
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        loading.startAnimating()
+        hiddenSwitch.isOn = loading.hidesWhenStopped
     }
 }
