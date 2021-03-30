@@ -793,4 +793,37 @@ override func viewDidLoad() {
 }
 ```
 
-초기 설정은 viewDidLoad()에서 설정합니다. progress는 처음 0.0이고, 틴트컬러는 회색, 진행 컬러는 빨간색으로 설정했습니다. 버튼을 클릭하면 progress가 0.8로 업데이트 되는 action을 구현하는데, progress 속성을 바로 0.8로 변경하는 코드는 시각적으로 매우 부자연스럽기 때문에 setProgress를 통해 애니메이션을 함께 전달합니다.
+초기 설정은 viewDidLoad()에서 설정합니다. progress는 처음 0.0이고, 틴트컬러는 회색, 진행 컬러는 빨간색으로 설정했습니다. 버튼을 클릭하면 progress가 0.8로 업데이트 되는 action을 구현하는데, progress 속성을 바로 0.8로 변경하는 코드는 시각적으로 매우 부자연스럽기 때문에 setProgress를 통해 애니메이션을 함께 전달합니다. 
+
+# 13. Alert #1
+
+Alert는 경고창입니다. 경고창의 버튼은 3개까지 올 수 있고, 세 개 이상의 버튼이 필요한 경우 Action Sheet를 추가합니다. 
+
+Alert의 버튼이 두개일때는 버튼이 수평으로, 세개일때는 버튼이 수직으로 구성됩니다. 
+
+1. UIAlertController 인스턴스를 생성합니다
+`let alert = UIAlertController(title: "Hello", msg: "nice to meet you", preferredStyle: .alert)`
+첫번째 파라미터로 제목, 두번째 파라미터로 내용, 마지막 파라미터로 경고창의 스타일을 지정하는데 alert와 actionSheet가 있습니다.
+2. UIAlertAction을 통해 경고창에 추가될 버튼(action)을 생성합니다.
+`let okAction = UIAlertAction(title: "OK", style: .default, 클로저)`
+액션 버튼 인스턴스를 생성하고, 파라미터로 버튼의 레이블과 스타일, 그리고 버튼을 탭했을 때 실행될 클로저를 전달합니다. 스타일은 .default, .cancel, .destructive의 세 가지 스타일이 존재합니다. 
+
+    ![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-30__11.10.15.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-30__11.10.15.png)
+
+    default는 기본적인 확인 버튼이고, cancel은 닫기 버튼이며 굵은 글씨로 표시됩니다. destructive는 강조되기 때문에 빨간색 글씨로 표시됩니다.
+
+3. UIAlertAction 인스턴스를 UIAlertController에 추가합니다.
+`alert.addAction(okAction)`
+4. 경고창을 띄우도록 구현합니다.
+`present(alert, animated: true, nil)`
+마지막 파라미터는 나중에 배우도록 하겠습니다. 첫번째 파라미터로 띄우고자 하는 경고창, 두번째 파라미터로는 애니메이션을 전달합니다.
+
+버튼이 출력되는 위치와 상태에는 규칙이 있습니다.
+
+만약 버튼이 두개일 때 cancel버튼이 있다면 cancel은 왼쪽에 위치합니다. 앞서 말했듯 cancel은 굵은 글씨로 표기되어 강조됩니다. 만약 강조하는 버튼을 변경하고자 한다면 alert.preferredAction = okAction 와 같은 코드를 입력합니다. 그럼 아래와 같이 OK에 강조 표시가 되고 return 키를 누를 경우 OK 버튼이 클릭됩니다. 
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-30__11.19.08.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-30__11.19.08.png)
+
+# 14. Alert #2
+
+이전에는 return 키를 누르면 무반응, esc 키를 누르면 cancel이 동작했으나, okAction을 preferredAction으로 추가하게 되면 return 키를 눌렀을 때 OK 버튼이, esc 키를 누르면 여전히 cancel이 동작합니다.

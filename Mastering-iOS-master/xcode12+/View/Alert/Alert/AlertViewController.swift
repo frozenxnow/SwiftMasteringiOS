@@ -26,6 +26,21 @@ import UIKit
 class AlertViewController: UIViewController {
     
     @IBAction func show(_ sender: Any) {
+        let alert = UIAlertController(title: "Hello", message: "Welcome to my project!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            print(action.title!)
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel) { (action) in
+            print(action.title!)
+        }
+        let destructiveAction = UIAlertAction(title: "destructive", style: .destructive) { (action) in
+            print(action.title!)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        alert.addAction(destructiveAction)
+        
+        present(alert, animated: true, completion: nil)
         
     }
     
