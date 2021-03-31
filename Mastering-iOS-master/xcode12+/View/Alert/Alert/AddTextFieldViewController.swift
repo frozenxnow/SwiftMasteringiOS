@@ -29,7 +29,35 @@ class AddTextFieldViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UILabel!
     
     @IBAction func show(_ sender: Any) {
+        let alert = UIAlertController(title: "Sign In to iTunes Store", message: nil, preferredStyle: .alert)
         
+        alert.addTextField { (idField) in
+            idField.placeholder = "Apple ID"
+        }
+        
+        alert.addTextField { (pwField) in
+            pwField.placeholder = "Input PW"
+            pwField.isSecureTextEntry = true
+        }
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] (action) in
+            if let fieldList = alert.textFields {
+                if let idField = fieldList.first {
+                    self?.idLabel.text = idField.text
+                }
+                if let pwField = fieldList.last {
+                    self?.passwordLabel.text = pwField.text
+                }
+            }
+        }
+        
+        alert.addAction(okAction)
+        
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

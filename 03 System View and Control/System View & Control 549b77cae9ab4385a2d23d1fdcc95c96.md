@@ -795,7 +795,7 @@ override func viewDidLoad() {
 
 초기 설정은 viewDidLoad()에서 설정합니다. progress는 처음 0.0이고, 틴트컬러는 회색, 진행 컬러는 빨간색으로 설정했습니다. 버튼을 클릭하면 progress가 0.8로 업데이트 되는 action을 구현하는데, progress 속성을 바로 0.8로 변경하는 코드는 시각적으로 매우 부자연스럽기 때문에 setProgress를 통해 애니메이션을 함께 전달합니다. 
 
-# 13. Alert #1
+# 13. Alert Controller #1
 
 Alert는 경고창입니다. 경고창의 버튼은 3개까지 올 수 있고, 세 개 이상의 버튼이 필요한 경우 Action Sheet를 추가합니다. 
 
@@ -824,6 +824,82 @@ Alert의 버튼이 두개일때는 버튼이 수평으로, 세개일때는 버�
 
 ![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-30__11.19.08.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-30__11.19.08.png)
 
-# 14. Alert #2
-
 이전에는 return 키를 누르면 무반응, esc 키를 누르면 cancel이 동작했으나, okAction을 preferredAction으로 추가하게 되면 return 키를 눌렀을 때 OK 버튼이, esc 키를 누르면 여전히 cancel이 동작합니다.
+
+# 14. Alert Controller #2
+
+Alert 창에 텍스트필드를 추가할 수 있습니다. 
+
+```jsx
+let alert = UIAlertController(title: "Sign In to iTunes Store", message: nil, preferredStyle: .alert)
+      
+alert.addTextField { (idField) in
+    idField.placeholder = "Apple ID"
+}
+
+alert.addTextField { (pwField) in
+    pwField.placeholder = "Input PW"
+    pwField.isSecureTextEntry = true
+}
+```
+
+UIAlertController 인스턴스를 생성하고, 그 인스턴스에 addTextField 메서드를 사용해 텍스트 필드를 순서대로 추가합니다. 이 함수의 파라미터로는 클로저가 전달되고, 클로저의 파라미터로 idField, pwField를 사용합니다. 추후에 이 텍스트필드에 접근할 때에도 이 파라미터 이름을 사용합니다. 
+
+텍스트필드의 속성은 placeholder가 있습니다. 사용자가 텍스트필드의 값을 입력하기 전 기본적으로 보여주는 문구이며 사용자는 수정할 수 없습니다. 대개 흐리게 표시되며 입력해야할 값에 대한 정보를 가지고 있습니다.
+
+isSecureTextEntry 속성은 Bool 타입으로, 입력한 값을 화면에 띄우지 않고 마스킹하는 속성입니다. true일 경우 입력하는 값이 다른 문자로 대체되고, false의 경우 값이 노출됩니다.
+
+```jsx
+let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] (action) in
+    if let fieldList = alert.textFields {
+        if let idField = fieldList.first {
+            self?.idLabel.text = idField.text
+        }
+        if let pwField = fieldList.last {
+            self?.passwordLabel.text = pwField.text
+        }
+    }
+}
+
+alert.addAction(okAction)
+let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+alert.addAction(cancelAction)
+
+present(alert, animated: true, completion: nil)
+```
+
+"OK" 버튼을 클릭했을 때 실행되는 okAction을 살펴보겠습니다. 마지막 파라미터로 전달되는 클로저는 "OK" 버튼을 탭했을 때 실행되는 함수입니다. 
+
+if let 구문을 사용해 alert의 textFields 속성을 통해 모든 텍스트필드를 순서대로 fieldList에 저장합니다. 그리고 각각 if let 구문을 사용해 첫번째에 추가된 fieldList가 있다면 idField에 바인딩하고, 화면에 있는 idLabel의 텍스트를 변경하도록 구현했습니다. 마찬가지로 마지막 fieldList가 있다면 pwField에 바인딩하여 화면에 있는 passwordLabel의 텍스트를 변경합니다.
+
+이렇게 생성한 okAction을 alert에 추가하고, cancel 액션을 만들어 추가합니다.
+
+TextField 는 ActionSheet에서 동작하지 않습니다. Alert에서만 추가가 가능합니다. 
+
+# 15. Alert Controller #3
+
+ActionSheet를 추가하는 방법입니다. UIAlertController는 preferredStyle을 .alert와 .actionSheet 중 하나를 선택할 수 있습니다. alert의 방식은 앞서 많이 다루어보았습니다. alert에 추가된 액션이 많을 경우 alert창은 세로로 긴 형태를 띠며 수직으로 버튼을 생성합니다. 이렇게 액션이 많을 때에는 주로 actionSheet를 사용합니다.
+
+같은 코드에서 preferredStyle만 변경해주었습니다. 두 차이점을 살펴보겠습니다.
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-31__10.21.38.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-31__10.21.38.png)
+
+![System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-31__10.40.42.png](System%20View%20&%20Control%20549b77cae9ab4385a2d23d1fdcc95c96/_2021-03-31__10.40.42.png)
+
+(좌)alert, (우)actionSheet입니다. 팝업창으로 경고창이 뜨는 반면, 액션시트는 하단에서 팝업이 올라오는 형태이고 Cancel 버튼을 보면 따로 떨어져 나와 약간의 틈을 두고 있습니다. 또한 액션시트의 바깥 회색바탕이 된 부분을 탭하면 Cancel 버튼을 탭한 것과 같은 효과를 나타냅니다. 
+
+위 화면은 선택한 액션의 타이틀을 화면에 있는 라벨에 띄우는 코드입니다. 이때 이미 선택된 액션에 대한 버튼을 비활성화 하는 코드를 구현하고자 한다면 for-in문을 사용해 모든 액션의 타이틀과 화면의 라벨에 표시된 텍스트를 각각 비교해보고, 일치하는 타이틀이 있다면 해당 버튼을 비활성화해야합니다. 이 때 isEnabled 속성을 사용합니다.
+
+```jsx
+for button in controller.actions {
+    if resultLabel.text == button.title {
+        button.isEnabled = false
+    }
+}
+```
+
+컨트롤러(alert)에 있는 모든 액션들 중 하나씩 비교를 합니다. 만약 각 액션의 타이틀과 화면의 레이블 텍스트가 일치한다면 해당 액션의 isEnabled 속성을 false로 변경합니다. 
+
+# 16. Stack View #1
+
+추후 오토레이아웃에 대한 강의를 수강한 후 다시 듣기 !

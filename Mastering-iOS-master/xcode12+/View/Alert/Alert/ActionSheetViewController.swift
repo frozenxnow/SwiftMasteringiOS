@@ -28,7 +28,7 @@ class ActionSheetViewController: UIViewController {
     @IBOutlet weak var resultLabel: UILabel!
     
     @IBAction func show(_ sender: UIButton) {
-        let controller = UIAlertController(title: "Languages", message: "Choose one", preferredStyle: .alert)
+        let controller = UIAlertController(title: "Languages", message: "Choose one", preferredStyle: .actionSheet)
         
         let swiftAction = UIAlertAction(title: "Swift", style: .default) { [weak self] (action) in
             self?.resultLabel.text = action.title
@@ -59,6 +59,12 @@ class ActionSheetViewController: UIViewController {
         controller.addAction(cancelAction)
         
         present(controller, animated: true, completion: nil)
+        
+        for button in controller.actions {
+            if resultLabel.text == button.title {
+                button.isEnabled = false
+            }
+        }
     }
     
     override func viewDidLoad() {
