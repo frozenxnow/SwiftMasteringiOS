@@ -35,16 +35,23 @@ class ImageAnimationViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     @IBAction func startAnimation(_ sender: Any) {
-        
+        imageView.startAnimating()
     }
     
     @IBAction func stopAnimation(_ sender: Any) {
-        
+        if imageView.isAnimating {
+            imageView.stopAnimating()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.animationImages = images
+        imageView.image = images[0]
+        
+        imageView.animationDuration = 1.0
+        imageView.animationRepeatCount = 3
         
     }
 }
