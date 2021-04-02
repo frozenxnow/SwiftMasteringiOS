@@ -30,6 +30,23 @@ class ImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let img1 = UIImage(named: "xiumin")
+//        let img2 = #imageLiteral(resourceName: "xiumin")
+        
+        imageView.image = img1
+        
+        if let ptSize = img1?.size {
+            print("Image Size: \(ptSize)")
+        }
+        
+        if let ptSize = img1?.size, let scale = img1?.scale {
+            let px = CGSize(width: ptSize.width * scale, height: ptSize.height * scale)
+            print("Image Size(px): \(px)")
+        }
+        
+        img1?.cgImage
+        img1?.ciImage
+        
         
     }
 }
