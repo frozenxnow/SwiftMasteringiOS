@@ -115,3 +115,43 @@ img1?.jpegData(param: 압축률)
 ```
 
 이미지를 다른 곳으로 전송하거나 파일을 저장하기 위해서는 이미지를 binary형태로 변환해야합니다. 이 변환 과정에 쓰이는 함수는 위와 같습니다. 각각 png binary로, jpeg binary로 변환하는 함수입니다. .jaegData()의 경우 파라미터로 압축률을 받습니다. 여기에는 0.0부터 1.0까지의 숫자가 올 수 있고, 숫자가 낮을수록 압축률이 높고 숫자가 높을수록 이미지의 품질이 높아집니다.
+
+# 3. Image #2
+
+## Resizable Images
+
+이미지 리사이징에 대해 알아보겠습니다. 
+
+버튼을 추가하고 버튼의 background image로 특정 이미지를 선택했을 때 버튼의 크기에 맞게 이미지의 크기가 변하면서 깨지고 품질이 떨어지는 경우가 발생하는데, 이 때 리사이징이 필요합니다. 
+
+Asset Library에서 배경이미지로 사용할 이미지를 선택한 후 인스펙터를 살펴보면 하단에 slicing에 대한 메뉴가 있습니다. 이미지 슬라이싱을 통해 이미지를 리사이징할 수 있습니다. 직접 드래그하여 영역을 선택하거나 인스펙터에서 직접 pt 값을 입력하면 됩니다. 가로나 세로, 혹은 가로와 세로를 조정하여 슬라이싱 영역을 선택할 수 있고, 색이 선명한 부분이 리사이징되어 우리가 사용하는 부분이고 희미하게 보이는 부분은 무시되는 영역입니다. 
+
+기본적으로 타일 형태로 리사이징된 이미지가 나열되어 있는데 이는 인스펙터에서 tile → stretched로 변경하면 이미지가 크기에 맞게 늘어나게 됩니다. 
+
+코드를 통해 리사이징 이미지를 생성하겠습니다. 버튼의 배경 이미지를 변경하기 위해 기존의 이미지를 리사이징하여 저장한 후, 버튼의 배경 이미지로 설정합니다.
+
+```jsx
+1. UIInset 구조체로 inset 값을 생성합니다. 이 부분은 리사이징 되지 않는 영역입니다.
+let capInset = UIEdgeInset(top: 14, left: 14, bottom: 14, right: 14)
+
+2. 새로운 resizable image를 생성합니다.
+let bckImage = img.resizableImage(withCapInsets: capInset)
+
+3. 버튼의 배경 이미지로 설정합니다.
+btn.setBackgroundImage(bckImage, for: .normal)
+```
+
+첫번째 구한 capInset은 리사이징 시 제외되는 영역입니다. 이때 나머지(가운데) 부분이 resizable image 영역입니다. asset library에서 영역을 직접 드래그하면 필요한 부분만 선택이 가능하지만 이렇게 코드를 사용해 resizable image를 구할 때에는 나머지 모든 영역이 resizable image입니다. 
+
+두번째로 resizableImage(withCapInsets:)를 사용해 새로운 resizable image를 생성했습니다. asset library에서와의 차이점으로, asset library에서 slicing할 경우 원본 이미지를 수정하는 반면 resizableImage 함수를 사용하면 새로운 이미지를 생성하고 리턴하게 됩니다. resizableImage(withCapInsets:) 함수에 파라미터가 하나 더 추가된 형태의 함수도 존재합니다. resizableImage(withCapInsets:resizingMode:) 함수는 리사이징된 이미지를 tile형으로 삽입할지 stretched형으로 삽입할지에 대한 선택이 가능합니다. asset library에서와 마찬가지로 기본값은 tile 입니다. 
+
+## Vector Images
+
+단순한 이미지의 경우 resizable image를 생성할 수 있지만 이미지가 복잡할 경우 이 방법을 사용할 수 없습니다. 이 때 사용할 수 있는 Vector Images입니다. 원본 크기로 추가했을 때에는 문제가 없던 이미지의 크기를 무작정 키웠을 경우 이미지 품질이 현저히 낮아집니다. 물론 크기에 맞는 다른 이미지를 추가하는 것도 하나의 방법이지만 벡터 이미지를 사용할 경우 한 장으로 해결이 가능합니다. 
+
+Vector 이미지의 종류는 두가지 입니다.
+
+1. PDF image: 낮은 버전부터 이용했기 때문에 거의 모든 기기에서 호환이 가능합니다. 그러나 변환이 번거롭다는 단점이 있습니다.
+2. SVG image: ios13, xcode12부터 사용이 가능해졌으나 웹개발에서는 많이 사용하고 있고 유료서비스도 많이 사용하고 있습니다. 호환도 잘 되는 편이지만 배포 버전이 iOS 13보다 낮다면 사용하지 않는 편이 좋습니다. 
+
+Vector 이미지를 추가할 때에는 기본 설정을 추가해야합니다. 이미지를 선택한 후 인스펙터에서 Resizing의 Preserve Vector Data에 체크하고 Appearances 속성을 Single Scale로 선택합니다.
