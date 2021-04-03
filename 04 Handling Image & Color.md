@@ -154,4 +154,192 @@ Vector 이미지의 종류는 두가지 입니다.
 1. PDF image: 낮은 버전부터 이용했기 때문에 거의 모든 기기에서 호환이 가능합니다. 그러나 변환이 번거롭다는 단점이 있습니다.
 2. SVG image: ios13, xcode12부터 사용이 가능해졌으나 웹개발에서는 많이 사용하고 있고 유료서비스도 많이 사용하고 있습니다. 호환도 잘 되는 편이지만 배포 버전이 iOS 13보다 낮다면 사용하지 않는 편이 좋습니다. 
 
-Vector 이미지를 추가할 때에는 기본 설정을 추가해야합니다. 이미지를 선택한 후 인스펙터에서 Resizing의 Preserve Vector Data에 체크하고 Appearances 속성을 Single Scale로 선택합니다.
+Vector 이미지를 추가할 때에는 기본 설정을 추가해야합니다. 이미지를 선택한 후 인스펙터에서 Resizing의 Preserve Vector Data에 체크하고 Appearances 속성을 Single Scale로 선택합니다. 
+
+# 4. Image #3
+
+Image Rendering과 template image에 대해 알아보겠습니다.
+
+우선 Template Image란 이미지에서 컬러를 모두 제거하고 불투명한 영역을 모두 같은 색으로 채워넣은 이미지를 말합니다. 버튼이나 이미지뷰에 추가되는 이미지는 default 상태에서 그대로 출력되지만 특정한 경우에는 탬플릿 이미지가 추가됩니다. 
+
+asset 폴더에 들어가 이미지를 선택한 후 인스펙터를 살펴보면 Render As 항목이 있습니다. 기본은 default로 설정되어 있는데 이는 컴퓨터가 자동으로 출력할 이미지를 선택합니다. 나머지 original image, template image는 늘 원본 이미지를 출력하거나 전부 탬플릿 이미지로 출력할 때 사용합니다.
+
+코드로 설정이 가능합니다. 
+
+```jsx
+@IBOutlet weak var imageView: UIImageView!
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    if let img = UIImage(named: "clover")?.withRenderingMode(.alwaysTemplate) {
+        imageView.image = img
+    }
+}
+```
+
+처음 이미지를 추가할 때 .withRenderingMode() 함수를 사용해 랜더링 모드를 설정할 수 있습니다. 이렇게 생성한 이미지를 이미지뷰의 이미지에 추가하게 되면 해당 아울렛은 탬플릿 이미지로 추가됩니다.
+
+어려운 내용은 없습니다.
+
+# 5. Image #4
+
+## Custom Drawing
+
+추가된 View는 Root View와 같은 사이즈를 가지고 있고 View에 사용자가 원하는 위치에 이미지를 삽입하는 방법입니다. 
+
+우선 View와 연결된 클래스를 정의하고 그 클래스 안에 삽입하고자 하는 이미지를 선언합니다. 그리고 draw() 메서드를 오버라이딩해서 그리기 코드를 직접 구현합니다. UIImage가 제공하는 방법으로 그릴 수 있는데 크게 세 가지가 있습니다. 
+
+1. .draw(at: CGPoint(x:y:)
+2. .draw(in: CGRect(x:y:width;height)
+3. .drawjAsPattern(in: CGRect(CGRect)
+
+첫번째 메서드는 이미지의 좌표만을 지정합니다. 이미지의 크기는 원본 크기로 삽입됩니다.
+
+두번째 메서드는 좌표 지정과 동시에 크기도 지정합니다. 
+
+세번째 메서드는 지정된 프레임의 이미지를 그리는데 이미지 크기가 프레임보다 작으면 패턴 형태로 그려지는 함수입니다.
+
+```jsx
+  
+class CustomDrawingView: UIView {
+    let starImg = UIImage(systemName: "star")
+    let bellImg = UIImage(systemName: "bell")
+    let umbrellaImg = UIImage(systemName: "umbrella")
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        starImg?.draw(at: CGPoint(x: 0.0, y: 0.0))
+        bellImg?.draw(in: CGRect(x: 0.0, y: 80, width: 40, height: 40))
+        umbrellaImg?.drawAsPattern(in: rect)
+        
+    }
+}
+
+class CustomImageDrawingViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+```
+
+## Resizing
+
+리사이징하는 방법은 여러가지가 있습니다. 그 중 Image Context를 사용하는 방법과 Bitmap Context를 사용하는 방법에 대해 알아보겠습니다.
+
+### [Image Context 사용]
+
+1. 이미지를 리사이징 하는 함수를 선언합니다. 이 함수는 리사이징하고자 하는 이미지와 그 크기를 파라미터로 받습니다. 
+2. ImageContext를 생성합니다. 무언가를 그릴 수 있는 그림판을 만드는 것입니다. 첫번째 파라미터로 리사이징하는 크기를 전달합니다. 그리고 두번째 파라미터는 이미지에 투명한 부분이 있다면 false, 투명한 부분이 없다면 true를 전달합니다. 마지막 파라미터로는 이미지의 스케일을 전달하는데, 0.0을 전달할 경우 디바이스의 스케일을 그대로 사용하게 됩니다. 
+3. 그림판은 만들어졌고 프레임 내부에 그림을 그리기 위해 프레임을 생성합니다. 
+4. draw(in: frame) 메서드를 사용해 이미지를 프레임에 그립니다. 원본 이미지가 프레임 내부에 원본 크기로 축소되어 그려집니다. 
+5. 컨텍스트에 그려진 이미지를 실제 이미지로 변환합니다. 현재 사용하는 이미지 컨텍스트에서 이미지를 가져오는 UIGraphicsGetImageFromCurrentImageContext() 함수를 사용합니다. 
+6. 컨텍스트 작업 완료 후 반드시 컨텍스트를 해제합니다. // method 구현 완료
+7. viewDidLoad() 함수에서 방금 만들었던 method를 호출합니다. 
+
+```jsx
+// 함수를 추가할 때에는 보통 extension을 사용합니다.
+
+extension ImageResizingViewController {
+    func resizingWithImageContext(image: UIImage, to size: CGSize) -> UIImage? {
+        
+        // 1. 컨텍스트를 생성한다
+        UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
+        // 2. 프레임을 생성한다
+        let frame = CGRect(origin: CGPoint.zero, size: size)
+        // 3. 프레임에 그림을 그린다
+        image.draw(in: frame)
+        // 4. 컨텍스트에 있는 그림을 실제로 사용할 수 있도록 꺼낸다
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        // 5. 컨텍스트를 해제한다
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+}
+
+class ImageResizingViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let image = UIImage(named: "photo") {
+            let size = CGSize(width: image.size.width / 5.0, height: image.size.height / 5.0)
+            imageView.image = resizingWithImageContext(image: image, to: size)
+        }
+                
+    }
+}
+```
+
+비교적 단순한 방법이지만 Context를 만들 때 사용할 수 있는 옵션이 제한적입니다. 
+
+### [Bitmap Context 사용]
+
+1. Bitmap Context를 사용할 수 있도록 CoreGraphics를 import합니다.
+2. 이미지를 리사이징 하는 함수를 선언합니다. 이 함수는 리사이징하고자 하는 이미지와 그 크기를 파라미터로 받습니다. 
+3. cgImage 속성을 사용해 이미지의 형식을 core graphics로 변경합니다.
+4. 비트맵 컨텍스트를 생성합니다.
+첫번째 파라미터로는 랜더링할 포인트의 메모리를 전달해야하는데 nil을 입력하면 알아서 처리됩니다. 
+두번째, 세번째 파라미터로는 너비와 높이를 입력하는데 이 메서드에서 파라미터로 받은 size를 int형으로 변환하여 입력합니다.
+나머지 파라미터들은 비트맵과 관련된 속성으로 이번에 다루지 않고 강의에 나온대로 원본 이미지의 비트맵 속성값을 입력하겠습니다.
+5. context의 속성 중 interpolationQuality속성을 사용해 이미지의 품질을 설정합니다.
+6. 프레임을 생성합니다.
+7. draw() 메서드를 사용해 그림을 그립니다. 여기에서 사용하는 draw() 메서드는 CGContext에 구현된 메서드로 앞서 사용한 메서드와는 다른 메서드입니다. 첫번째 파라미터로는 core graphics Image로 변환한 이미지를 전달하고, 두번째 파라미터로는 프레임을 전달합니다.
+8. 컨텍스트에 그려진 이미지를 makeImage() 메서드를 이용해 실제 이미지로 바꾸어줍니다.
+9. CGImage를 UIImage로 바꾸어 리턴합니다.
+10. viewDidLoad()에서 method를 호출합니다. 
+
+```jsx
+extension ImageResizingViewController {
+    func resizingWithBitmapContext(image: UIImage, to size: CGSize) -> UIImage? {
+        
+        // 1. 비트맵을 사용하기 위해 cgImage(coreGraphicsImage)로 변경한다
+        guard let cgImage = image.cgImage else {
+            return nil
+        }
+        
+        // 2. 비트맵 컨텍스트를 생성한다
+        guard let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: cgImage.bytesPerRow, space:  cgImage.colorSpace!, bitmapInfo: cgImage.bitmapInfo.rawValue) else {
+            return nil
+        }
+        
+        // 3. 이미지의 품질을 설정한다
+        context.interpolationQuality = .high
+        
+        // 4. 프레임을 생성한다
+        let frame = CGRect(origin: CGPoint.zero, size: size)
+        
+        // 5. 프레임에 그림을 그린다 (CGContext에 구현된 메서드로 앞서 사용한 메서드와 완전히 다르다)
+        context.draw(cgImage, in: frame)
+        
+        // 6. 컨텍스트에 그려진 이미지를 실제 이미지로 변경한다
+        guard let img = context.makeImage() else {
+            return nil
+        }
+        
+        // 7. CGImage를 UIImage로 변경하여 리턴한다
+        return UIImage(cgImage: img)
+    }
+}
+
+class ImageResizingViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let image = UIImage(named: "photo") {
+            let size = CGSize(width: image.size.width / 5.0, height: image.size.height / 5.0)
+            imageView.image = resizingWithBitmapContext(image: image, to: size)
+        }
+    }
+}
+```
+
+이미지를 리사이징 하면서 비트맵 속성을 바꾸어야한다면 두번째 방법을 사용하고 그게 아니라면 주로 첫번째 방법을 사용합니다.

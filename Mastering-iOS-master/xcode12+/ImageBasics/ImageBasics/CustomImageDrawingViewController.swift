@@ -31,12 +31,12 @@ class CustomDrawingView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
+        starImg?.draw(at: CGPoint(x: 0.0, y: 0.0))
+        bellImg?.draw(in: CGRect(x: 0.0, y: 80, width: 40, height: 40))
+        umbrellaImg?.drawAsPattern(in: rect)
         
     }
 }
-
-
-
 class CustomImageDrawingViewController: UIViewController {
     
     override func viewDidLoad() {
