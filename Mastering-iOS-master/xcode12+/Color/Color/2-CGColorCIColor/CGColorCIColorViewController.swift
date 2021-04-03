@@ -31,5 +31,6 @@ class CGColorCIColorViewController: UIViewController {
         super.viewDidLoad()
         
         blueView.layer.borderWidth = 10
+        blueView.layer.borderColor = UIColor.systemYellow.cgColor
     }
 }

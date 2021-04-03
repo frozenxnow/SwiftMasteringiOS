@@ -34,12 +34,28 @@ class UIColorViewController: UIViewController {
     @IBOutlet weak var greenSlider: UISlider!
     
     @IBAction func sliderChanged(_ sender: UISlider) {
-       
+        let r = CGFloat(redSlider.value)
+        let g = CGFloat(greenSlider.value)
+        let b = CGFloat(blueSlider.value)
+        let newColor = UIColor(displayP3Red: r, green: g, blue: b, alpha: 1.0)
+        targetView.backgroundColor = newColor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        targetView.backgroundColor = UIColor.systemPink
+        
+        var r = CGFloat(0)
+        var g = CGFloat(0)
+        var b = CGFloat(0)
+        var a = CGFloat(0)
+        
+        targetView.backgroundColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        redSlider.value = Float(r)
+        greenSlider.value = Float(g)
+        blueSlider.value = Float(b)
         
     }
 }

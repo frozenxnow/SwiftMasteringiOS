@@ -342,4 +342,97 @@ class ImageResizingViewController: UIViewController {
 }
 ```
 
-이미지를 리사이징 하면서 비트맵 속성을 바꾸어야한다면 두번째 방법을 사용하고 그게 아니라면 주로 첫번째 방법을 사용합니다.
+이미지를 리사이징 하면서 비트맵 속성을 바꾸어야한다면 두번째 방법을 사용하고 그게 아니라면 주로 첫번째 방법을 사용합니다. 
+
+# 6. Color #1
+
+Interface Builder에서 색상을 선택하는 것은 상당히 직관적입니다. 컬러의 미리보기와 컬러의 이름이 나란히 작성되어 있는 모습을 확인할 수 있습니다. 
+
+코드에서 컬러를 사용할 때에는 주로 UIColor를 사용합니다. UIColor는 자주 사용하는 컬러를 type property로 제공하여 컬러의 이름을 직접 입력하여 사용할 수 있습니다. 이미 등록된 색상이 아닌 또다른 색상을 선택하기 위해서는 UIColor의 생성자를 사용합니다. 다양한 생성자들 중 주로 사용하는 것은 아래의 두 생성자입니다.
+
+```jsx
+UIColor(red:green:blue:alpha)
+UIColor(displayP3Red:green:blue:alpha)
+```
+
+rgb 컬러를 기반으로 색을 조합하여 새로운 색을 만들어내는 생성자입니다. 기존에 알고 있는 rgb 색상 체계는 0 ~ 255 까지의 숫자로 이루어져있지만 UIColor 생성자의 파라미터로는 모두 0.0 ~ 1.0 사이의 숫자를 사용합니다. 따라서 29를 입력하고자 한다면 (29.0/255.0) 과 같이 입력해야합니다. 
+
+두 생성자 중 아래에 있는 생성자는 위의 생성자보다 표기할 수 있는 색상의 범위가 더 넓고 아이폰의 디바이스는 대부분 displayP3 컬러스페이스를 지원합니다.
+
+type property로 제공된 컬러의 alpha 값을 변경하고자 한다면 아래와 같이 작성합니다.
+
+```jsx
+UIColor.systemRed.withAlphaComponent(0.5)
+UIColor.clear
+```
+
+첫번째 코드는 알파값을 0.5로 변경하는 함수이고, 두번째 코드는 색상을 알파값을 0으로 즉, 투명하게 만드는 코드입니다.
+
+UIColor에 직접 r, g, b 숫자를 입력해 새로운 색상을 만들어내는 것과 반대로 기존 색상에서 r, g, b 값을 추출하는 함수도 존재합니다.
+
+```jsx
+/*		
+getRed(<#T##red: UnsafeMutablePointer<CGFloat>?##UnsafeMutablePointer<CGFloat>?#>, 
+green: <#T##UnsafeMutablePointer<CGFloat>?#>, blue: <#T##UnsafeMutablePointer<CGFloat>?#>, 
+alpha: <#T##UnsafeMutablePointer<CGFloat>?#>)
+*/
+
+// 실제로 사용하는 모습
+view.backgroundColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
+```
+
+파라미터로 포인트 값을 입력받기 때문에 & 문자를 사용합니다. 위와 같이 얻은 r, g, b, a 값은 CGFloat 형태입니다.
+
+CIColor와 CGColor 형식이 존재합니다. 필요하다면 CIColor와 CGColor를 생성해야하는데 생성자를 이용하기보다는 기존의 UIColor를 사용해 CIColor, CGColor를 생성하는 방법을 선호합니다. 훨씬 깔끔하고 쉽습니다.
+
+```jsx
+view.layer.borderColor = UIColor.systemYellow.cgColor
+```
+
+borderColor 속성은 CGColor type이며 UIColor의 각 type property는 cgColor 속성을 가지고 있어 해당 속성에 접근하면 타입이 CGColor로 변경됩니다. CIColor도 마찬가지입니다.
+
+반대의 경우 즉, CGColor와 CIColor를 UIColor로 변경하는 방법도 간단합니다. 아래의 생성자를 사용해 파라미터로 해당 타입의 컬러를 입력합니다.
+
+```jsx
+UIColor(cgColor:)
+UIColor(ciColor:)
+```
+
+# 7. Color #2
+
+## Pattern Color
+
+asset에 패턴 이미지를 저장하고 이 이미지를 배경으로 채우는 방법입니다. UIColor 생성자에 중 파라미터로 patternImage를 받는 생성자가 있습니다.
+
+```jsx
+if let pattern = UIImage(named: "pattern") {
+	view.backgroundColor = UIColor(patternImage: pattern)
+}
+```
+
+개별 패턴은 사용하는 이미지의 원본 크기로 표시됩니다. 만약 패턴의 사이즈를 변경하고싶다면 속성에 직접 접근하여 수정하는 것은 불가능하고, 패턴 이미지 자체의 크기를 변경해야합니다.
+
+## Color Literal
+
+Color Literal 이라고 입력하면 자동완성에 Color Literal이 있습니다. 이를 탭하면 네모모양의 미리보기 색상으로 변경됩니다. 이 네모를 클릭하면 다른 색으로 변경이 가능합니다. 컬러 리터럴의 개념은 단순합니다. 말 그대로 리터럴이기 때문에 상수에 저장할 수 있고, 파라미터로 전달할 수 있습니다.
+
+## Color Set
+
+Color Set은 Asse의 네비게이터에서 우클릭하면 추가할 수 있으며 기본으로 두가지를 함께 추가합니다. 이름은 하나이지만 Any Appearance는 기본 모드에서, Dark Appearance는 다크 모드에서 사용되는 컬러입니다. 색을 지정하는 각 네모칸은 Color Well이라고 합니다. Color Set을 사용하기 위해서는 UIColor의 생성자를 이용해named: 파라미터로 해당 Color Set 이름을 입력합니다. 그러나 같은 이름의 Color Set이 Asset에 존재하지 않을 경우 이 생성자는 nil을 리턴하기 때문에 기본 컬러를 함께 작성해주는 편이 좋습니다.
+
+```jsx
+view.backgroundColor = UIColor(named: "PrimaryColor") ?? UIColor.white
+```
+
+## Color Drawing
+
+커스텀뷰에서 직접 그린 이미지들의 기본 컬러는 검정색입니다. 아무것도 색을 지정하지 않으면 검정색으로 화면에 표시되고, 이 컬러를 수정하는 코드를 알아보겠습니다.
+
+CGContext가 제공하는 것으로 변경할 수 있지만 UIColor 클래스가 제공하는 method를 사용하면 아래와 같습니다.
+
+```jsx
+UIColor.systemRed.setStroke()
+UIColor.systemBlue.setFill()
+```
+
+setStroke()는 그리는 라인의 색상을 변경하는 메서드이고 setFill()은 채우는 색상을 변경하는 메서드입니다.
