@@ -30,26 +30,36 @@ class WebContentViewController: UIViewController {
    
    @IBAction func goBack(_ sender: Any) {
       // Code Input Point #3
-      
+    if webView.canGoBack {
+        webView.goBack()
+    }
       // Code Input Point #3
    }
    
    @IBAction func reload(_ sender: Any) {
       // Code Input Point #5
-      
+    webView.reload()
       // Code Input Point #5
    }
    
    @IBAction func goForward(_ sender: Any) {
       // Code Input Point #4
-      
+    if webView.canGoForward {
+        webView.goForward()
+    }
       // Code Input Point #4
    }
    
    func go(to urlStr: String) {
       // Code Input Point #2
-      
+        guard let url = URL(string: urlStr) else {
+            fatalError("Invalid URL")
+        }
       // Code Input Point #2
+        let request = URLRequest(url: url)
+    
+        webView.load(request)
+    
    }
    
    override func viewDidLoad() {
@@ -59,7 +69,7 @@ class WebContentViewController: UIViewController {
       webView.navigationDelegate = self
       
       // Code Input Point #1
-      
+    urlField.text = "http://www.apple.com"
       // Code Input Point #1
    }
 }

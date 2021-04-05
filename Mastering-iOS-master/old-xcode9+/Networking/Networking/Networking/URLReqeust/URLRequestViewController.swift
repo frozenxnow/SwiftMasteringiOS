@@ -29,8 +29,22 @@ class URLRequestViewController: UIViewController {
    @IBAction func sendRequest(_ sender: Any) {
       imageView.image = nil
       
-      // Code Input Point #1
-      
+      // Code Input Point #1 -URL 인스턴스 생성-
+    guard let url = URL(string: picUrlStr) else {
+        fatalError("Invalid URL")
+    }
+    
+    let task = URLSession.shared.dataTask(with: url) { (data, reponse, error) in
+        if let error = error {
+            print(error)
+        } else if let data = data {
+            let image = UIImage(data: data)
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
+        }
+    }
+    task.resume()
       // Code Input Point #1
    }
 }

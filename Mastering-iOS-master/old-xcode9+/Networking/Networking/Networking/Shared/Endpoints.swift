@@ -24,9 +24,9 @@ import Foundation
 
 // Please enter the file path uploaded to the dropbox here.
 // https://dl.dropboxusercontent.com
-let bigFileUrlStr = ""
-let smallFileUrlStr = ""
-let picUrlStr = ""
+let bigFileUrlStr = "https://dl.dropboxusercontent.com/s/8gysx0g495c62va/intro-big.mp4?dl=0"
+let smallFileUrlStr = "https://dl.dropboxusercontent.com/s/d7fwjrapn360fra/intro-small.mp4?dl=0"
+let picUrlStr = "https://dl.dropboxusercontent.com/s/bl7nvwapxiavra3/pic.jpg?dl=0"
 
 // Please enter the dropbox access token here.
-let dropBoxAccessToken = ""
+let dropBoxAccessToken = "sl.AuW-UwW7GUMPqfvMpbzBBt5pAmHVBhlUW3Wh2DAoIzD3eLrve02GzvlXDDfdEP5SaJLyD0cEsgAUVH6AjMJKjhD_0vpn8PyGSa-zZ-k-QEj09kGhwYysAs7x3aEqi0zbuyMMqjc"
