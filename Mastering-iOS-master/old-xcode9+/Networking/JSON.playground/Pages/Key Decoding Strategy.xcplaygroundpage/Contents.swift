@@ -24,6 +24,8 @@ guard let jsonData = jsonStr.data(using: .utf8) else {
 
 let decoder = JSONDecoder()
 
+decoder.keyDecodingStrategy = .convertFromSnakeCase
+
 //
 
 //

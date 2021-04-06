@@ -23,7 +23,14 @@ guard let jsonData = jsonStr.data(using: .utf8) else {
 }
 
 //
+let decoder = JSONDecoder()
 
+do {
+    let decodedData = try decoder.decode(Person.self, from: jsonData)
+    dump(decodedData)
+} catch {
+    print(error)
+}
 //
 
 
