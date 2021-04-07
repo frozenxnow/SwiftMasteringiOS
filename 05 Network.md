@@ -250,3 +250,170 @@ decoder.dateDecodingStrategy = .iso8601
 ```
 
 위 코드를 추가할 경우 ios8601의 형식으로 date가 처리됩니다. 반대로 double 값으로 처리하도록 해도 오류 없이 해결이 가능하지만 가독성이 떨어지기 때문에 보통은 위와 같이 표준 문자열로 처리하도록 권장합니다.
+
+# 5. JSON #2
+
+## Custom Key Mapping
+
+Encoding할 때에는 구조체의 속성과 데이터의 키 값이 일치해야 올바른 인코딩이 이루어집니다. 서로 다른 이름의 속성과 키값을 연결하기 위해서는 열거형의 rawValue를 사용합니다.
+
+```jsx
+struct Person: Codable {
+   var firstName: String
+   var lastName: String
+   var age: Int
+   var address: String?
+}
+
+let jsonStr = """
+{
+"firstName" : "John",
+"age" : 30,
+"lastName" : "Doe",
+"homeAddress" : "Seoul",
+}
+"""
+```
+
+만약 jsonStr를 인코딩하기 위해서는 homeAddress를 Person 구조체의 address 이름으로 매핑해야합니다.
+
+구조체 안에 새로운 이름의 열거형을 선언하고, 각 케이스는 속성값과 동일하게 정의합니다. 그리고 그 열거형은 String형태의 rawValue를 가지고 있고 Coding Key 프로토콜을 채용해야합니다.
+
+```jsx
+struct Person: Codable {
+   var firstName: String
+   var lastName: String
+   var age: Int
+   var address: String?
+   
+    enum CodingKeys: String, CodingKey {
+        case firstName
+        case lastName
+        case age
+        case address = "homeAddress"
+    }
+}
+```
+
+CodingKeys의 각 열거형은 자신의 이름과 같은 rawValue를 갖게 됩니다. 그러나 address에는 "homeAddress"라는 이름의 rawValue를 따로 지정해주었습니다. 앞으로 homeAddress는 adress로 매핑됩니다.
+
+> CodingKey란?
+프로토콜의 한 종류이며 인코딩 및 디코딩을 하기 위한 키로 사용되는 타입입니다.
+
+## Custom Encoding
+
+인코딩의 커스텀이 필요할 때는 크게 두 가지가 있습니다. 첫째는 인코딩 시점의 값을 검증하거나 제약을 추가하는 경우이고 두번째는 인코딩 전략이나 Custom Key Mapping으로 원하는 결과를 얻을 수 없는 경우입니다. 직접 인코딩을 구현해야합니다.
+
+```jsx
+struct Employee: Codable {
+   var name: String
+   var age: Int
+   var address: String?
+}
+
+let p = Employee(name: "James", age: 40, address: "Seoul")
+
+let encoder = JSONEncoder()
+encoder.outputFormatting = .prettyPrinted
+
+do {
+   let jsonData = try encoder.encode(p)
+   if let jsonStr = String(data: jsonData, encoding: .utf8) {
+      print(jsonStr)
+   }
+} catch {
+   print(error)
+}
+```
+
+위 객체를 특정 조건에 맞게 인코딩 하기 위해서는 encode() 메서드를 다시 정의해야합니다. 이는 struct Employee 내부에 선언합니다. Codable 프로토콜은 Encodable, Decodable 프로토콜을 함께 가지고 있고, Encodable은 encode() 함수를 가지고 있습니다.
+
+age의 범위가 30 이상, 60 이하일 때만 인코딩되도록 func encode(to encoder:)를 정의합니다.
+
+```jsx
+struct Employee: Codable {
+   var name: String
+   var age: Int
+   var address: String?
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self) // (1)
+        try container.encode(name, forKey: .name) // (2)
+        guard (30...60).contains(age) else { // (3)
+            throw EncodingError.invalidRange
+        }
+        try container.encode(age, forKey: .age) // (4)
+        try container.encodeIfPresent(address, forKey: .address) // (5)
+    }
+}
+```
+
+(1) 인코딩된 데이터는 인코더 내부에 컨테이너 형태로 저장됩니다. 이 컨테이너를 사용해야하기 때문에 컨테이너를 먼저 불러옵니다. 
+
+(2) name 키에 name 속성값을 저장합니다.
+
+(3) age가 범위 안에 있을 경우에만 인코딩이 가능하게 하도록 조건을 추가하기로 했습니다. guard문을 사용해 age가 범위를 벗어난다면 invalidRange error를 출력합니다. 범위에 맞다면 (4)번을 실행합니다.
+
+(4) age 키에 age 속성값을 저장합니다.
+
+(5) address 키에 adress 속성값을 저장합니다. 옵셔널 타입일 경우 encode()함수가 아닌 encodeIfPresent() 함수를 사용합니다. 
+
+## Custom Decoding
+
+인코딩에서 사용자화를 할 때에는 encode() 함수를 정의했습니다. 디코딩 사용자화에는 initializer를 정의합니다. 
+
+```jsx
+struct Employee: Codable {
+   var name: String
+   var age: Int
+   var address: String?
+   
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self) // (1)
+        name = try container.decode(String.self, forKey: .name) // (2)
+        age = try container.decode(Int.self, forKey: .age) // (3)
+        guard (30...60).contains(age) else { // (4)
+            throw DecodingError.invalidRange
+        }
+        address = try container.decodeIfPresent(String.self, forKey: .address) // (5)
+    }
+}
+```
+
+(1) 마찬가지로 container를 통해 접근해야하기 때문에 컨테이너를 불러옵니다.
+
+(2) name 속성에 name 키 값을 저장합니다. 
+
+(3) age 속성에 age 키 값을 저장합니다.
+
+(4) 저장된 age의 범위가 30 이상 60 이하인지 확인하고 범위를 벗어날 경우 invalidRange를 출력합니다. 범위 내의 값이 맞다면 (5)번을 실행합니다.
+
+(5) address 속성은 옵셔널 타입으로 decodeIfPresent() 함수를 사용해 디코딩합니다. 
+
+커스텀인코딩과 커스텀디코딩의 큰 차이는 없습니다. 우선 컨테이너를 통해 접근해야한다는 점이 일치하고, encode 혹은 decode 함수를 사용하여 인코딩 및 디코딩을 진행합니다. 인코딩의 경우 조건이 있다면 그 조건에 맞도록 guard문을 사용해 값을 검증해보아야 하고 디코딩의 경우 조건이 있다면 guard문을 사용해 디코딩된 값을 검증해보아야 합니다. 속성이 옵셔널 타입인 경우 encodeIfPresent(), decodeIfPresent() 함수를 사용합니다.
+
+encode() 함수의 파라미터로는 (어떤 속성값을, 어떤 키값으로 보내는지) 에 대한 두 개의 파라미터가 필요하고, 
+
+decode() 함수의 파라미터로는 (어떤 타입의 자료로, 어떤 키값의 데이터를 가져오는지) 에 대한 두 개의 파라미터가 필요합니다.
+
+# 6. URL Loading System
+
+URL Loading System은 URL을 통해 네트워크의 서버와 통신하는 기술입니다. high-level API를 사용하고 있어 웬만한 작업은 모두 가능합니다. URL Loading System에서 가장 중요한 것은 URLSession입니다.
+
+`URLSession`은 네트워크 연결을 설정하고 요청과 응답을 처리합니다. 네 종류의 URLSession이 있습니다.
+
+1. Shared Session: 가장 단순합니다. Background 전송은 지원하지 않습니다.
+2. Default Session: 세션을 직접 구성할 때 사용합니다. 델리게이터를 통해 세부적인 제어가 가능하고 서버에서 전달받은 응답은 디스크, 메모리 캐시에 저장합니다.
+3. Ephemeral Session: 디폴트 세션과 비슷하지만 캐시와 쿠키 등을 디스크에 저장하지 않습니다.
+4. Background Session: Background 전송 구현 시 사용합니다. 주로 private browsing을 구현할 때 사용합니다.
+
+2, 3, 4번 Session은 Session Configration을 통해 객체를 생성한 뒤 사용해야합니다.
+
+`Task`는 URLSession을 통해 전달하는 개별 요청을 뜻합니다. 
+
+1. data task: API서버와의 통신에 적합합니다. URLSession에서는 대개 data task를 사용합니다.
+2. upload task, download task: 파일 전송 구현시 사용합니다. background 전송을 지원합니다.
+3. stream task: 채팅과 같은 TCP 프로그램을 구현시 적합합니다.
+
+URLSession를 통해 task를 만드는 데까지는 어려움이 없습니다. 많이 하는 실수는 task를 불러오지 않아 일어나는 실수입니다. 반드시 task를 생성하고 `resume()`을 사용해 직접 호출해야합니다.
+
+# 7. Data Task

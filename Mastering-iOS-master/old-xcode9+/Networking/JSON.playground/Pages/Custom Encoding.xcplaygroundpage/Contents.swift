@@ -26,7 +26,6 @@ struct Employee: Codable {
         
         try container.encodeIfPresent(address, forKey: .address)
         
-        
     }
    //
 }
@@ -35,7 +34,7 @@ let p = Employee(name: "James", age: 40, address: "Seoul")
 
 
 let encoder = JSONEncoder()
-encoder.outputFormatting = .prettyPrinted
+encoder.outputFormatting = .prettyPrinted // 줄바꿈
 
 do {
    let jsonData = try encoder.encode(p)
