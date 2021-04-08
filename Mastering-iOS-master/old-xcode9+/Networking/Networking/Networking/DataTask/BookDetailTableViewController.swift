@@ -35,14 +35,16 @@ class BookDetailTableViewController: UITableViewController {
    }()
    
    // Code Input Point #3
-   
+    var book: Book?
    // Code Input Point #3
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
       // Code Input Point #4
-      
+    titleLabel.text = book?.title
+    descLabel.text = book?.desc
+    dateLabel.text = formatter.string(from: book!.date)
       // Code Input Point #4
    }
    
@@ -59,7 +61,11 @@ class BookDetailTableViewController: UITableViewController {
       
       if indexPath.row == 3 {
          // Code Input Point #6
-         
+        if let link = book?.link, let url = URL(string: link) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
          // Code Input Point #6
       }
    }
