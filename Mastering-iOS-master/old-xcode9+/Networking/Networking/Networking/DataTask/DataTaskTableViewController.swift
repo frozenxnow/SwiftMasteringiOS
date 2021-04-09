@@ -31,62 +31,69 @@ class DataTaskTableViewController: UITableViewController {
       
       // Code Input Point #1
     guard let url = URL(string: booksUrlStr) else {
-        fatalError("Inavlid URL")
+        fatalError("Invalid URL")
     }
+    
     let session = URLSession.shared
+    
     let task = session.dataTask(with: url) { (data, response, error) in
-        if let error = error { // error가 발생했는지 확인한다
+        // 1) 에러 검증
+        if let error = error {
             self.showErrorAlert(with: error.localizedDescription)
             return
         }
+        // 2) response
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            self.showErrorAlert(with: "Invalid Response")
+            self.showErrorAlert(with: "Response Error")
             return
         }
-        
         guard (200...299).contains(httpResponse.statusCode) else {
-            self.showErrorAlert(with: "\(httpResponse.statusCode)")
+            self.showErrorAlert(with: "Connect Error")
             return
         }
         
+        // 3) data
         guard let data = data else {
-            fatalError("Invalid Data")
+            self.showErrorAlert(with: "data Error")
+            return
         }
         
+        // 디코딩
         do {
             let decoder = JSONDecoder()
+            
             decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
                 let container = try decoder.singleValueContainer()
                 let dateStr = try container.decode(String.self)
                 
                 let formatter = ISO8601DateFormatter()
                 formatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+                
                 let date = formatter.date(from: dateStr)!
+                
                 return date
+                
                 
             })
             
-            
             let bookList = try decoder.decode(BookList.self, from: data)
-            
             
             if bookList.code == 200 {
                 self.list = bookList.list
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            } else {
-                self.showErrorAlert(with: bookList.message ?? "error")
             }
         } catch {
-            print(error)
-            self.showErrorAlert(with: error.localizedDescription)
+            self.showErrorAlert(with: "Error")
+            return
         }
-        
     }
-      // Code Input Point #1
+
     task.resume()
+   
+      // Code Input Point #1
    }
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
