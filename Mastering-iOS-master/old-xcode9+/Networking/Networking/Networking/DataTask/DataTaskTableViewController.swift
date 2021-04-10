@@ -74,7 +74,6 @@ class DataTaskTableViewController: UITableViewController {
                 
                 return date
                 
-                
             })
             
             let bookList = try decoder.decode(BookList.self, from: data)
@@ -99,8 +98,10 @@ class DataTaskTableViewController: UITableViewController {
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if let destVC = segue.destination as? BookDetailTableViewController {
          if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-            // Code Input Point #5 다음 페이지로 전달할 것
+            // Code Input Point #5
+            
             destVC.book = list[indexPath.row]
+            
             // Code Input Point #5
          }
       }
@@ -116,8 +117,10 @@ extension DataTaskTableViewController {
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
       
       // Code Input Point #2
+    
     let target = list[indexPath.row]
     cell.textLabel?.text = target.title
+    
       // Code Input Point #2
       
       return cell

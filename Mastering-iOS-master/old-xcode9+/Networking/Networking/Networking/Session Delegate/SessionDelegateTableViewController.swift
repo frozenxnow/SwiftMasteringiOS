@@ -26,11 +26,13 @@ class SessionDelegateTableViewController: UITableViewController {
    
    @IBOutlet weak var titleLabel: UILabel!
    @IBOutlet weak var descLabel: UILabel!
+    
+   
    
    var session: URLSession!
    
    // Code Input Point #3
-   
+    var buffer: Data?
    // Code Input Point #3
    
    @IBAction func sendReqeust(_ sender: Any) {
@@ -39,7 +41,13 @@ class SessionDelegateTableViewController: UITableViewController {
       }
       
       // Code Input Point #1
-      
+    let configuration = URLSessionConfiguration.default
+    let session = URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue.main)
+    
+     buffer = Data()
+    
+    let task = session.dataTask(with: url)
+    task.resume()
       // Code Input Point #1
    }
    
@@ -47,19 +55,41 @@ class SessionDelegateTableViewController: UITableViewController {
       super.viewWillDisappear(animated)
       
       // Code Input Point #6
-      
+    session.invalidateAndCancel()
       // Code Input Point #6
    }
 }
 
 // Code Input Point #2
-
+extension SessionDelegateTableViewController: URLSessionDataDelegate {
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+            completionHandler(.cancel)
+            return
+        }
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        buffer?.append(data)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let _ = error {
+            showErrorAlert(with: "Error")
+        } else {
+            parse()
+        }
+    }
+    
+}
 // Code Input Point #2
 
 extension SessionDelegateTableViewController {
    func parse() {
       // Code Input Point #4
-      
+    guard let data = buffer else {
+        fatalError("Invalid Buffer")
+    }
       // Code Input Point #4
       
       let decoder = JSONDecoder()
@@ -74,7 +104,18 @@ extension SessionDelegateTableViewController {
       })
       
       // Code Input Point #5
-      
+    do {
+        let detail = try decoder.decode(BookDetail.self, from: data)
+        if detail.code == 200 {
+            titleLabel.text = detail.book?.title
+            descLabel.text = detail.book?.desc
+            tableView.reloadData()
+        } else {
+            showErrorAlert(with: detail.message)
+        }
+    } catch {
+        showErrorAlert(with: "Error")
+    }
       // Code Input Point #5
    }
 }

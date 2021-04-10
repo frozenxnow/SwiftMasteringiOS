@@ -26,35 +26,51 @@ class SessionConfigurationViewController: UIViewController {
    
    @IBAction func useSharedConfiguration(_ sender: Any) {
       // Code Input Point #1
-      
+    sendRequest(using: URLSession.shared)
       // Code Input Point #1
    }
    
    @IBAction func useDefaultConfiguration(_ sender: Any) {
       // Code Input Point #2
-      
-      // Code Input Point #2
+    let configuration = URLSessionConfiguration.default
+    let session = URLSession(configuration: configuration)
+    sendRequest(using: session)
+    // Code Input Point #2
    }
    
    @IBAction func useEphemeralConfiguration(_ sender: Any) {
       // Code Input Point #3
-      
+    let configuration = URLSessionConfiguration.ephemeral
+    let session = URLSession(configuration: configuration)
+    sendRequest(using: session)
       // Code Input Point #3
    }
    
    @IBAction func useBackgroundConfiguration(_ sender: Any) {
       // Code Input Point #4
-      
+    let configuration = URLSessionConfiguration.background(withIdentifier: "DownTask")
+    let session = URLSession(configuration: configuration)
+    sendRequest(using: session)
       // Code Input Point #4
+    // crash: 컴플리션 핸들러를 지원하지 않는다. 혹은 delegate를 함께 구현해야한다.
    }
    
    @IBAction func useCustomConfiguration(_ sender: Any) {
       // Code Input Point #5
-      
+      // 기본 제공되는 configuration을 수정하는 방식으로 사용
+    let configuration = URLSessionConfiguration.default
+    
+    configuration.timeoutIntervalForRequest = 30 // 30초동안 응답 없을경우 요청 취소, 오류 전달
+    configuration.httpAdditionalHeaders = ["ZUMO-API-VERSION" : "2.0.0"] // 모든 요청에 공통적으로 추가할 헤더 설정
+    configuration.networkServiceType = .responsiveData
+    // urlsession이 처리하는 작업의 종류 지정, 여기에 지정된 것을 기반으로 네트워크 처리 방식을 최적화한다
+    
+    let session = URLSession(configuration: configuration)
+    sendRequest(using: session)
       // Code Input Point #5
    }
    
-   func sendReqeust(using session: URLSession) {
+   func sendRequest(using session: URLSession) {
       guard let url = URL(string: "https://kxcoding-study.azurewebsites.net/api/string") else {
          fatalError("Invalid URL")
       }

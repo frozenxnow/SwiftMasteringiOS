@@ -46,4 +46,8 @@ struct BookList: Codable {
     let message: String?
 }
 
-
+struct BookDetail: Codable {
+    let book: Book?
+    let code: Int
+    let message: String
+}
