@@ -79,7 +79,29 @@ class UploadTaskViewController: UIViewController {
       }
       
       // Code Input Point #1
-      
+    let task = URLSession.shared.uploadTask(with: dropboxUploadRequest, from: data) { (data, response, error) in
+        if let error = error {
+            self.showErrorAlert(with: error.localizedDescription)
+            print(error)
+            return
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            self.showErrorAlert(with: "Invalid Response")
+            return
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+            self.showErrorAlert(with: "\(httpResponse.statusCode)")
+            return
+        }
+        
+        guard let data = data, let str = String(data: data, encoding: .utf8) else {
+            fatalError("Invalid Data")
+        }
+        self.showInfoAlert(with: str)
+    }
+    task.resume()
       // Code Input Point #1
    }
    

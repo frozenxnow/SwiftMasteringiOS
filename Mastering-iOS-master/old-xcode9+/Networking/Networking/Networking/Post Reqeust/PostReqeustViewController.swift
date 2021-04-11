@@ -56,6 +56,38 @@ class PostReqeustViewController: UIViewController {
       }
       
       // Code Input Point #1
+    
+    var request = URLRequest(url: url)
+    
+    request.addValue("application/json", forHTTPHeaderField: "content-Type")
+    request.httpMethod = "POST"
+    request.httpBody = encodedData()
+    
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let error = error {
+            self.showErrorAlert(with: "Error")
+            return
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            self.showErrorAlert(with: "Response Error")
+            return
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+            self.showErrorAlert(with: "Response Error")
+            return
+        }
+        
+        guard let data = data, let str = String(data: data, encoding: .utf8) else {
+            self.showErrorAlert(with: "Data Error")
+            return
+        }
+        
+        self.showInfoAlert(with: str)
+    }
+    
+    task.resume()
       
       // Code Input Point #1
    }
