@@ -44,6 +44,14 @@ class DownloadTaskViewController: UIViewController {
    }
    
    // Code Input Point #1
+    
+    var task: URLSessionDownloadTask?
+    
+    lazy var session: URLSession = { [weak self] in
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config, delegate: self, delegateQueue: OperationQueue.main)
+        return session
+    }()
    
    // Code Input Point #1
    
@@ -57,14 +65,15 @@ class DownloadTaskViewController: UIViewController {
          print(error)
       }
       
-      guard let url = URL(string: smallFileUrlStr) else { // 나중에서 수정
+      guard let url = URL(string: "https://www.dropbox.com/s/8gysx0g495c62va/intro-big.mp4?dl=0") else { // 나중에서 수정
          fatalError("Invalid URL")
       }
       
       downloadProgressView.progress = 0.0
       
       // Code Input Point #2
-      
+    let task = session.downloadTask(with: url)
+    task.resume()
       // Code Input Point #2
    }
    
@@ -113,5 +122,33 @@ class DownloadTaskViewController: UIViewController {
 }
 
 // Code Input Point #3
-
+extension DownloadTaskViewController: URLSessionDownloadDelegate {
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let current = formatter.string(fromByteCount: totalBytesWritten)
+        let total = formatter.string(fromByteCount: totalBytesExpectedToWrite)
+        sizeLabel.text = "\(current)/\(total)"
+        
+        downloadProgressView.progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        print(#function)
+        print(error ?? "done")
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        print(#function)
+        
+        guard (try? location.checkResourceIsReachable()) ?? false else {
+            return
+        }
+        
+        do {
+            _ = try FileManager.default.replaceItemAt(targetUrl, withItemAt: location)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+}
 // Code Input Point #3

@@ -31,4 +31,4 @@ let picUrlStr = "https://dl.dropboxusercontent.com/s/bl7nvwapxiavra3/pic.jpg?dl=
 // Please enter the dropbox access token here.
 //let dropBoxAccessToken = "sl.AuW-UwW7GUMPqfvMpbzBBt5pAmHVBhlUW3Wh2DAoIzD3eLrve02GzvlXDDfdEP5SaJLyD0cEsgAUVH6AjMJKjhD_0vpn8PyGSa-zZ-k-QEj09kGhwYysAs7x3aEqi0zbuyMMqjc"
 
-let dropBoxAccessToken = "sl.AuwS62_ybzZE37dnHPz13nwTEW7kqzU3IFO4vUqA49Ha1WCbuWXB90iwojyCwyeoPNm_Q23a3RvhaWIlgU4hhLNDXhlvE6-dkGjyWA5XsKprYrKIDTKLF65KX-3i0dmsKr8HL5f9DyA"
+let dropBoxAccessToken = "sl.AuwsWCDBwy-sUSIWCBrJiJ-oBgHnoJUskPC4H2XjJWY_zYE3c663NIF-xh1u0JXzQ6uqjfnhGkTSVAvOfLSF27pOeZRiILodSR4UxtZ2MH6iC1tcIvvYM0RdNUs2T4qGVR9zLjA"
