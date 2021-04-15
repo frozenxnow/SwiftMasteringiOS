@@ -65,7 +65,7 @@ class DownloadTaskViewController: UIViewController {
          print(error)
       }
       
-      guard let url = URL(string: "https://www.dropbox.com/s/8gysx0g495c62va/intro-big.mp4?dl=0") else { // 나중에서 수정
+      guard let url = URL(string: "https://www.dropbox.com/s/8gysx0g495c62va/intro-big.mp4?dl=0") else {
          fatalError("Invalid URL")
       }
       
