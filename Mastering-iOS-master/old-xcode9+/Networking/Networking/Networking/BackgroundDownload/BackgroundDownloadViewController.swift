@@ -54,7 +54,7 @@ class BackgroundDownloadViewController: UIViewController {
    lazy var session: URLSession = { [weak self] in
       // Code Input Point #1
 
-      let config = URLSessionConfiguration.default
+      let config = URLSessionConfiguration.background(withIdentifier: "SampleSession")
       
       // Code Input Point #1
 

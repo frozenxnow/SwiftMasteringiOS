@@ -65,7 +65,7 @@ class DownloadTaskViewController: UIViewController {
          print(error)
       }
       
-      guard let url = URL(string: "https://www.dropbox.com/s/8gysx0g495c62va/intro-big.mp4?dl=0") else {
+      guard let url = URL(string: bigFileUrlStr) else {
          fatalError("Invalid URL")
       }
       
@@ -79,24 +79,31 @@ class DownloadTaskViewController: UIViewController {
    
    @IBAction func stopDownload(_ sender: Any) {
       // Code Input Point #4
-      
+    task?.cancel()
       // Code Input Point #4
    }
    
    
    // Code Input Point #5
-   
+    var resumeData: Data?
    // Code Input Point #5
    
    @IBAction func pauseDownload(_ sender: Any) {
       // Code Input Point #6
-      
+    task?.cancel(byProducingResumeData: { (data) in
+        self.resumeData = data
+    })
       // Code Input Point #6
    }
    
    @IBAction func resumeDownload(_ sender: Any) {
       // Code Input Point #7
-      
+    guard let data = resumeData else {
+        return
+    }
+    
+    task = session.downloadTask(withResumeData: data)
+    task?.resume()
       // Code Input Point #7
    }
    
@@ -116,21 +123,26 @@ class DownloadTaskViewController: UIViewController {
       super.viewWillDisappear(animated)
       
       // Code Input Point #8
-      
+    session.invalidateAndCancel()
       // Code Input Point #8
    }
 }
 
 // Code Input Point #3
 extension DownloadTaskViewController: URLSessionDownloadDelegate {
-    
+ 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         let current = formatter.string(fromByteCount: totalBytesWritten)
         let total = formatter.string(fromByteCount: totalBytesExpectedToWrite)
+        
         sizeLabel.text = "\(current)/\(total)"
         
-        downloadProgressView.progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+        downloadProgressView.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
     }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        print(#function, fileOffset, expectedTotalBytes)
+    } 
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         print(#function)
