@@ -65,15 +65,15 @@ class DownloadTaskViewController: UIViewController {
          print(error)
       }
       
-      guard let url = URL(string: bigFileUrlStr) else {
+      guard let url = URL(string: smallFileUrlStr) else {
          fatalError("Invalid URL")
       }
       
       downloadProgressView.progress = 0.0
       
       // Code Input Point #2
-    let task = session.downloadTask(with: url)
-    task.resume()
+    task = session.downloadTask(with: url)
+    task?.resume()
       // Code Input Point #2
    }
    

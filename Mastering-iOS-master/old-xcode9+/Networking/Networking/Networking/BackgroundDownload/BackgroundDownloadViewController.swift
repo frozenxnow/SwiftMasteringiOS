@@ -75,7 +75,7 @@ class BackgroundDownloadViewController: UIViewController {
       }
       updateRecentDownload()
       
-      guard let url = URL(string: smallFileUrlStr) else {
+      guard let url = URL(string: bigFileUrlStr) else {
          fatalError("Invalid URL")
       }
       
