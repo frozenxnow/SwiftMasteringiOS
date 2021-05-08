@@ -25,9 +25,18 @@ class NotificationCenterViewController: UIViewController {
    
    @IBOutlet weak var valueLabel: UILabel!
    
-   
+    @objc func process(notification: Notification) {
+        guard let value = notification.userInfo?["NewValue"] as? String else {
+            return
+        }
+        valueLabel.text = value
+        
+        print("#1", #function)
+    }
    override func viewDidLoad() {
       super.viewDidLoad()
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(process(notification:)), name: NSNotification.Name.NewValueDidInput, object: nil)
 
    }
    

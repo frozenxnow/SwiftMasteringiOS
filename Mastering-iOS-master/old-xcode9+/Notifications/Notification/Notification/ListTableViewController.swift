@@ -25,7 +25,7 @@ import UIKit
 class ListTableViewController: UITableViewController {
    
    @objc func postNotification() {
-      
+    NotificationCenter.default.post(name: NSNotification.Name.NewValueDidInput, object: nil, userInfo: ["NewValue":"dummy"])
    }
 
    override func viewDidLoad() {
