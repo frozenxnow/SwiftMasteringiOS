@@ -26,22 +26,42 @@ class NotificationCenterViewController: UIViewController {
    @IBOutlet weak var valueLabel: UILabel!
    
     @objc func process(notification: Notification) {
+        print(Thread.isMainThread ? "MainThread" : "BackgroundThread")
+        
         guard let value = notification.userInfo?["NewValue"] as? String else {
             return
         }
-        valueLabel.text = value
+        
+        DispatchQueue.main.async {
+            self.valueLabel.text = value
+        }
         
         print("#1", #function)
     }
    override func viewDidLoad() {
       super.viewDidLoad()
     
+    // 옵저버 등록 방법 1
     NotificationCenter.default.addObserver(self, selector: #selector(process(notification:)), name: NSNotification.Name.NewValueDidInput, object: nil)
+    // 옵저버 등록 방법 2
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.NewValueDidInput, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+        print(Thread.isMainThread ? "MainThread" : "BackgroundThread")
+        
+        guard let value = notification.userInfo?["NewValue"] as? String else {
+            return
+        }
+        
+        self?.valueLabel.text = value
+        
+        print("#2 handling \(notification.name)", #function)
+    }
 
    }
    
    deinit {
-      
+    NotificationCenter.default.removeObserver(self)
       print(#function)
    }
 }
+
+

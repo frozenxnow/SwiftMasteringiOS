@@ -39,7 +39,10 @@ class ComposeViewController: UIViewController {
         return
     }
     
-    NotificationCenter.default.post(name: NSNotification.Name.NewValueDidInput, object: nil, userInfo: ["NewValue": text])
+    DispatchQueue.global().async {
+        NotificationCenter.default.post(name: NSNotification.Name.NewValueDidInput, object: nil, userInfo: ["NewValue": text])
+    }
+    
     
       dismiss(animated: true, completion: nil)
    }
