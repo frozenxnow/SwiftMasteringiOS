@@ -25,9 +25,24 @@ import UIKit
 
 class TextFieldViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var inputValue: UITextField!
+    
+    @IBOutlet weak var inputLable: UILabel!
+    
+    
+    @IBAction func clickButton(_ sender: Any) {
+        
+        if let text = inputValue.text {
+            inputLable.text = text
+        }
         
         
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        inputValue.placeholder = "값을 입력하세요."
+    }
 }
+

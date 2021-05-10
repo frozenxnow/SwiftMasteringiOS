@@ -29,7 +29,11 @@ class TextFieldBorderStyleViewController: UIViewController {
     
     @IBAction func borderStyleChanged(_ sender: UISegmentedControl) {
         
+        let index = sender.selectedSegmentIndex
+        let style = UITextField.BorderStyle(rawValue: index) ?? .roundedRect
+        inputField.borderStyle = style
     }
+    
     
     
     @IBOutlet weak var enabledSwitch: UISwitch!

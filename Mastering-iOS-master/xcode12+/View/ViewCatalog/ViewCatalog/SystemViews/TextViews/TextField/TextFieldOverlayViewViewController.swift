@@ -55,6 +55,12 @@ class TextFieldOverlayViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let btn = UIButton(type: .custom)
+        btn.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        btn.setImage(UIImage(named: "menu"), for: .normal)
+        btn.addTarget(self, action: #selector(showPredefinedValue), for: .touchUpInside)
         
+        inputField.leftView = btn
+        inputField.leftViewMode = .always
     }
 }
