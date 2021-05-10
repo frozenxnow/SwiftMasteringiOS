@@ -35,32 +35,34 @@ class MultilineLabelViewController: UIViewController {
     
     
     @IBAction func updateLines(_ sender: UIStepper) {
-        
+        sender.minimumValue = 1
+        valueLabel.numberOfLines = Int(sender.value)
+        lineNumberLabel.text = String(Int(sender.value))
     }
     
     @IBAction func toggleAutoshrink(_ sender: UISwitch) {
+        valueLabel.minimumScaleFactor = sender.isOn ? 0.5 : 0.0
+        valueLabel.adjustsFontSizeToFitWidth = sender.isOn
         
     }
     
     func changeLineBreakMode(with rawValue: Int) {
-        
+        if let mode = NSLineBreakMode(rawValue: rawValue) {
+            valueLabel.lineBreakMode = mode
+        }
     }
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        lineNumberLabel.text = "\(valueLabel.numberOfLines)"
+        lineNumberStepper.value = Double(valueLabel.numberOfLines)
         
+        autoshrinkSwitch.isOn = valueLabel.minimumScaleFactor != 0 && valueLabel.adjustsFontSizeToFitWidth
+        
+        lineBreakModePicker.selectRow(valueLabel.lineBreakMode.rawValue, inComponent: 0, animated: false)
         
     }
 }
-
-
-
-
-
-
 
 extension MultilineLabelViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

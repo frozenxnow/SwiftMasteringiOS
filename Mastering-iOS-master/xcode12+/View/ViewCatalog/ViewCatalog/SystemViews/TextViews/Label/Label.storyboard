@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6kr-Sr-K7L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6kr-Sr-K7L">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -161,6 +161,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-qC-iiv">
+                                <rect key="frame" x="16" y="120" width="382" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8vh-wB-A7g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -170,11 +176,14 @@
                             <constraint firstItem="MBa-Yz-0WE" firstAttribute="top" secondItem="KuW-tm-K8W" secondAttribute="bottom" constant="8" id="GQu-F4-6qv"/>
                             <constraint firstItem="7Ly-Tn-766" firstAttribute="top" secondItem="TxF-Am-536" secondAttribute="bottom" constant="30" id="Gj9-Vd-Fmq"/>
                             <constraint firstItem="MBa-Yz-0WE" firstAttribute="leading" secondItem="8vh-wB-A7g" secondAttribute="leading" constant="16" id="IhC-Jk-PwW"/>
+                            <constraint firstItem="zEP-qC-iiv" firstAttribute="top" secondItem="8vh-wB-A7g" secondAttribute="top" constant="32" id="M5s-ms-jkf"/>
                             <constraint firstItem="Fvj-Jx-dtD" firstAttribute="top" secondItem="MBa-Yz-0WE" secondAttribute="bottom" constant="30" id="Og2-By-Jua"/>
                             <constraint firstItem="TxF-Am-536" firstAttribute="leading" secondItem="8vh-wB-A7g" secondAttribute="leading" constant="16" id="VYI-Ef-PET"/>
                             <constraint firstItem="YH6-kb-27b" firstAttribute="centerX" secondItem="QAG-bL-Cx5" secondAttribute="centerX" id="VbE-4d-w0d"/>
+                            <constraint firstItem="zEP-qC-iiv" firstAttribute="leading" secondItem="8vh-wB-A7g" secondAttribute="leading" constant="16" id="huG-lS-w1o"/>
                             <constraint firstItem="8vh-wB-A7g" firstAttribute="trailing" secondItem="MBa-Yz-0WE" secondAttribute="trailing" constant="16" id="icQ-vk-kKh"/>
                             <constraint firstItem="TxF-Am-536" firstAttribute="top" secondItem="Fvj-Jx-dtD" secondAttribute="bottom" constant="8" id="jez-QG-W0f"/>
+                            <constraint firstItem="8vh-wB-A7g" firstAttribute="trailing" secondItem="zEP-qC-iiv" secondAttribute="trailing" constant="16" id="oJv-kq-9JI"/>
                             <constraint firstItem="8vh-wB-A7g" firstAttribute="bottom" secondItem="YH6-kb-27b" secondAttribute="bottom" constant="20" id="qOm-s5-oNV"/>
                             <constraint firstItem="8vh-wB-A7g" firstAttribute="trailing" secondItem="TxF-Am-536" secondAttribute="trailing" constant="16" id="sJJ-D8-fST"/>
                             <constraint firstItem="Fvj-Jx-dtD" firstAttribute="centerX" secondItem="QAG-bL-Cx5" secondAttribute="centerX" id="sbI-gL-SzY"/>
@@ -183,11 +192,12 @@
                     </view>
                     <connections>
                         <outlet property="fontSizeStepper" destination="YH6-kb-27b" id="sWs-jZ-LH2"/>
+                        <outlet property="valueLabel" destination="zEP-qC-iiv" id="6a1-Sm-gQY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3c-bG-B87" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1749" y="-136"/>
+            <point key="canvasLocation" x="1747.826086956522" y="-136.60714285714286"/>
         </scene>
         <!--Multiline Label-->
         <scene sceneID="ssW-sa-Gjf">
