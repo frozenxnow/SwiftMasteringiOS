@@ -30,6 +30,7 @@ class DataDetectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textView.dataDetectorTypes = [.link, .address, .calendarEvent, .phoneNumber]
     }
 }
 

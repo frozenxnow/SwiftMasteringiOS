@@ -32,7 +32,11 @@ class TextSelectionViewController: UIViewController {
     @IBAction func selectLast(_ sender: Any) {
         let lastWord = "pariatur?"
         
-        
+        if let text = textView.text as? NSString {
+            let range = text.range(of: lastWord)
+            textView.selectedRange = range
+            textView.scrollRangeToVisible(range)
+        }
     }
     
     
@@ -42,3 +46,9 @@ class TextSelectionViewController: UIViewController {
     }
 }
 
+extension TextSelectionViewController: UITextViewDelegate {
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        let range = textView.selectedRange
+        selectedRangeLabel.text = "\(range)"
+    }
+}
