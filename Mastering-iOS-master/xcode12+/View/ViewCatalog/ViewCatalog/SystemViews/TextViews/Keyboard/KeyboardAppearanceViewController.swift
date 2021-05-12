@@ -29,12 +29,14 @@ class KeyboardAppearanceViewController: UIViewController {
     
     @IBAction func appearanceChanged(_ sender: UISegmentedControl) {
         
+        let idx = sender.selectedSegmentIndex
+        self.inputField.keyboardAppearance = UIKeyboardAppearance(rawValue: idx) ?? .default
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         inputField.becomeFirstResponder()
     }
 }
