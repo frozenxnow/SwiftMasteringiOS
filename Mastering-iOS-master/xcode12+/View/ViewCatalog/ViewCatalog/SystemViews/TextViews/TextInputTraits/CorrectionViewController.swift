@@ -28,6 +28,13 @@ class CorrectionViewController: UIViewController {
     
     @IBAction func correctionChanged(_ sender: UISegmentedControl) {
         
+        inputField.resignFirstResponder()
+        
+        let index = sender.selectedSegmentIndex
+        inputField.autocorrectionType = UITextAutocorrectionType(rawValue: index) ?? .default
+        
+        inputField.becomeFirstResponder()
+        
     }
     
     override func viewDidLoad() {

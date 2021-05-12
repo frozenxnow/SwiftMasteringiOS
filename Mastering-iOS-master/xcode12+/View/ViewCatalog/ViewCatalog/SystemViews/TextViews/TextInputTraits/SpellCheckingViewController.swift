@@ -29,6 +29,16 @@ class SpellCheckingViewController: UIViewController {
     
     @IBAction func spellCheckingChanged(_ sender: UISegmentedControl) {
         
+        textView.resignFirstResponder()
+        
+        let index = sender.selectedSegmentIndex
+        
+        
+        textView.spellCheckingType = UITextSpellCheckingType(rawValue: index) ?? .default
+        
+        
+        textView.becomeFirstResponder()
+        
     }
     
     

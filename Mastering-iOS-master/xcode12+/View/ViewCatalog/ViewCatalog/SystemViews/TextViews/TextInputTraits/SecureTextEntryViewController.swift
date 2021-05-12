@@ -30,6 +30,6 @@ class SecureTextEntryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        passwordField.isSecureTextEntry = true
     }
 }
