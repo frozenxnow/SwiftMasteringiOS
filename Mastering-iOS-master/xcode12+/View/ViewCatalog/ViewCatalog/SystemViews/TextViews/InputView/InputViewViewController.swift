@@ -25,22 +25,64 @@ import UIKit
 
 
 class InputViewViewController: UIViewController {
+    
+    @IBOutlet var pickerContainerView: UIView!
+    
+    @IBOutlet var buttonContainerView: UIView!
+    
+    @IBOutlet var accessoryBar: UIToolbar!
+    
+    
     @IBOutlet weak var nameField: UITextField!
     
     @IBOutlet weak var ageField: UITextField!
     
     @IBOutlet weak var genderField: UITextField!
     
+    @IBAction func selectGender(_ sender: UIButton) {
+        genderField.text = sender.tag == 0 ? "M" : "F"
+        
+        UIDevice.current.playInputClick()
+        
+    }
+    
+    @IBAction func movePrevious(_ sender: Any) {
+        
+        if genderField.isFirstResponder {
+            ageField.becomeFirstResponder()
+        } else if ageField.isFirstResponder {
+            nameField.becomeFirstResponder()
+        }
+        
+    }
+    
+    @IBAction func moveNext(_ sender: Any) {
+        if nameField.isFirstResponder {
+            ageField.becomeFirstResponder()
+        } else if ageField.isFirstResponder {
+            genderField.becomeFirstResponder()
+        }
+    
+    
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        ageField.inputView = pickerContainerView
+        genderField.inputView = buttonContainerView
+        nameField.inputAccessoryView = accessoryBar
+        ageField.inputAccessoryView = accessoryBar
+        genderField.inputAccessoryView = accessoryBar
     }
 }
 
 
-
+class GenderInputView: UIView, UIInputViewAudioFeedback {
+    var enableInputClicksWhenVisible: Bool {
+        return true
+    }
+}
 
 
 
@@ -60,7 +102,7 @@ extension InputViewViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        ageField.text = "\(row+1)"
     }
 }
 
