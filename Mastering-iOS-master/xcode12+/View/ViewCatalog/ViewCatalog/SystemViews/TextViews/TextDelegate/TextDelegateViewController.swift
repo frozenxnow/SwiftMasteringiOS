@@ -35,24 +35,91 @@ class TextDelegateViewController: UIViewController {
     
     let regex = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$"
     
+    lazy var charSet = CharacterSet(charactersIn: "0123456789").inverted
+    lazy var genderCharSet = CharacterSet(charactersIn: "MF").inverted
+        
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nameField.becomeFirstResponder()
+        
+    }
+}
+
+extension TextDelegateViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case nameField:
+            ageField.becomeFirstResponder()
+        case ageField:
+            genderField.becomeFirstResponder()
+        case genderField:
+            emailField.becomeFirstResponder()
+        case emailField:
+            emailField.resignFirstResponder()
+        default:
+            break
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        print("current: \(textField.text ?? "")")
+        print("string: \(string)")
+        
+        let currentText = NSString(string: textField.text ?? "")
+        let finalText = currentText.replacingCharacters(in: range, with: string)
+        switch textField {
+        case nameField:
+            if finalText.count > 10 {
+                return false
+            }
+        case ageField:
+            // charSet에는 숫자를 제외한 모든 문자가 포함되어 있다
+            if let _ = string.rangeOfCharacter(from: charSet) {
+                // string에 입력된 값이 숫자가 아닐 경우(charSet에 포함될 경우: 숫자가 아님)
+                return false
+            }
+            
+            if let age = Int(finalText), !(1...100).contains(age) {
+                return false
+            }
+        case genderField:
+            if finalText.count > 1 {
+                return false
+            }
+            if let _ = string.rangeOfCharacter(from: genderCharSet) {
+                return false
+            }
+        
+        default:
+            break
+        }
+        
+        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        
+        if textField == emailField {
+            if let email = textField.text {
+                guard let _ = email.range(of: regex, options: .regularExpression) else {
+                    alert(message: "Invalid Email")
+                    return false
+                }
+            }
+        }
+        
+        return true
     }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
+// 경고창을 띄우는 method
 extension TextDelegateViewController {
     func alert(message: String) {
         let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
