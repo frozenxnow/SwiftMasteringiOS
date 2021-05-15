@@ -27,7 +27,15 @@ import Foundation
 /*:
  # TimeInterval
 */
+let oneSec = TimeInterval(1) // 1초
 
+let oneMillisecond = TimeInterval(0.001)
+
+let oneMin = TimeInterval(60)
+let oneHour = TimeInterval(oneMin * 60)
+let oneDay = TimeInterval(oneHour * 24)
+
+Date(timeIntervalSinceNow: oneDay)
 
 
 //: [Next](@next)
