@@ -28,8 +28,22 @@
 import UIKit
 
 let now = Date()
-print(now)
+//print(now)
+
+let formatter = DateFormatter()
+
+formatter.dateStyle = .full
+formatter.timeStyle = .medium
+formatter.locale = Locale(identifier: "ko_kr")
+
+var result = formatter.string(from: now)
+print(result)
+
+formatter.string(for: now)
+
+var pr = DateFormatter.localizedString(from: now, dateStyle: .long, timeStyle: .short)
+print(pr)
+
+//: [Next](@next)\
 
 
-
-//: [Next](@next)

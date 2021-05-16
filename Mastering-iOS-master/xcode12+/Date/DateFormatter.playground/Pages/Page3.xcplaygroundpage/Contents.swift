@@ -37,6 +37,9 @@ formatter.locale = Locale(identifier: "ko_KR")
 formatter.dateStyle = .full
 formatter.timeStyle = .none
 
+formatter.doesRelativeDateFormatting = true
+
+
 print(formatter.string(from: now))
 print(formatter.string(from: yesterday))
 print(formatter.string(from: tomorrow))
