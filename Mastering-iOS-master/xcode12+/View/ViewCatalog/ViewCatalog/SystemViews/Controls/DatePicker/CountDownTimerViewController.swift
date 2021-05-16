@@ -32,12 +32,25 @@ class CountDownTimerViewController: UIViewController {
     @IBOutlet weak var picker: UIDatePicker!
     
     @IBAction func start(_ sender: Any) {
+        timeLabel.text = "\(Int(picker.countDownDuration))"
+        remainingSecond = Int(picker.countDownDuration)
         
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            self.remainingSecond -= 1
+            self.timeLabel.text = "\(self.remainingSecond)"
+            
+            if self.remainingSecond == 0 {
+                timer.invalidate()
+                AudioServicesPlaySystemSound(1315)
+            }
+        }
     }
+    
+    var remainingSecond = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        picker.countDownDuration = 60 // 초단위로 입력
     }
 }
