@@ -27,7 +27,10 @@ import Foundation
 /*:
  # Calendar
  */
+Calendar.Identifier.gregorian // 열거형으로 나열된 달력의 종류 중 하나 그레고리력
 
+Calendar.current // 대부분 이거 사용
+Calendar.autoupdatingCurrent // 사용자가 설정해둔? 최근의 달력 가져옴
 
 
 

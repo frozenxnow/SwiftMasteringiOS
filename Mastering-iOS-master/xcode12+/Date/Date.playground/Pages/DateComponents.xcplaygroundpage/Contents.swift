@@ -27,6 +27,28 @@ import Foundation
 /*:
  # DateComponents
  */
+let now = Date()
+
+//now.year // 에러 : 캘린더를 통해 접근해야 한다
+
+let calendar = Calendar.current
+let components = calendar.dateComponents([.year, .month, .day], from: now)
+
+components.year
+components.month
+components.day
+
+let year = calendar.component(.year, from: now)
+
+
+// 새로운 날짜 만들기 (date)만들기
+var memorialDayComponents = DateComponents()
+memorialDayComponents.year = 1990
+memorialDayComponents.month = 3
+memorialDayComponents.day = 26
+
+let memorialDay = calendar.date(from: memorialDayComponents)
+
 
 
 

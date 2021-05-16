@@ -49,8 +49,16 @@ extension Date {
 let calendar = Calendar.current
 let worldCup2002 = Date(year: 2002, month: 5, day: 31)!
 
+let now = Date()
+let today = calendar.startOfDay(for: now) // 0시0분0초로 만들어줌
 
+var comps = DateComponents()
+comps.day = 100
 
+calendar.date(byAdding: comps, to: now)
+calendar.date(byAdding: comps, to: today)
 
-
+//2002 월드컵으로부터 며칠이 지났는지?
+comps = calendar.dateComponents([.day], from: worldCup2002, to: today)
+comps.day
 //: [Next](@next)

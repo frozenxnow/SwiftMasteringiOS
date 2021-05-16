@@ -37,5 +37,5 @@ let oneDay = TimeInterval(oneHour * 24)
 
 Date(timeIntervalSinceNow: oneDay)
 
-
+Date(timeIntervalSince1970: oneDay)
 //: [Next](@next)
