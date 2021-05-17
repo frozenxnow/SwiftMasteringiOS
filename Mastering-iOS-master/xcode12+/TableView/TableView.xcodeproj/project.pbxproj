@@ -54,6 +54,7 @@
 		AAE2BD2E20EFC84D00FD64F1 /* PrefetchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD2D20EFC84D00FD64F1 /* PrefetchingViewController.swift */; };
 		AAE2BD3020EFCAB800FD64F1 /* Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD2F20EFCAB800FD64F1 /* Landscape.swift */; };
 		AAE2BD3220EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */; };
+		F2B63F282652B8AE00D5EC7D /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		AAE2BD2D20EFC84D00FD64F1 /* PrefetchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchingViewController.swift; sourceTree = "<group>"; };
 		AAE2BD2F20EFCAB800FD64F1 /* Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landscape.swift; sourceTree = "<group>"; };
 		AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewViewController.swift; sourceTree = "<group>"; };
+		F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 			children = (
 				AAA1E1D525E3A98F006BC597 /* MultiSection.storyboard */,
 				AA84F76120E21D67004DF711 /* MultiSectionTableViewViewController.swift */,
+				F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */,
 			);
 			path = MultiSection;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				AA0880EC20EF05CB004BCAEA /* RowActionViewController.swift in Sources */,
 				AA0880E620EEA301004BCAEA /* SingleSelectionViewController.swift in Sources */,
 				AAA1E24B25E3F832006BC597 /* SceneDelegate.swift in Sources */,
+				F2B63F282652B8AE00D5EC7D /* SwitchTableViewCell.swift in Sources */,
 				AAE2BD2E20EFC84D00FD64F1 /* PrefetchingViewController.swift in Sources */,
 				AA871A4920E372B8004E2E8B /* AccessoryViewViewController.swift in Sources */,
 				AA0880E820EEDEE5004BCAEA /* MultipleSelectionViewController.swift in Sources */,

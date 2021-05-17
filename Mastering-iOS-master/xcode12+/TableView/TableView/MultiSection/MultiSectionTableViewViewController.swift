@@ -27,6 +27,11 @@ class MultiSectionTableViewViewController: UIViewController {
     
     let list = PhotosSettingSection.generateData()
     
+    
+    @IBOutlet weak var listTableView: UITableView!
+    
+    
+    
     @objc func toggleHideAlbum(_ sender: UISwitch) {
         print(#function)
         list[1].items[0].on.toggle()
@@ -73,25 +78,106 @@ class MultiSectionTableViewViewController: UIViewController {
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // scene이 표시되기 직전 호출
+        super.viewWillAppear(animated)
+        
+        if let selected = listTableView.indexPathForSelectedRow {
+            listTableView.deselectRow(at: selected, animated: true) // 선택된 회색 배경이 흰색으로 돌아온다
+        }
+    }
 }
 
 
 
 
 
+extension MultiSectionTableViewViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return list.count
+        // section의 개수 리턴하는 함수
+        // 필수 함수는 아닙니다
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return list[section].items.count
+        // section마다 리턴
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let target = list[indexPath.section].items[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: target.type.rawValue, for: indexPath)
+        
+        cell.textLabel?.text = target.title
 
+        switch target.type {
+        case .disclosure:
+            cell.imageView?.image = UIImage(systemName: target.imageName ?? "")
+        case .switch:
+            if let switchView = cell.accessoryView as? UISwitch {
+                switchView.isOn = target.on
+                
+                if indexPath.section == 1 && indexPath.row == 0 {
+                    switchView.removeTarget(nil, action: nil, for: .valueChanged)
+                    switchView.addTarget(self, action: #selector(toggleHideAlbum(_:)), for: .valueChanged)
+                }
+                
+                if indexPath.section == 2 && indexPath.row == 0 {
+                    switchView.removeTarget(nil, action: nil, for: .valueChanged)
+                    switchView.addTarget(self, action: #selector(toggleAutoPlayVideos(_:)), for: .valueChanged)
+                }
+                
+                if indexPath.section == 2 && indexPath.row == 1 {
+                    switchView.removeTarget(nil, action: nil, for: .valueChanged)
+                    switchView.addTarget(self, action: #selector(toggleSummarizePhotos(_:)), for: .valueChanged)
+                }
+                
+                if indexPath.section == 3 && indexPath.row == 1 {
+                    switchView.removeTarget(nil, action: nil, for: .valueChanged)
+                    switchView.addTarget(self, action: #selector(toggleShowHolidayEvents(_:)), for: .valueChanged)
+                }
+            }
+        case .action:
+                break
+        case .checkmark:
+            cell.accessoryType = target.on ? .checkmark : .none
+        }
+        
+        return cell
+        
+    }
+    
+    // header ,footer
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return list[section].header
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return list[section].footer
+    }
+    
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+extension MultiSectionTableViewViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 셀 탭하면 호출되는 메서드
+        
+        if indexPath.section == 3 && indexPath.row == 0 {
+            showActionSheet()
+            if let selected = listTableView.indexPathForSelectedRow {
+                listTableView.deselectRow(at: selected, animated: true)
+            }
+        }
+        
+        if indexPath.section == 4 {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                list[indexPath.section].items[indexPath.row].on.toggle()
+                cell.accessoryType = list[indexPath.section].items[indexPath.row].on ? .checkmark : .none
+                
+            }
+        }
+        
+    }
+}
