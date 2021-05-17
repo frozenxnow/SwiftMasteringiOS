@@ -35,8 +35,20 @@ class TableViewBasicsViewController: UIViewController {
 
 
 
+extension TableViewBasicsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("#1", #function)
+        return list.count
+    }
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("#2", #function)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = list[indexPath.row]
+        return cell
+    }
 
+}
 
 
 
