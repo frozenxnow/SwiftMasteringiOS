@@ -27,6 +27,22 @@ class TableViewCellViewController: UIViewController {
     
     let list = ["iPhone", "iPad", "Apple Watch", "iMac Pro", "iMac 5K", "Macbook Pro", "Apple TV"]
     
+    @IBOutlet weak var listTableView: UITableView!
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // 셀 선택한 상태에서 화면이 전환되기 직전 호출
+        // 이 메서드를 호출시킨 cell이 sender 파라미터로 전달됨
+        if let cell = sender as? UITableViewCell {
+            if let indexPath = listTableView.indexPath(for: cell) {
+                if let vc = segue.destination as? DetailViewController {
+                    vc.value = list[indexPath.row]
+                }
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +61,7 @@ extension TableViewCellViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = list[indexPath.row]
+        cell.imageView?.image = UIImage(systemName: "star")
         return cell
     }
 }
@@ -53,7 +70,18 @@ extension TableViewCellViewController: UITableViewDataSource {
 
 extension TableViewCellViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        // cell을 선택할 때마다 반복적으로 호출
+        if let cell = tableView.cellForRow(at: indexPath) {
+            print(cell.textLabel?.text ?? "nil")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row.isMultiple(of: 2) {
+            cell.backgroundColor = UIColor.systemBackground
+        } else {
+            cell.backgroundColor = UIColor.secondarySystemBackground
+        }
     }
 }
 

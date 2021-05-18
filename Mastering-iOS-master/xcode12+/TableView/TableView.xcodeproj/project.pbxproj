@@ -55,6 +55,7 @@
 		AAE2BD3020EFCAB800FD64F1 /* Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD2F20EFCAB800FD64F1 /* Landscape.swift */; };
 		AAE2BD3220EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */; };
 		F2B63F282652B8AE00D5EC7D /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */; };
+		F2B63F2B2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F2A2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		AAE2BD2F20EFCAB800FD64F1 /* Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landscape.swift; sourceTree = "<group>"; };
 		AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewViewController.swift; sourceTree = "<group>"; };
 		F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		F2B63F2A2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAccessoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 			children = (
 				AAA1E1E525E3AB9F006BC597 /* AccessoryView.storyboard */,
 				AA871A4820E372B8004E2E8B /* AccessoryViewViewController.swift */,
+				F2B63F2A2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift */,
 			);
 			path = AccessoryView;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				AA7CDBA920ED8A94004EFB9C /* Region.swift in Sources */,
 				AA0880F020EF15F8004BCAEA /* SwipeActionViewController.swift in Sources */,
 				AAA71FE420DF46CF00C5E2AB /* TableViewBasicsViewController.swift in Sources */,
+				F2B63F2B2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift in Sources */,
 				AA5016F420EC26AE00F82883 /* WorldTime.swift in Sources */,
 				AA62FF7120EE5A9200C27EF0 /* SectionIndexViewController.swift in Sources */,
 				AAE2BD3220EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift in Sources */,
