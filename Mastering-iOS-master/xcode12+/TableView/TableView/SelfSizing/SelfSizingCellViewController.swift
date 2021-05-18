@@ -37,6 +37,12 @@ class SelfSizingCellViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // size automatic size check
+//        listTableView.rowHeight = UITableViewAutomaticDimension
+//        listTableView.estimatedRowHeight = UITableViewAutomaticDimension
+        
+        
+        
     }
 }
 
@@ -60,7 +66,20 @@ extension SelfSizingCellViewController: UITableViewDataSource {
 
 
 extension SelfSizingCellViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 100
+        }
+        return UITableViewAutomaticDimension
+    }
     
+    // 같은 값을 리턴하도록 작성하면 스크롤 성능이 좋아집니다
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 100
+        }
+        return UITableViewAutomaticDimension
+    }
 }
 
 
