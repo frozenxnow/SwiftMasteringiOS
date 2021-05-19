@@ -56,6 +56,10 @@
 		AAE2BD3220EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */; };
 		F2B63F282652B8AE00D5EC7D /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */; };
 		F2B63F2B2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F2A2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift */; };
+		F2B63F2E2654D02B00D5EC7D /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F2D2654D02B00D5EC7D /* TimeTableViewCell.swift */; };
+		F2B63F312654DEA100D5EC7D /* SharedCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2B63F302654DEA100D5EC7D /* SharedCustomCell.xib */; };
+		F2B63F342655017900D5EC7D /* CustomHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2B63F332655017900D5EC7D /* CustomHeader.xib */; };
+		F2B63F372655025700D5EC7D /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F362655025700D5EC7D /* CustomHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +114,10 @@
 		AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewViewController.swift; sourceTree = "<group>"; };
 		F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		F2B63F2A2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAccessoryTableViewCell.swift; sourceTree = "<group>"; };
+		F2B63F2D2654D02B00D5EC7D /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
+		F2B63F302654DEA100D5EC7D /* SharedCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedCustomCell.xib; sourceTree = "<group>"; };
+		F2B63F332655017900D5EC7D /* CustomHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeader.xib; sourceTree = "<group>"; };
+		F2B63F362655025700D5EC7D /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +213,8 @@
 			children = (
 				AAA1E1EF25E3AC44006BC597 /* CustomCell.storyboard */,
 				AA5016F120EC098D00F82883 /* CustomCellViewController.swift */,
+				F2B63F2D2654D02B00D5EC7D /* TimeTableViewCell.swift */,
+				F2B63F302654DEA100D5EC7D /* SharedCustomCell.xib */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -214,6 +224,8 @@
 			children = (
 				AAA1E1F425E3ACAD006BC597 /* HeaderAndFooter.storyboard */,
 				AA7CDBAA20ED8DB3004EFB9C /* HeaderAndFooterViewController.swift */,
+				F2B63F332655017900D5EC7D /* CustomHeader.xib */,
+				F2B63F362655025700D5EC7D /* CustomHeaderView.swift */,
 			);
 			path = SectionHeaderFooter;
 			sourceTree = "<group>";
@@ -409,11 +421,13 @@
 				AAA1E22625E3B0BD006BC597 /* StaticCells.storyboard in Resources */,
 				AAA1E22125E3B078006BC597 /* Prefetching.storyboard in Resources */,
 				AAA1E21C25E3B038006BC597 /* Reordering.storyboard in Resources */,
+				F2B63F342655017900D5EC7D /* CustomHeader.xib in Resources */,
 				AAA1E1D625E3A98F006BC597 /* MultiSection.storyboard in Resources */,
 				AACF6A0620DA448400DE209C /* LaunchScreen.storyboard in Resources */,
 				AAA1E1DB25E3AA12006BC597 /* Separator.storyboard in Resources */,
 				AAA1E20425E3ADA9006BC597 /* SingleSelection.storyboard in Resources */,
 				AAA1E1E025E3AA89006BC597 /* TableViewCell.storyboard in Resources */,
+				F2B63F312654DEA100D5EC7D /* SharedCustomCell.xib in Resources */,
 				AAA1E20D25E3AF75006BC597 /* EditMode.storyboard in Resources */,
 				AACF6A0320DA448400DE209C /* Assets.xcassets in Resources */,
 				AAA1E21225E3AFB7006BC597 /* RowAction.storyboard in Resources */,
@@ -438,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2B63F2E2654D02B00D5EC7D /* TimeTableViewCell.swift in Sources */,
 				AAE2BD3020EFCAB800FD64F1 /* Landscape.swift in Sources */,
 				AA7CDBA320ED2DBC004EFB9C /* DetailViewController.swift in Sources */,
 				AA7CDBA120ED1784004EFB9C /* TableViewCellViewController.swift in Sources */,
@@ -460,6 +475,7 @@
 				AA0880EC20EF05CB004BCAEA /* RowActionViewController.swift in Sources */,
 				AA0880E620EEA301004BCAEA /* SingleSelectionViewController.swift in Sources */,
 				AAA1E24B25E3F832006BC597 /* SceneDelegate.swift in Sources */,
+				F2B63F372655025700D5EC7D /* CustomHeaderView.swift in Sources */,
 				F2B63F282652B8AE00D5EC7D /* SwitchTableViewCell.swift in Sources */,
 				AAE2BD2E20EFC84D00FD64F1 /* PrefetchingViewController.swift in Sources */,
 				AA871A4920E372B8004E2E8B /* AccessoryViewViewController.swift in Sources */,
