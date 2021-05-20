@@ -31,11 +31,28 @@ class SingleSelectionViewController: UIViewController {
     
     
     func selectRandomCell() {
+        // 랜덤으로 셀을 선택하는 메소드 구현하기
+        // 셀 선택시 index.row가 있어야 함. section과 indexPath를 랜덤으로 받아서 선택한다
+        let section = Int.random(in: 0 ..< list.count)
+        let row = Int.random(in: 0..<list[section].countries.count)
+        let targetIndexPath = IndexPath(row: row, section: section)
         
+        listTableView.selectRow(at: targetIndexPath, animated: true, scrollPosition: .top)
+        // 세번째 파라미터 : 랜덤으로 선택한 후 셀로 스크롤을 하는지
     }
     
     
     func deselect() {
+        // 선택을 제거하는 메서드
+        if let selected = listTableView.indexPathForSelectedRow {
+            listTableView.deselectRow(at: selected, animated: true)
+            // 선택을 해제하는 메서드 deselectedRow(at:animated:)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                let first = IndexPath(row: 0, section: 0)
+                self?.listTableView.scrollToRow(at: first, at: .top, animated: true)
+            }
+        }
         
     }
     
