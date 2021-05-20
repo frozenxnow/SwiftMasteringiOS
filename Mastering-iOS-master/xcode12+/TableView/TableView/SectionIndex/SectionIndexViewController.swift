@@ -32,7 +32,12 @@ class SectionIndexViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // section index ui 변경
+        listTableView.sectionIndexColor = UIColor.systemBlue
+        listTableView.sectionIndexBackgroundColor = UIColor.secondarySystemBackground
         
+        // 드래그하고있는 도중 배경색
+        listTableView.sectionIndexTrackingBackgroundColor = UIColor.systemYellow
     }
 }
 
@@ -62,6 +67,20 @@ extension SectionIndexViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return list[section].title
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        // index 전체 표시
+        // return list.map{ $0.title }
+        
+        // index 짝수번째 문자만 표시
+        return stride(from: 0, to: list.count, by: 2).map { list[$0].title }
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        // 인덱스와 실제 위치를 연결해주기 위해 구현
+        // 인덱스 드래그 후 실제 section 이동하기 전 호출되는 메서드
+        return index * 2
     }
 }
 

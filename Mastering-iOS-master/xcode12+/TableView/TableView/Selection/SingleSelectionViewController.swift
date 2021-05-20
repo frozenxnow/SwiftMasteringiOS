@@ -105,6 +105,48 @@ extension SingleSelectionViewController: UITableViewDataSource {
 
 extension SingleSelectionViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        // 선택되기 전 호출. nil을 리턴하면 셀이 선택되지 않는다. 특정 셀을 선택하지 못하도록 구현할 때 사용
+        if indexPath.row == 0 {
+            return nil
+        }
+        return indexPath
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        // 선택 직후 호출. indexPath : 선택된 셀의 위치 전달
+//        let target = list[indexPath.section].countries[indexPath.row]
+//        showAlert(with: target)
+//        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = .black
+//    }
+//
+//    func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+//        // 선택된 셀에서 선택이 해제되기 직전 호출. nil 리턴시 선택상태 유지
+//        return indexPath
+//    }
+//
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        // 선택해제된 후 호출
+//        print(#function, indexPath)
+//        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = .systemGray3
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        // 선택 시 강조되는 효과 false 리턴시 강조되지 않는다
+//        return indexPath.row != 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+//        // 셀 강조 후 호출
+//        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = .black
+//    }
+//
+//    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+//        // 강조효과 후 호출
+//        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = .systemGray3
+//    }
+    
 }
 
 
@@ -123,10 +165,22 @@ extension UIViewController {
 
 
 
+// cell의 custom class로 설정되어 있다
 class SingleSelectionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        textLabel?.textColor = .systemGray3
+        textLabel?.highlightedTextColor = .black
+        
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
     }
 }
 
