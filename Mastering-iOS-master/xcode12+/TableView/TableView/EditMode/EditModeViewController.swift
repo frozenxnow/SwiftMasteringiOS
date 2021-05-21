@@ -32,7 +32,8 @@ class EditModeViewController: UIViewController {
    var selectedList = [String]()
    
    @objc func toggleEditMode(_ sender: UISwitch) {
-      
+//    listTableView.isEditing.toggle() 애니메이션 효과가 적용되지 않습니다.
+    listTableView.setEditing(sender.isOn, animated: true)
    }
    
    @objc func emptySelectedList() {
@@ -49,6 +50,8 @@ class EditModeViewController: UIViewController {
       deleteButton.tintColor = UIColor.red
       
       navigationItem.rightBarButtonItems = [deleteButton, UIBarButtonItem(customView: editingSwitch)]
+    
+    editingSwitch.isOn = listTableView.isEditing
    }
 }
 
@@ -94,11 +97,67 @@ extension EditModeViewController: UITableViewDataSource {
          return nil
       }
    }
+    
+    // 편집모드 활성화시 실제로 편집할 수 있는지 확인하는 메서드 먼저 호출
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        // 삭제/추가 버튼을 눌렀을 때 호출되는 메서드
+        // 위 메서드의 두번째 파라미터에서 스타일 감지
+        switch editingStyle {
+        case .insert:
+            let target = productList[indexPath.row]
+            let insertIndexPath = IndexPath(row: selectedList.count, section: 0)
+            
+            selectedList.append(target)
+            productList.remove(at: indexPath.row)
+            
+            listTableView.beginUpdates()
+            
+            // 두 메서드가 배치방식으로 실행되도록 begin, end 사이에 넣어준다 : insert, delete, reload
+            listTableView.insertRows(at: [insertIndexPath], with: .automatic)
+            listTableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            listTableView.endUpdates()
+            
+        case .delete:
+            let target = selectedList[indexPath.row]
+            let insertIndexPath = IndexPath(row: productList.count, section: 1)
+            
+            productList.append(target)
+            selectedList.remove(at: indexPath.row)
+            
+            listTableView.beginUpdates()
+
+            listTableView.insertRows(at: [insertIndexPath], with: .automatic)
+            listTableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            listTableView.endUpdates()
+            
+        default:
+            break
+        }
+    }
 }
 
 
 extension EditModeViewController: UITableViewDelegate {
-   
+    // 셀을 편집할 수 있다면, 편집 스타일을 확인하기 위해 호출되는 메서드 (delegate에 선언되어있음)
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        // 세가지 스타일 중 하나를 리턴해야합니다.
+        switch indexPath.section {
+        case 0:
+            return .delete
+        case 1:
+            return .insert
+        default:
+            return .none
+        }
+    }
+    
+    
 }
 
 
