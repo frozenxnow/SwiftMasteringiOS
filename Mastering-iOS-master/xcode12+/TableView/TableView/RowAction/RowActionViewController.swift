@@ -94,7 +94,30 @@ extension RowActionViewController: UITableViewDataSource {
 
 
 extension RowActionViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        // 셀을 왼쪽으로 스와이프 하면 호출되는 메서드 . 구현하지 않으면 기본 삭제버튼이 나타난다
+        
+        // email action
+        let emailAction = UITableViewRowAction(style: .default, title: "Email") { [weak self] (action, indexPath) in
+            if let data = self?.list[indexPath.row] {
+                self?.sendEmail(with: data)
+            }
+        }
+        emailAction.backgroundColor = UIColor.black
+        
+        let messageAction = UITableViewRowAction(style: .normal, title: "SMS") { [weak self](action, indexPath) in
+            if let data = self?.list[indexPath.row] {
+                self?.sendMessage(with: data)
+            }
+        }
+        messageAction.backgroundColor = UIColor.blue
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (action, indexPath) in
+            self?.delete(at: indexPath)
+        }
+        
+        return [deleteAction, messageAction, emailAction]
+    }
 }
 
 

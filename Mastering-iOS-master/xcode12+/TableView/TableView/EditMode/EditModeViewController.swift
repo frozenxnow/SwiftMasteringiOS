@@ -37,7 +37,9 @@ class EditModeViewController: UIViewController {
    }
    
    @objc func emptySelectedList() {
-      
+    productList.append(contentsOf: selectedList)
+    selectedList.removeAll()
+    listTableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
    }
    
    override func viewDidLoad() {
@@ -157,7 +159,18 @@ extension EditModeViewController: UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        editingSwitch.setOn(true, animated: true)
+    }
     
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        editingSwitch.setOn(false, animated: true)
+    }
+    
+    // button title 변경
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return ""
+    }
 }
 
 
