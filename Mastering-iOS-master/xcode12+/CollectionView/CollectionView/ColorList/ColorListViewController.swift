@@ -25,6 +25,9 @@ import UIKit
 
 class ColorListViewController: UIViewController {
     
+    
+    let list = MaterialColorDataSource.generateMultiSectionData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +35,27 @@ class ColorListViewController: UIViewController {
 }
 
 
-
+extension ColorListViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return list.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // 표시할 아이템 개수 파악
+        return list[section].colors.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // 화면에 표시할 셀이 필요할 때마다 호출, 직접 생성하지 않고 collection view에게 요청
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        cell.contentView.backgroundColor = list[indexPath.section].colors[indexPath.row]
+        
+        return cell
+    }
+    
+    
+}
 
 
 
