@@ -57,6 +57,46 @@ extension SwipeActionViewController: UITableViewDataSource {
 
 @available(iOS 11.0, *)
 extension SwipeActionViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // 리딩방향(오른쪽)으로 스와이프했을때 왼쪽에 나타나는 메뉴
+        // 액션을 만들어 UISwipeActionConfiguration에 담아 리턴
+        let unreadAction = UIContextualAction(style: .normal, title: "읽지않음") { (action, view, completion) in
+            completion(true) // 정상적으로 실행되었을때 true 전달
+        }
+        
+        unreadAction.backgroundColor = UIColor.systemBlue
+        unreadAction.image = UIImage(systemName: "envelope")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [unreadAction])
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // 반대로 우>좌로 스와이프, 오른쪽에 메뉴 생성
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (action, view, completion) in
+            completion(true)
+        }
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        let flagAction = UIContextualAction(style: .normal, title: "깃발 표시") { (action, view, completion) in
+            completion(true)
+        }
+        
+        flagAction.image = UIImage(systemName: "flag")
+        flagAction.backgroundColor = UIColor.systemOrange
+        
+        let menuAction = UIContextualAction(style: .normal, title: "기타") { (action, view, completion) in
+            completion(true)
+        }
+        
+        menuAction.image = UIImage(systemName: "ellipsis")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, flagAction, menuAction])
+        configuration.performsFirstActionWithFullSwipe = true // 셀 전체 스와이프 했을때 첫번째 액션이 자동으로 실행됨
+        
+        return configuration
+    }
     
 }
 
