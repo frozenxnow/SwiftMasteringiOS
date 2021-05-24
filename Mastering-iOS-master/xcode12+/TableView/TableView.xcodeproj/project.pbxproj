@@ -54,6 +54,8 @@
 		AAE2BD2E20EFC84D00FD64F1 /* PrefetchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD2D20EFC84D00FD64F1 /* PrefetchingViewController.swift */; };
 		AAE2BD3020EFCAB800FD64F1 /* Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD2F20EFCAB800FD64F1 /* Landscape.swift */; };
 		AAE2BD3220EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */; };
+		F23A4C60265C04C700F192B6 /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A4C5F265C04C700F192B6 /* MyTableViewController.swift */; };
+		F23A4C63265C07A500F192B6 /* StaticCellsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A4C62265C07A500F192B6 /* StaticCellsTableViewController.swift */; };
 		F2B63F282652B8AE00D5EC7D /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */; };
 		F2B63F2B2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F2A2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift */; };
 		F2B63F2E2654D02B00D5EC7D /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B63F2D2654D02B00D5EC7D /* TimeTableViewCell.swift */; };
@@ -112,6 +114,8 @@
 		AAE2BD2D20EFC84D00FD64F1 /* PrefetchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchingViewController.swift; sourceTree = "<group>"; };
 		AAE2BD2F20EFCAB800FD64F1 /* Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landscape.swift; sourceTree = "<group>"; };
 		AAE2BD3120EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewViewController.swift; sourceTree = "<group>"; };
+		F23A4C5F265C04C700F192B6 /* MyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
+		F23A4C62265C07A500F192B6 /* StaticCellsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticCellsTableViewController.swift; sourceTree = "<group>"; };
 		F2B63F272652B8AE00D5EC7D /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		F2B63F2A2653DA5800D5EC7D /* CustomAccessoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAccessoryTableViewCell.swift; sourceTree = "<group>"; };
 		F2B63F2D2654D02B00D5EC7D /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				AA0401B625EBA22300535A6A /* TableViewController.storyboard */,
+				F23A4C5F265C04C700F192B6 /* MyTableViewController.swift */,
 			);
 			path = TableViewController;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				AAA1E22525E3B0BD006BC597 /* StaticCells.storyboard */,
+				F23A4C62265C07A500F192B6 /* StaticCellsTableViewController.swift */,
 			);
 			path = StaticCells;
 			sourceTree = "<group>";
@@ -465,6 +471,7 @@
 				AA62FF7120EE5A9200C27EF0 /* SectionIndexViewController.swift in Sources */,
 				AAE2BD3220EFF3FC00FD64F1 /* HeaderFooterViewViewController.swift in Sources */,
 				AA5016F220EC098D00F82883 /* CustomCellViewController.swift in Sources */,
+				F23A4C60265C04C700F192B6 /* MyTableViewController.swift in Sources */,
 				AA871A4520E331EA004E2E8B /* SeparatorViewController.swift in Sources */,
 				AA7CDBAB20ED8DB3004EFB9C /* HeaderAndFooterViewController.swift in Sources */,
 				AA84F76520E22A96004DF711 /* PhotosSetting.swift in Sources */,
@@ -473,6 +480,7 @@
 				AA0880EE20EF0BA6004BCAEA /* ReorderingViewController.swift in Sources */,
 				AA0880E420EEA136004BCAEA /* Products.swift in Sources */,
 				AA0880EC20EF05CB004BCAEA /* RowActionViewController.swift in Sources */,
+				F23A4C63265C07A500F192B6 /* StaticCellsTableViewController.swift in Sources */,
 				AA0880E620EEA301004BCAEA /* SingleSelectionViewController.swift in Sources */,
 				AAA1E24B25E3F832006BC597 /* SceneDelegate.swift in Sources */,
 				F2B63F372655025700D5EC7D /* CustomHeaderView.swift in Sources */,
