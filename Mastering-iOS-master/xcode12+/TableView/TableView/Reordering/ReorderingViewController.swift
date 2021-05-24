@@ -99,13 +99,72 @@ extension ReorderingViewController: UITableViewDataSource {
             return nil
         }
     }
+    
+    // 순서를 바꾸는 기능: 기본적으로 비활성화, true 리턴할 경우 활성화된다(셀을 이동할 수 있음)
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // editing control 삭제 후 여백도 없애기
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false // 여백이 사라짐
+    }
+    
+    // 셀을 드래그하여 드롭하면 이 메서드가 호출된다
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // 두번째파라미터: 시작위치, 세번째: 이동된 드랍 위치
+        // 내부를 구현하지 않으면 데이터의 순서는 바뀌지 않는다. 겉보기에만 셀 위치가 변경됨
+        var target: String? = nil
+        
+        switch sourceIndexPath.section {
+        case 0:
+            target = firstList.remove(at: sourceIndexPath.row)
+        case 1:
+            target = secondList.remove(at: sourceIndexPath.row)
+        case 2:
+            target = thirdList.remove(at: sourceIndexPath.row)
+        default:
+            break
+        }
+        
+        guard let item = target else { return }
+        
+        
+        switch destinationIndexPath.section {
+        case 0:
+            firstList.insert(item, at: destinationIndexPath.row)
+        case 1:
+            secondList.insert(item, at: destinationIndexPath.row)
+        case 2:
+            thirdList.insert(item, at: destinationIndexPath.row)
+        default:
+            break
+            // append로 추가할 경우 가장 마지막에 추가되기 때문에 데이터가 원하는 위치로 변경되지 않는다
+        }
+        
+    }
 }
 
 
 
 
 extension ReorderingViewController: UITableViewDelegate {
+    // editing control 표시되지 않도록
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
     
+    // 특정 section으로 이동하지 못하게 제한하기
+    // cell drop시 호출되는 메서드
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if proposedDestinationIndexPath.section == 0 {
+            return sourceIndexPath
+            // section == 0 일때 시작인덱스를 리턴하면 셀이 이동하지 않는다 
+        }
+        
+        return proposedDestinationIndexPath
+        //
+    }
 }
 
 
