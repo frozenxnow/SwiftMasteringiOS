@@ -52,10 +52,10 @@ class FlowLayoutViewController: UIViewController {
         
         if let layout = listCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 100, height: 100)
-            layout.minimumLineSpacing = 10
-            layout.minimumInteritemSpacing = 10
+            layout.minimumLineSpacing = 5
+            layout.minimumInteritemSpacing = 5
             
-            layout.sectionInset = UIEdgeInsets(top: 40, left: 20, bottom: 40, right: 20)
+            layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         }
         
         
@@ -63,7 +63,60 @@ class FlowLayoutViewController: UIViewController {
 }
 
 
-
+extension FlowLayoutViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        print(indexPath.section, "#1", #function)
+        
+        // collection view가 cell 배치 전 크기를 설정하기 위해 호출하는 메서드
+        // indexPath로 cell 위치 확인
+        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {
+            return CGSize.zero
+        }
+        
+        var bounds = collectionView.bounds
+        bounds.size.height += bounds.origin.y
+        
+        var width = bounds.width - (layout.sectionInset.left + layout.sectionInset.right)
+        var height = bounds.height - (layout.sectionInset.top + layout.sectionInset.bottom)
+        
+        switch layout.scrollDirection {
+        case .vertical:
+            height = (height-(layout.minimumLineSpacing * 4)) / 5
+            if indexPath.item > 0 {
+                width = (width - (layout.minimumInteritemSpacing * 2)) / 3
+            }
+        case .horizontal:
+            width = (width - (layout.minimumLineSpacing * 2)) / 3
+            if indexPath.item > 0 {
+                height = (height - (layout.minimumInteritemSpacing * 4)) / 5
+            }
+        }
+        
+        return CGSize(width: width.rounded(.down), height: height.rounded(.down))
+            // .rounded(.down)으로 소숫점을 없애 오차를 줄인다 
+    }
+    
+    
+    // viewDidLoad() 에서 직접 설정해줌
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        print(section, "#2", #function)
+//        // 여백이 필요할 때마다 호출
+//        return 5
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        print(section, "#3", #function)
+//        // 여백이 필요할 때마다 호출
+//        return 5
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        print(section, "#4", #function)
+//        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+//    }
+}
 
 extension FlowLayoutViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -83,18 +136,6 @@ extension FlowLayoutViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
