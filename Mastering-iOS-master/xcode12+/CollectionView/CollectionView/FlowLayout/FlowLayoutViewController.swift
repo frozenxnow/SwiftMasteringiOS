@@ -31,6 +31,16 @@ class FlowLayoutViewController: UIViewController {
     
     
     @objc func toggleScrollDirection() {
+        // 스크롤 방향을 토글하는 메서드
+        guard let layout = listCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        // performBatchUpdates의 첫 파라미터 : 실행될 블록,
+        // 두번째 파라미터 : 실행 후 이루어질 동작
+        listCollectionView.performBatchUpdates({
+            layout.scrollDirection = layout.scrollDirection == .vertical ? .horizontal : .vertical
+        }, completion: nil)
         
     }
     
@@ -39,6 +49,14 @@ class FlowLayoutViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Toggle", style: .plain, target: self, action: #selector(toggleScrollDirection))
+        
+        if let layout = listCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: 100, height: 100)
+            layout.minimumLineSpacing = 10
+            layout.minimumInteritemSpacing = 10
+            
+            layout.sectionInset = UIEdgeInsets(top: 40, left: 20, bottom: 40, right: 20)
+        }
         
         
     }
