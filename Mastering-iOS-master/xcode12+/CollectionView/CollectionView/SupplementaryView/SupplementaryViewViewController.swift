@@ -41,6 +41,12 @@ class SupplementaryViewViewController: UIViewController {
 
 
 extension SupplementaryViewViewController: UICollectionViewDataSource {
+    
+    // supplementary view 표시하려면 이 메서드를 구현해야한다
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) 
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return list.count
     }
