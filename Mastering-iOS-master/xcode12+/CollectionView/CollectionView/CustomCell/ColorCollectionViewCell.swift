@@ -17,7 +17,8 @@ class ColorCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // 스토리보드에서 초기화하지 못한 값들은 주로 여기에서 초기화 코드
+        // 스토리보드에서 초기화하지 못한 값들은 주로 여기에서 오버라이딩해서 구현
+        
         colorView.clipsToBounds = true
         colorView.layer.cornerRadius = colorView.bounds.width / 2
     }

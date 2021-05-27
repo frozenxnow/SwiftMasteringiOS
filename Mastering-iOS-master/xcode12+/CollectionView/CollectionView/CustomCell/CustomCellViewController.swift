@@ -29,11 +29,29 @@ class CustomCellViewController: UIViewController {
     
     @IBOutlet weak var listCollectionView: UICollectionView!
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // 파라미터 1) viewController에 접근, 2) segue 실행시킨 객체 전달
+        guard let cell = sender as? UICollectionViewCell else {
+            return
+        }
+        
+        guard let indexPath = listCollectionView.indexPath(for: cell) else {
+            return
+        }
+        
+        let target = list[indexPath.item]
+        
+        segue.destination.view.backgroundColor = target.color
+        segue.destination.title = target.title
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+//        listCollectionView.visibleCells
+//        listCollectionView.cellForItem(at: <#T##IndexPath#>) index 위치의 셀 반환, 없다면 nil 반환
+//        listCollectionView.indexPath(for: <#T##UICollectionViewCell#>)
     }
 }
 

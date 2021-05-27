@@ -71,6 +71,7 @@
                                             <outlet property="colorView" destination="NZS-10-5av" id="JrD-wl-hZR"/>
                                             <outlet property="hexLabel" destination="SWU-r8-4Li" id="HGl-et-GSn"/>
                                             <outlet property="nameLabel" destination="awR-gr-0Jh" id="gbt-uw-m8W"/>
+                                            <segue destination="UEf-Io-slk" kind="show" id="8QS-Ly-G0C"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -95,7 +96,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCh-wk-aXz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728.98550724637687" y="446.65178571428567"/>
+            <point key="canvasLocation" x="712" y="345"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="lU0-Ap-2J9">
+            <objects>
+                <viewController id="UEf-Io-slk" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rOI-Nw-Imv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="F3a-4r-tVh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fzW-fl-C7D"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="brT-up-a59" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1504" y="345"/>
         </scene>
     </scenes>
     <resources>
