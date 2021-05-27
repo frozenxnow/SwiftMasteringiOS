@@ -53,6 +53,33 @@ class SelectionViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showMenu))
                 
+        listCollectionView.allowsSelection = true
+        listCollectionView.allowsMultipleSelection = true
+        
+    }
+}
+
+
+extension SelectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let color = list[indexPath.item].color
+        view.backgroundColor = color
+        print("#1", indexPath, #function)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        
+        // cell 선택 직전에 호출 true: 선택, false: 선택되지 않음
+        // 조건에 따라 선택할지 안할지에 대한 검증
+        print("#2", indexPath, #function)
+        
+        // 선택되어 있는 셀은 indexPathForSelectedItem으로 확인 : nil 이라면 true 리턴
+        guard let list = collectionView.indexPathsForSelectedItems else {
+            return true
+        }
+        
+//        indexPath가 존재하지 않는 경우에만 true 리턴
+        return !list.contains(indexPath)
     }
 }
 
