@@ -34,7 +34,15 @@ class SupplementaryViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        if let layout = listCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionHeadersPinToVisibleBounds = true // sticky 설정
+            
+            
+            // Footer 구현 추가 : 복잡하지만 다른 곳에서도 재사용이 가능하고 유지 보수에 용이
+            listCollectionView.register(FooterCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
+            
+            layout.footerReferenceSize = CGSize(width: 50, height: 50)
+        }
     }
 }
 
@@ -44,7 +52,25 @@ extension SupplementaryViewViewController: UICollectionViewDataSource {
     
     // supplementary view 표시하려면 이 메서드를 구현해야한다
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) 
+        // header identifier를 가지고 재사용할 헤더를 찾아 리턴, 없다면 프로토타입의 기본 헤더 리턴
+        
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderCollectionReusableView
+            header.sectionTitleLabel.text = list[indexPath.section].title
+            
+            return header
+        case UICollectionElementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath) as! FooterCollectionReusableView
+            
+            footer.sectionFooterLabel.text = list[indexPath.section].title
+            return footer
+        default:
+            fatalError("Unsupported Kind")
+        }
+        
+        
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
