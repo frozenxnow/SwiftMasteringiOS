@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O6m-9B-Wqp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O6m-9B-Wqp">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,19 +21,57 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="U7Y-lU-2sj">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="300" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="sua-oJ-AYC">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="sua-oJ-AYC" customClass="ColorCollectionViewCell" customModule="CollectionView" customModuleProvider="target">
+                                        <rect key="frame" x="57" y="0.0" width="300" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZS-10-5av">
+                                                    <rect key="frame" x="20" y="20" width="60" height="60"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="ZLk-en-UKc"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWU-r8-4Li">
+                                                    <rect key="frame" x="92" y="20" width="188" height="36"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awR-gr-0Jh">
+                                                    <rect key="frame" x="111" y="59" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="awR-gr-0Jh" firstAttribute="leading" secondItem="SWU-r8-4Li" secondAttribute="leading" id="83m-qS-ac1"/>
+                                            <constraint firstItem="awR-gr-0Jh" firstAttribute="bottom" secondItem="NZS-10-5av" secondAttribute="bottom" id="NNW-3K-FGF"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="NZS-10-5av" secondAttribute="bottom" constant="12" id="PFd-ws-PBO"/>
+                                            <constraint firstItem="NZS-10-5av" firstAttribute="leading" secondItem="sua-oJ-AYC" secondAttribute="leadingMargin" constant="12" id="Z7d-jJ-yWm"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="SWU-r8-4Li" secondAttribute="trailing" constant="12" id="b7h-jf-ZWT"/>
+                                            <constraint firstItem="awR-gr-0Jh" firstAttribute="trailing" secondItem="SWU-r8-4Li" secondAttribute="trailing" id="mkL-WW-H5I"/>
+                                            <constraint firstItem="SWU-r8-4Li" firstAttribute="leading" secondItem="NZS-10-5av" secondAttribute="trailing" constant="12" id="neK-Vh-3op"/>
+                                            <constraint firstItem="NZS-10-5av" firstAttribute="top" secondItem="sua-oJ-AYC" secondAttribute="topMargin" constant="12" id="o8u-Ve-sk1"/>
+                                            <constraint firstItem="SWU-r8-4Li" firstAttribute="top" secondItem="NZS-10-5av" secondAttribute="top" id="qbX-0d-EC0"/>
+                                        </constraints>
+                                        <size key="customSize" width="300" height="100"/>
+                                        <connections>
+                                            <outlet property="colorView" destination="NZS-10-5av" id="JrD-wl-hZR"/>
+                                            <outlet property="hexLabel" destination="SWU-r8-4Li" id="HGl-et-GSn"/>
+                                            <outlet property="nameLabel" destination="awR-gr-0Jh" id="gbt-uw-m8W"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -57,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCh-wk-aXz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="729" y="447"/>
+            <point key="canvasLocation" x="728.98550724637687" y="446.65178571428567"/>
         </scene>
     </scenes>
     <resources>

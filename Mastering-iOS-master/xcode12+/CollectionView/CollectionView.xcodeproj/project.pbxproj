@@ -33,6 +33,7 @@
 		AAB967132105565C0078FCA8 /* FlowLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB967122105565C0078FCA8 /* FlowLayoutViewController.swift */; };
 		AAC8D0302106790A0040D7CA /* ColorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC8D02F2106790A0040D7CA /* ColorListViewController.swift */; };
 		AADA67D725E5128D00B7C82D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADA67D625E5128D00B7C82D /* SceneDelegate.swift */; };
+		F23A4C67265F778200F192B6 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A4C66265F778200F192B6 /* ColorCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		AAB967122105565C0078FCA8 /* FlowLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayoutViewController.swift; sourceTree = "<group>"; };
 		AAC8D02F2106790A0040D7CA /* ColorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListViewController.swift; sourceTree = "<group>"; };
 		AADA67D625E5128D00B7C82D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F23A4C66265F778200F192B6 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				AA63665225E5477200C68889 /* CustomCell.storyboard */,
 				AA5B472221078E58007AC6A8 /* CustomCellViewController.swift */,
+				F23A4C66265F778200F192B6 /* ColorCollectionViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F23A4C67265F778200F192B6 /* ColorCollectionViewCell.swift in Sources */,
 				AAC8D0302106790A0040D7CA /* ColorListViewController.swift in Sources */,
 				AADA67D725E5128D00B7C82D /* SceneDelegate.swift in Sources */,
 				AA5B472321078E58007AC6A8 /* CustomCellViewController.swift in Sources */,

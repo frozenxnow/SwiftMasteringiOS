@@ -47,7 +47,13 @@ extension CustomCellViewController: UICollectionViewDataSource {
 
         
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ColorCollectionViewCell
+        
+        let target = list[indexPath.item]
+        cell.colorView.backgroundColor = target.color
+        cell.hexLabel.text = target.hex
+        cell.nameLabel.text = target.title
+        
         
         return cell
     }
