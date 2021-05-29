@@ -68,7 +68,25 @@ class EditViewController: UIViewController {
     
     
     func performBatchUpdates() {
+        // 두번째 섹션에서 추가와 삭제를 동시에 하는 코드
+        let deleteIndexPaths = (1..<3).compactMap { _ in
+            Int(arc4random_uniform(UInt32(colorList[0].colors.count)))
+        }.sorted(by: >).map { IndexPath(item: $0, section: 1)}
         
+        let insertIndexPaths = (1..<4).compactMap { _ in
+            Int(arc4random_uniform(UInt32(colorList[0].colors.count)))
+        }.sorted(by: <).map { IndexPath(item: $0, section: 1)}
+        
+        // 동시에 실행할때는 삭제 후 추가! 순서가 중요하다
+        // 삭제는 내림차순으로 , 추가는 오름차순으로 한다 
+        deleteIndexPaths.forEach { colorList[0].colors.remove(at: $0.item) }
+        insertIndexPaths.forEach { colorList[0].colors.insert(UIColor.random, at: $0.item) }
+        
+        // 배치방식으로 실행할 코드 전달, completion에는 배치 완료 후 실행할 코드
+        listCollectionView.performBatchUpdates ({
+            listCollectionView.deleteItems(at: deleteIndexPaths)
+            listCollectionView.insertItems(at: insertIndexPaths)
+        }, completion: nil)
     }
     
     
@@ -199,13 +217,4 @@ extension UIColor {
         return UIColor(displayP3Red: r, green: g, blue: b, alpha: 1.0)
     }
 }
-
-
-
-
-
-
-
-
-
 
