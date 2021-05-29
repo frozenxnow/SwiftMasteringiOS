@@ -33,22 +33,37 @@ class EditViewController: UIViewController {
     
     
     func emptySelectedList() {
-        
+        selectedList.removeAll()
+        // 하나하나 indexPath 생성하여 삭제하는 것보다 데이터를 새로 읽는것이(reload) 더 효율적이다
+        let targetSection = IndexSet(integer: 0)
+        listCollectionView.reloadSections(targetSection)
     }
     
     
     func insertSection() {
+        // 새로운 더미데이터를 생성하여 colorList 앞부분에 추가
+        let sectionData = MaterialColorDataSource.Section()
+        colorList.insert(sectionData, at: 0)
         
+        let targetSection = IndexSet(integer: 1)
+        listCollectionView.insertSections(targetSection) // 두번째 섹션으로 추가된다
     }
     
     
     func deleteSecondSection() {
-        
+        // 두번째 섹션 삭제
+        colorList.remove(at: 0)
+        let targetSection = IndexSet(integer: 1)
+        listCollectionView.deleteSections(targetSection)
     }
     
     
     func moveSecondSectionToThird() {
+        // 두번째 데이터를 세번째 데이터로 이동시키는 메서드
+        let target = colorList.remove(at: 0)
+        colorList.insert(target, at: 1)
         
+        listCollectionView.moveSection(1, toSection: 2)
     }
     
     
@@ -68,7 +83,22 @@ class EditViewController: UIViewController {
 
 extension EditViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if indexPath.section == 0 {
+            selectedList.remove(at: indexPath.item)
+            collectionView.deleteItems(at: [indexPath])
+            // 실제 데이터 먼저 수정하고 셀을 수정한다. 반드시 이 순서로 해야함
+        } else {
+            let deleted = colorList[indexPath.section - 1].colors.remove(at: indexPath.item)
+            
+            // collectionView.deleteItems(at: [indexPath])
+            let  targetIndexPath = IndexPath(item: selectedList.count, section: 0)
+            selectedList.append(deleted)
+            // collectionView.insertItems(at: [targetIndexPath])
+            
+            collectionView.moveItem(at: indexPath, to: targetIndexPath)
+            // fade in 애니메이션이 아니라 직접 이동하는 애니메이션이 나타난다
+            
+        }
     }
 }
 
