@@ -28,6 +28,32 @@ class ReorderingViewController: UIViewController {
     
     @IBOutlet weak var listCollectionView: UICollectionView!
     
+    @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+        // Collection View에서 제공하는 API 사용해서 제스처를 추적할 수 있도록 구현한다
+        
+        // 1. gesture 발생 위치 저장
+        let location = sender.location(in: listCollectionView)
+        
+        // 2. switch문으로 발생 위치 분기
+        
+        switch sender.state {
+        case .began:
+            // gesture 시작시 호출, 대상 cell의 위치(indexPath)를 파라미터로 전달
+            if let indexPath = listCollectionView.indexPathForItem(at: location) {
+                listCollectionView.beginInteractiveMovementForItem(at: indexPath)
+            }
+        case .changed:
+            // gesture 진행되는동안에는 터치 이벤트를 지속적으로 업데이트 해야함
+            // 파라미터로 전달된 위치로 대상 cell을 이동시켜준다, cell 이동할 때마다 나머지 cell 위치도 자동으로 조절
+            listCollectionView.updateInteractiveMovementTargetPosition(location)
+        case .ended:
+            // gesture 종료시 호출: cell이 gesture 종료된 위치로 이동하고 연관 delegate method 실행
+            listCollectionView.endInteractiveMovement()
+        default:
+            // 작업 취소: cell이 원래 위치로 되돌아간다
+            listCollectionView.cancelInteractiveMovement()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +65,20 @@ class ReorderingViewController: UIViewController {
 
 
 extension ReorderingViewController: UICollectionViewDataSource {
+    
+    // 실제 reordering 활성화하기 위해서는 몇가지 메서드를 구현해야한다
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // pan gesture 정상종료 후 호출: 삭제 후 추가!!
+        let target = list[sourceIndexPath.section].colors.remove(at: sourceIndexPath.item)
+        list[destinationIndexPath.section].colors.insert(target, at:destinationIndexPath.item)
+    }
+    
+    // 별도의 제약이 없기 때문에 제약을 추가하고싶다면 또다른 메서드 추가
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        // 셀을 이동시키기 전에 호출된다. true: 이동 OK, false: 이동 금지된다
+        return true
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return list.count
     }

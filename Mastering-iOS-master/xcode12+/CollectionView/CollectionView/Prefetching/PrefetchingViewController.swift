@@ -27,9 +27,9 @@ class PrefetchingViewController: UIViewController {
     
     @IBOutlet weak var listCollectionView: UICollectionView!
     
-    
     lazy var refreshControl: UIRefreshControl = { [weak self] in
         let control = UIRefreshControl()
+        control.tintColor = self?.view.tintColor
         return control
     }()
     
@@ -41,9 +41,12 @@ class PrefetchingViewController: UIViewController {
             strongSelf.downloadTasks.forEach { $0.cancel() }
             strongSelf.downloadTasks.removeAll()
             Thread.sleep(forTimeInterval: 2)
-            
+            // data 초기화, reload하고 있다
             DispatchQueue.main.async {
                 strongSelf.listCollectionView.reloadData()
+                
+                // refresh 작업 완료 추가: CollectionView 업데이트 후 자동으로 사라진다 
+                strongSelf.listCollectionView.refreshControl?.endRefreshing()
             }
         }
     }
@@ -56,11 +59,41 @@ class PrefetchingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Data Prefetching을 구현해 Cell Prefetching의 효율을 극대화
+        // ViewController를 Prefetching DataSource로 지정
+        listCollectionView.prefetchDataSource = self // storyboard에서도 연결 가능
         
+        // refresh control 연결
+        listCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
 }
 
-
+// Data Prefetching을 구현해 Cell Prefetching의 효율을 극대화
+extension PrefetchingViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        // data를 미리 다운로드, 파일을 미리 가져오면 지연을 최소화할 수 있다
+        // cell prefetching만 사용할 때보다 더욱 더 많은 이미지를 준비해둔다
+        for indexPath in indexPaths {
+            downloadImage(at: indexPath.item)
+        }
+        print(#function, indexPaths)
+        // 여러번 호출될수 있고, 같은 indexPath가 전달될 수 있기 때문에 동일한 작업을 여러번 실행하지 않도록 구현해야함
+        // >> downloadImage(at:)에서 이미지가 있는지 검증하는 과정을 추가했다
+        
+    }
+    
+    // prefetching 취소하는 메서드
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        // 제외되는 indexPath가 있을 때 실행된다
+        print(#function, indexPaths)
+        for indexPath in indexPaths {
+            cancelDownload(at: indexPath.item)
+        }
+    }
+    
+    
+}
 
 extension PrefetchingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -84,6 +117,21 @@ extension PrefetchingViewController: UICollectionViewDataSource {
     }
 }
 
+
+extension PrefetchingViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // cell이 화면에 표시되기 직전에 호출
+        // 파라미터로 표시할 셀과 indexPath 전달
+        if let imageView = cell.viewWithTag(100) as? UIImageView {
+            if let image = list[indexPath.row].image {
+                imageView.image = image
+            } else {
+                imageView.image = nil
+            }
+        }
+        
+    }
+}
 
 
 extension PrefetchingViewController {

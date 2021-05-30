@@ -78,7 +78,7 @@ class EditViewController: UIViewController {
         }.sorted(by: <).map { IndexPath(item: $0, section: 1)}
         
         // 동시에 실행할때는 삭제 후 추가! 순서가 중요하다
-        // 삭제는 내림차순으로 , 추가는 오름차순으로 한다 
+        // 삭제는 내림차순으로 , 추가는 오름차순으로 한다
         deleteIndexPaths.forEach { colorList[0].colors.remove(at: $0.item) }
         insertIndexPaths.forEach { colorList[0].colors.insert(UIColor.random, at: $0.item) }
         
