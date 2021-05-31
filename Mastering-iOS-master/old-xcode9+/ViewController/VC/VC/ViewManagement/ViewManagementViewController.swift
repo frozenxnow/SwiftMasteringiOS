@@ -25,42 +25,64 @@ import UIKit
 class ViewManagementViewController: UIViewController {
    
    var grayView: UIView?
-   
+    
+    @IBOutlet weak var redView: UIView!
+    
+    @IBOutlet weak var greenView: UIView!
+    
+    @IBOutlet weak var blueView: UIView!
+    
+    
    func addRandomView() {
-      
+      let v  = generateRandomView()
+      view.addSubview(v)
+    // 이렇게 추가할 경우 v가 루트뷰에 subView 배열 중 가장 마지막에 추가
    }
    
    func insertRandomViewToBack() {
-      
+    // 특정 위치에 view 추가
+        let v = generateRandomView()
+        view.insertSubview(v, at: 0) // 가장 마지막에 추가하려면 index =.
    }
    
    func removeTopmostRandomView() {
-      
+    let topmostRandomView = view.subviews.reversed().first { $0.tag > 0 } // 가장 위에 있는, 배열의 가장 마지막 뷰 제거
+    topmostRandomView?.removeFromSuperview()
    }
    
    func bringRedViewToFront() {
-      
+      // 서브뷰의 순서를 바꾸는 메서드, 슈퍼뷰에서 호출
+    view.bringSubview(toFront: redView) // redView를 가장 앞으로 이동하게 함, subViews 배열에서는 가장 마지막
    }
    
    func sendRedViewToBack() {
-      
+    view.sendSubview(toBack: redView)
    }
    
    func switchGreenViewWithBlueView() {
-      
+    // subView의 위치를 교차
+    guard let greenViewIndex = view.subviews.index(of: greenView) else { return }
+    guard let blueViewIndex = view.subviews.index(of: blueView) else { return }
+    view.exchangeSubview(at: greenViewIndex, withSubviewAt: blueViewIndex)
    }
    
    func addGrayViewToRedView() {
-      
+       grayView = generateGrayView()
+    // redView에 grayView를 추가하기 때문에 루트뷰가 아닌 레드뷰에서 호출
+    redView.addSubview(grayView!)
    }
    
    func moveGrayViewToRootView() {
-      
+    if let grayView = grayView {
+        view.addSubview(grayView)
+        // 레드뷰에 추가된 그레이뷰를 루트뷰에 추가한다. 그레이뷰가 레드뷰에서 제거, 루트뷰에 추가된다
+    }
    }
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
+    // navi에 버튼을 추가
       navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showMenu))
    }
 }
@@ -117,6 +139,7 @@ extension ViewManagementViewController {
       present(menu, animated: true, completion: nil)
    }
    
+    // 새로운 뷰를 생성하는 메서드
    func generateRandomView() -> UIView {
       let frame = CGRect(x: 0, y: 0, width: 200, height: 200)
       let v = UIView(frame: frame)
