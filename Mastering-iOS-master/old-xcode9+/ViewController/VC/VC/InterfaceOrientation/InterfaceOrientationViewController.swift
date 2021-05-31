@@ -24,7 +24,19 @@ import UIKit
 
 class InterfaceOrientationViewController: UIViewController {
    
-   
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // iPad에서 실행될 때에는 모든 오리엔테이션 리턴
+        // 아이폰에서는 Portrait UpsideDown 제외한 모든 오리엔테이션 리턴
+        
+        // 직접 구현해서 지원 방식을 선택할 수 있다
+        return [.landscapeRight, .landscapeLeft]
+    }
+    
+    override var shouldAutorotate: Bool {
+        // default true : 회전이 감지될 경우 자동으로 회전된다
+        return true
+    }
+    
    override func viewDidLoad() {
       super.viewDidLoad()
       
