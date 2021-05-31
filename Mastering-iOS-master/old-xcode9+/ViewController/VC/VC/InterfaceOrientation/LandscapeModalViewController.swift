@@ -32,6 +32,35 @@ class LandscapeModalViewController: UIViewController {
         return .landscapeLeft
     }
     
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        // Rotation 이벤트가 일어날 때마다 버튼 뒤의 배경을 토글하는 메서드 구현
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        // portrait 가로, 세로 길이로 대략적으로 파악한다
+        print(newCollection.verticalSizeClass.description)
+        
+        // size class가 regular면 red background color, 나머지 green : 아이패드에서 적용되지 않는다
+        switch newCollection.verticalSizeClass {
+        case .regular:
+            closeButton.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        default: // Compact
+            closeButton.backgroundColor = UIColor.green.withAlphaComponent(0.5)
+        }
+    }
+    
+    // RootView Size Update 전 호출, 첫번째 파라미터를 사용해 가로인지 세로인지 파악
+    // iPad에서도 동작할 수 있도록 이 메서드를 추가한다
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { (context) in
+            if size.height > size.width { // 세로
+                self.closeButton.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+            } else {
+                self.closeButton.backgroundColor = UIColor.green.withAlphaComponent(0.5)
+            }
+        }, completion: nil)
+    }
     
    override func viewDidLoad() {
       super.viewDidLoad()
