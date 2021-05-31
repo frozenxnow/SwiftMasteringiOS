@@ -28,6 +28,11 @@ class LandscapeModalViewController: UIViewController {
    @IBOutlet weak var closeButton: UIButton!
    @IBOutlet weak var playerView: PlayerView!
    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .landscapeLeft
+    }
+    
+    
    override func viewDidLoad() {
       super.viewDidLoad()
       
