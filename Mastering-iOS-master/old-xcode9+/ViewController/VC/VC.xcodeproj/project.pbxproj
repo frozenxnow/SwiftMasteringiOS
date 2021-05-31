@@ -55,6 +55,9 @@
 		AAC345A8211DA607007D2460 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC345A7211DA607007D2460 /* Color.swift */; };
 		AAC345AA211DA7C8007D2460 /* ColorListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC345A9211DA7C8007D2460 /* ColorListTableViewController.swift */; };
 		AAC345AC211DA86D007D2460 /* ColorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC345AB211DA86D007D2460 /* ColorDetailViewController.swift */; };
+		F22BBEF62664E0DA0070795C /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22BBEF52664E0DA0070795C /* MyViewController.swift */; };
+		F22BBEFA2664E22C0070795C /* CustomNibViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22BBEF82664E22C0070795C /* CustomNibViewController.swift */; };
+		F22BBEFB2664E22C0070795C /* CustomNibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22BBEF92664E22C0070795C /* CustomNibViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +111,9 @@
 		AAC345A7211DA607007D2460 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAC345A9211DA7C8007D2460 /* ColorListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListTableViewController.swift; sourceTree = "<group>"; };
 		AAC345AB211DA86D007D2460 /* ColorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailViewController.swift; sourceTree = "<group>"; };
+		F22BBEF52664E0DA0070795C /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		F22BBEF82664E22C0070795C /* CustomNibViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNibViewController.swift; sourceTree = "<group>"; };
+		F22BBEF92664E22C0070795C /* CustomNibViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomNibViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +222,9 @@
 			isa = PBXGroup;
 			children = (
 				AA24B717210FC7D10052BB79 /* ViewController.storyboard */,
+				F22BBEF52664E0DA0070795C /* MyViewController.swift */,
+				F22BBEF82664E22C0070795C /* CustomNibViewController.swift */,
+				F22BBEF92664E22C0070795C /* CustomNibViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -356,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA18405C21197F91003102B0 /* StatusBar.storyboard in Resources */,
+				F22BBEFB2664E22C0070795C /* CustomNibViewController.xib in Resources */,
 				AA18405E21197F9C003102B0 /* HomeIndicator.storyboard in Resources */,
 				AA24B709210FC3060052BB79 /* LaunchScreen.storyboard in Resources */,
 				AA2F9E6B21143D5900D58745 /* ContainerVC.storyboard in Resources */,
@@ -382,6 +392,7 @@
 				AAC345A5211D9961007D2460 /* CustomSplitViewController.swift in Sources */,
 				AA0EBAE52116AEC10066C954 /* SecondViewController.swift in Sources */,
 				AAC345A8211DA607007D2460 /* Color.swift in Sources */,
+				F22BBEF62664E0DA0070795C /* MyViewController.swift in Sources */,
 				AAC345AA211DA7C8007D2460 /* ColorListTableViewController.swift in Sources */,
 				AA6B87792118446D0057356F /* FirstTabViewController.swift in Sources */,
 				AA18406221198094003102B0 /* BlackViewController.swift in Sources */,
@@ -409,6 +420,7 @@
 				AA0EBAEF2116BF4F0066C954 /* NavigationHostViewController.swift in Sources */,
 				AA0EBAE72116AED70066C954 /* ThirdViewController.swift in Sources */,
 				AA6B87722117F1F90057356F /* SecondToolbarViewController.swift in Sources */,
+				F22BBEFA2664E22C0070795C /* CustomNibViewController.swift in Sources */,
 				AAC345A3211D9720007D2460 /* SplitVCHostViewController.swift in Sources */,
 				AA8A1DF5211CB5C500D82EB4 /* OrientationRotationViewController.swift in Sources */,
 				AA1840602119807E003102B0 /* WhiteViewController.swift in Sources */,
