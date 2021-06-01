@@ -20,27 +20,27 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-
 import UIKit
 
 class ThirdViewController: UIViewController {
     
-    @IBAction func pushForuth(_ sender: Any) {
-        guard let fourthVC = storyboard?.instantiateViewController(withIdentifier: "FourthViewController") else { return }
-        navigationController?.pushViewController(fourthVC, animated: true)
-    }
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    @IBAction func unwindToThird(_ unwindSegue: UIStoryboardSegue) {
         
     }
+   
+   @IBAction func pushForuth(_ sender: Any) {
+      guard let fourthVC = storyboard?.instantiateViewController(withIdentifier: "FourthViewController") else { return }
+      navigationController?.pushViewController(fourthVC, animated: true)
+   }
+   
+
+   
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      
+      // Do any additional setup after loading the view.
+   }
 }
-
-
-
 
 
 

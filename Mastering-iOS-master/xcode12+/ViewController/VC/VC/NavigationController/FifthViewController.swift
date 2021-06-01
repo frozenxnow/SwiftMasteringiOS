@@ -21,27 +21,33 @@
 //  THE SOFTWARE.
 //
 
+
 import UIKit
 
 class FifthViewController: UIViewController {
+   
+    // 지정된 화면으로 돌아가는 코드 구현
     
-    @IBAction func popToRoot(_ sender: Any) {
-        
+   @IBAction func popToRoot(_ sender: Any) {
+    navigationController?.popToRootViewController(animated: true)
+   }
+   
+   @IBAction func popToThird(_ sender: Any) {
+    guard let thirdVC = navigationController?.viewControllers.first(where: {
+        $0 is ThirdViewController
+    }) else {
+        return
     }
     
-    
-    @IBAction func popToThird(_ sender: Any) {
-        
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
+    navigationController?.popToViewController(thirdVC, animated: true)
+   }
+   
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      
+      
+   }
 }
-
 
 
 

@@ -25,16 +25,28 @@ import UIKit
 
 class FirstViewController: UIViewController {
     
-    @IBAction func pushSecond(_ sender: Any) {
+    @IBAction func unwindToFirst(_ unwindSegue: UIStoryboardSegue) {
         
     }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
+   
+   @IBAction func pushSecond(_ sender: Any) {
+    guard let secondVC = storyboard?.instantiateViewController(withIdentifier: "SecondViewController") else {
+        return
     }
+    
+    // 새로운 child push할 때에는 nav controller에 접근해야함
+    // 모든 view controller는 nav controller 가지고 있다
+    // view controller가 nav controller에 임베드 되어있다면 navigation controller 리턴, 없으면 nil
+    navigationController?.pushViewController(secondVC, animated: true) // 전달할 뷰 입력
+    
+   }
+   
+   
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      
+      
+   }
 }
 
 

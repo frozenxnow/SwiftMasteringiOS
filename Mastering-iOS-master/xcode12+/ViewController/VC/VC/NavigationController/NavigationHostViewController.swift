@@ -24,18 +24,32 @@
 import UIKit
 
 class NavigationHostViewController: UIViewController {
-    
-    @IBAction func presentNavigationController(_ sender: Any) {
-        
+   
+   @IBAction func presentNavigationController(_ sender: Any) {
+      
+    // RootView 지정
+    guard let rootVC = storyboard?.instantiateViewController(withIdentifier: "FirstViewController") else {
+        return
     }
+    // Navigation 생성, 주로 루트뷰컨트롤러를 파라미터로 받는 생성자를 사용한다
+    let nav = UINavigationController(rootViewController: rootVC)
     
+    // navigation controller를 modal 방식으로 표현
+    present(nav, animated: true, completion: nil)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
+   }
+   
+   
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      
+
+   }
 }
+
+
+
+
 
 
 
