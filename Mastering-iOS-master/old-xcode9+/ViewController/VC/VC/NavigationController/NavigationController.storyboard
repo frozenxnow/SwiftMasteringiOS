@@ -285,7 +285,7 @@ using</string>
             </objects>
             <point key="canvasLocation" x="1969" y="-749"/>
         </scene>
-        <!--First View Controller-->
+        <!--First-->
         <scene sceneID="nKv-l6-0Qm">
             <objects>
                 <viewController storyboardIdentifier="FirstViewController" id="8OI-AX-WfQ" customClass="FirstViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
@@ -334,7 +334,7 @@ using</string>
                             <constraint firstItem="VM0-6b-feJ" firstAttribute="bottom" secondItem="I9d-aS-Qgc" secondAttribute="bottom" constant="20" id="xsc-WO-dMi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="0tV-fU-L3I"/>
+                    <navigationItem key="navigationItem" title="First" id="0tV-fU-L3I"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZk-bO-4bb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
