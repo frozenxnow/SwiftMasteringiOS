@@ -286,7 +286,7 @@ using</string>
             </objects>
             <point key="canvasLocation" x="2162" y="-768"/>
         </scene>
-        <!--First View Controller-->
+        <!--First-->
         <scene sceneID="nKv-l6-0Qm">
             <objects>
                 <viewController storyboardIdentifier="FirstViewController" id="8OI-AX-WfQ" customClass="FirstViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
@@ -335,13 +335,28 @@ using</string>
                             <constraint firstItem="VM0-6b-feJ" firstAttribute="bottom" secondItem="I9d-aS-Qgc" secondAttribute="bottom" constant="20" id="xsc-WO-dMi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="0tV-fU-L3I"/>
+                    <navigationItem key="navigationItem" title="First" id="0tV-fU-L3I">
+                        <barButtonItem key="backBarButtonItem" title="goback" id="Cy7-zP-rdw"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="Kad-fI-Mdt"/>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" id="WgH-hN-dhA">
+                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="J7u-eL-yxC">
+                                    <rect key="frame" x="323" y="12.666666666666664" width="51" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <connections>
+                                        <action selector="switchChanged:" destination="8OI-AX-WfQ" eventType="valueChanged" id="BV7-Wo-UqJ"/>
+                                    </connections>
+                                </switch>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="luE-r1-mgh"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZk-bO-4bb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3180" y="-591"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Second-->
         <scene sceneID="GU4-5m-ISh">
             <objects>
                 <viewController storyboardIdentifier="SecondViewController" id="LcD-y8-VkC" customClass="SecondViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
@@ -400,16 +415,16 @@ using</string>
                             <constraint firstItem="xHG-Hn-v0k" firstAttribute="centerX" secondItem="OX7-bU-BvG" secondAttribute="centerX" id="gDe-64-mjq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ccg-OS-QhV"/>
+                    <navigationItem key="navigationItem" title="Second" id="ccg-OS-QhV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rdd-IB-krL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4028" y="-593"/>
         </scene>
-        <!--Third View Controller-->
+        <!--Third-->
         <scene sceneID="Oue-ta-pQd">
             <objects>
-                <viewController storyboardIdentifier="ThirdViewController" id="EIW-8B-anM" customClass="ThirdViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ThirdViewController" title="Third" id="EIW-8B-anM" customClass="ThirdViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kcz-Lv-yfz">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -455,7 +470,7 @@ using</string>
                             <constraint firstItem="J6k-jV-XFn" firstAttribute="centerX" secondItem="gkJ-lA-UzP" secondAttribute="centerX" id="cXD-Si-HBz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="O9a-R3-rm8"/>
+                    <navigationItem key="navigationItem" title="Third" id="O9a-R3-rm8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01O-4O-G79" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -516,7 +531,7 @@ using</string>
             </objects>
             <point key="canvasLocation" x="5882" y="-591"/>
         </scene>
-        <!--Fifth View Controller-->
+        <!--Fifth-->
         <scene sceneID="e2z-a6-EqQ">
             <objects>
                 <viewController storyboardIdentifier="FifthViewController" id="OAV-he-6bW" customClass="FifthViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
@@ -617,7 +632,7 @@ using</string>
                             <constraint firstItem="QtI-EK-lXf" firstAttribute="centerX" secondItem="VjC-Nc-C6s" secondAttribute="centerX" id="RE0-uQ-2hg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HvC-OJ-3nd"/>
+                    <navigationItem key="navigationItem" title="Fifth" id="HvC-OJ-3nd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aae-1z-An9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="pIa-9f-HUc" userLabel="Exit" sceneMemberID="exit"/>

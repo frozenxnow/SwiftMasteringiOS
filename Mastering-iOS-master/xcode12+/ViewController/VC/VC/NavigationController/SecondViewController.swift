@@ -43,12 +43,21 @@ class SecondViewController: UIViewController {
       let btn1 = UIBarButtonItem(barButtonSystemItem: .action, target: nil, action: nil)
       let btn2 = UIBarButtonItem(title: "Two", style: .plain, target: nil, action: nil)
       
+    let sw = UISwitch()
+    let switchItem = UIBarButtonItem(customView: sw) // switch는 임베드해서 추가해야한다
+    
+    navigationItem.setRightBarButtonItems([switchItem, btn1, btn2], animated: true)
       
    }
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
+    
+    // code로 bar button item을 추가할때는 주로 viewDidLoad() 에서 구현
+    
+    // back button이 다른 버튼과 함께 보이도록 설정
+    navigationItem.leftItemsSupplementBackButton = true
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRightButtons))
       
    }
 }

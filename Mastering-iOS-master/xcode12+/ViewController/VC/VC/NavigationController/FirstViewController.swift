@@ -25,6 +25,30 @@ import UIKit
 
 class FirstViewController: UIViewController {
     
+    @IBAction func switchChanged(_ sender: UISwitch) {
+        switch sender.isOn {
+        case true:
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+            
+            if var list = navigationItem.rightBarButtonItems {
+                let btn = UIBarButtonItem(title: "Item", style: .plain, target: nil, action: nil)
+                list.append(btn)
+                navigationItem.rightBarButtonItems = list
+            }
+        
+        case false:
+            // 왼쪽 버튼 제거
+            navigationItem.leftBarButtonItem = nil
+            // 오른쪽 아이템 버튼 제거
+            let list = navigationItem.rightBarButtonItems?.dropLast()
+            // 제거 후 새로운 배열을 right item에 저장
+            navigationItem.rightBarButtonItems = Array(list!)
+        }
+    }
+    
+    
+    
+    
     @IBAction func unwindToFirst(_ unwindSegue: UIStoryboardSegue) {
         
     }
@@ -45,7 +69,8 @@ class FirstViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      
+      // back button (second view에서 보이는 back button item의 title은 first에서 지정한다
+    navigationItem.backBarButtonItem?.title = "Go Back"
    }
 }
 
