@@ -25,16 +25,31 @@ import UIKit
 class ContainerViewController: UIViewController {
    
    
-   
+    @IBOutlet weak var bottomContainerView: UIView!
+    
    @objc func removeChild() {
-     
+     // child 목록은 child View Controller속성에 배열로 저장되어있음
+    for vc in childViewControllers {
+        vc.willMove(toParentViewController: nil) // 직접 willMove 호출한다. 
+        vc.view.removeFromSuperview()
+        vc.removeFromParentViewController()
+    }
    }
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
-      
-      navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeChild))
+    
+        // child 추가하는 코드는 주로 viewDidLoad()에서 작성
+        if let childVC = storyboard?.instantiateViewController(withIdentifier: "BottomViewController") {
+            addChildViewController(childVC)
+            childVC.didMove(toParentViewController: self) // 직접 didMove 호출해야한다. 호출이 안되더라고
+            childVC.view.frame = bottomContainerView.bounds
+            bottomContainerView.addSubview(childVC.view)
+        }
+          
+          
+        // navigation bar 옆에 버튼을 추가, removeChild() 와 연결
+          navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeChild))
    }
 }
 

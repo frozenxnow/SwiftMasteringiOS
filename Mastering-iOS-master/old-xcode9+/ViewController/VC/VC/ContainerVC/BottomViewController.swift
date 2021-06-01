@@ -25,14 +25,32 @@ import UIKit
 class BottomViewController: UIViewController {
    
    @IBAction func removeFromParent(_ sender: Any) {
-      
+      // root view를 view 계층에서 먼저 제거
+    view.removeFromSuperview()
+      // container에서 제거
+    removeFromParentViewController()
    }
+    
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
       
    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        // container에 추가되거나 삭제되기 직전 호출
+        // 추가되는 시점에는 파라미터로 container view controller 전달, 삭제 시점에는 nil 전달
+        super.willMove(toParentViewController: parent)
+        print(String(describing: type(of: self)), #function, parent?.description ?? "nil")
+    }
+    
+    override func didMove(toParentViewController parent: UIViewController?) {
+        // container에 추가되거나 삭제된 후
+        super.didMove(toParentViewController: parent)
+        print(String(describing: type(of: self)), #function, parent?.description ?? "nil")
+
+    }
 }
 
 
