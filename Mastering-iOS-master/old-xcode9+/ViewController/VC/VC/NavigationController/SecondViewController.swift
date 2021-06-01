@@ -25,11 +25,17 @@ import UIKit
 class SecondViewController: UIViewController {
    
    @IBAction func pop(_ sender: Any) {
-      
+      // 이전화면이 돌아가는 버튼은 back button으로 충분ㅇ하지만 직접 구현한다면 이렇게
+    navigationController?.popViewController(animated: true) // VC를 nav stack에서 제거하고 이전화면으로 이동
    }
    
    @IBAction func pushThird(_ sender: Any) {
-      
+    guard let thirdVC = storyboard?.instantiateViewController(withIdentifier: "ThirdViewController") else {
+        return
+    }
+    
+    navigationController?.pushViewController(thirdVC, animated: true)
+    
    }
    
    @objc func addRightButtons() {
