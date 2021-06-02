@@ -26,11 +26,20 @@ import UIKit
 class SecondToolbarViewController: UIViewController {
     
     @IBAction func toggleToolbar(_ sender: Any) {
-        
+        // toolBar toggle 구현
+        let hidden = navigationController?.isToolbarHidden ?? false
+        navigationController?.setToolbarHidden(!hidden, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // tool bar item을 추가하는 시점 중요하지 않음
+        let flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+        let trashItem = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
+        
+        setToolbarItems([flexibleSpaceItem, addItem, flexibleSpaceItem, trashItem, flexibleSpaceItem], animated: true)
         
         
     }

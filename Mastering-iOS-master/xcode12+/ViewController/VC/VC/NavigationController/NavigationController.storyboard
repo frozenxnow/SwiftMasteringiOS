@@ -171,13 +171,13 @@
         <!--Navigation Controller-->
         <scene sceneID="oQA-jl-GLc">
             <objects>
-                <navigationController id="GQN-AL-cWU" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="GQN-AL-cWU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="id8-zy-1Tg">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X3K-x7-DXC">
-                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
+                        <rect key="frame" x="0.0" y="707" width="390" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -198,7 +198,10 @@
                         <viewLayoutGuide key="safeArea" id="JZ8-ad-E5j"/>
                         <color key="backgroundColor" red="0.45882352939999999" green="0.66274509800000003" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="5S6-Yo-Rcl"/>
+                        <barButtonItem title="Item" id="aAb-4V-gIA"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="First Toolbar" id="HQy-aE-dWJ">
                         <barButtonItem key="rightBarButtonItem" title="Push" id="DCl-DQ-3Lw">
                             <connections>
