@@ -77,7 +77,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="qwM-ih-rhH" kind="presentation" id="egM-Yb-KD8"/>
+                                            <segue destination="aLO-hJ-fMA" kind="presentation" id="egM-Yb-KD8"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="tQf-w3-LTK" style="IBUITableViewCellStyleDefault" id="lr8-sc-G2t">
@@ -124,10 +124,33 @@
                         <viewLayoutGuide key="safeArea" id="HaK-rA-ZU2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Customizing" id="fJI-B9-ZRq">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="3dR-xR-XR3">
+                            <connections>
+                                <segue destination="FSQ-Bo-K2G" kind="show" id="h8P-t3-HTC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDs-mj-aXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1001" y="863"/>
+            <point key="canvasLocation" x="1929.2307692307691" y="862.32227488151659"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DCX-D0-QzY">
+            <objects>
+                <viewController id="FSQ-Bo-K2G" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G7x-Sb-zib">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="sIN-Cy-uyT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wo1-SK-Yfd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xiU-bq-gEl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2831" y="862"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gd9-nK-QQw">
@@ -639,13 +662,39 @@ using</string>
             </objects>
             <point key="canvasLocation" x="6868" y="-591"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gV6-f4-kjz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" hidesBarsOnTap="YES" hidesBarsWhenVerticallyCompact="YES" id="aLO-hJ-fMA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="shadow" backIndicatorImage="back" backIndicatorTransitionMaskImage="back-mask" id="hUr-iN-MYO">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" systemColor="systemRedColor"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qwM-ih-rhH" kind="relationship" relationship="rootViewController" id="8Un-kt-s5a"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nze-I5-ps8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000" y="862.32227488151659"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Euw-L2-Djz"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="back" width="32" height="32"/>
+        <image name="back-mask" width="32" height="32"/>
+        <image name="shadow" width="15.5" height="18.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

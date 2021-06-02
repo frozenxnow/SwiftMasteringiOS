@@ -77,24 +77,3 @@ class FirstViewController: UIViewController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
