@@ -35,7 +35,7 @@ class FirstTabViewController: UIViewController {
     
     
     @IBAction func selectThirdTab(_ sender: Any) {
-        // 선택할 tab을 index로 지정하는 방법, 코드가 단순하다 
+        // 선택할 tab을 index로 지정하는 방법, 코드가 단순하다
         tabBarController?.selectedIndex = 2
     }
     
@@ -43,7 +43,15 @@ class FirstTabViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 0)
+        // size가 맞지 않는 이미지 조절해서 tab bar item image로 사용하기. image literal 사용
+        let regularImage = UIImage(named: "calendar_regular")
+        let compactImage = UIImage(named: "calendar_compact")
+        
+        let item = UITabBarItem(title: "Calendar", image: regularImage, selectedImage: compactImage)
+        item.badgeColor = UIColor.darkGray
+        item.badgeValue = "7"
+        
+        tabBarItem = item
 
     }
     
@@ -51,8 +59,8 @@ class FirstTabViewController: UIViewController {
         super.viewDidLoad()
         
         // tab bar item 속성 변경
-        tabBarItem.title = "First" // 스토리보드에서 System item으로 지정되어서 코드가 무시됨 (badge만 적용)
-        tabBarItem.badgeValue = "HOT"
+//        tabBarItem.title = "First" // 스토리보드에서 System item으로 지정되어서 코드가 무시됨 (badge만 적용)
+//        tabBarItem.badgeValue = "HOT"
         
         // 스토리보드에서 정한것 무시하려면 새로운 인스턴스 생성해서 할당해야함
 //        tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 0)
