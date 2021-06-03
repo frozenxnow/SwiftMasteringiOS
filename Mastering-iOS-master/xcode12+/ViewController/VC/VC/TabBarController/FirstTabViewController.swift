@@ -26,12 +26,17 @@ import UIKit
 class FirstTabViewController: UIViewController {
     
     @IBAction func selectSecondTab(_ sender: Any) {
+        // 선택할 VC 지정하는 방법
+        // child에서 tab bar controller에 접근할때는 tab bar controller 속성 사용
+        guard let secondChild = tabBarController?.viewControllers?[1] else { return }
         
+        tabBarController?.selectedViewController = secondChild
     }
     
     
     @IBAction func selectThirdTab(_ sender: Any) {
-        
+        // 선택할 tab을 index로 지정하는 방법, 코드가 단순하다 
+        tabBarController?.selectedIndex = 2
     }
     
     
