@@ -38,6 +38,11 @@ class FirstTabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // tab bar item 속성 변경
+        tabBarItem.title = "First" // 스토리보드에서 System item으로 지정되어서 코드가 무시됨
+        tabBarItem.badgeValue = "HOT"
+        
+        tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 0)
         
     }
 }
