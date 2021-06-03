@@ -56,6 +56,7 @@
 		AAC345AA211DA7C8007D2460 /* ColorListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC345A9211DA7C8007D2460 /* ColorListTableViewController.swift */; };
 		AAC345AC211DA86D007D2460 /* ColorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC345AB211DA86D007D2460 /* ColorDetailViewController.swift */; };
 		AADAA1FB25ED29B600C79F6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAA1FA25ED29B600C79F6F /* SceneDelegate.swift */; };
+		F270B89A26691B05003700FC /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F270B89926691B05003700FC /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		AAC345A9211DA7C8007D2460 /* ColorListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListTableViewController.swift; sourceTree = "<group>"; };
 		AAC345AB211DA86D007D2460 /* ColorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailViewController.swift; sourceTree = "<group>"; };
 		AADAA1FA25ED29B600C79F6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F270B89926691B05003700FC /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 				AA6B877421183E340057356F /* TabBarController.storyboard */,
 				AA6B877621183ED70057356F /* TabBarHostViewController.swift */,
 				AA6B87782118446D0057356F /* FirstTabViewController.swift */,
+				F270B89926691B05003700FC /* CustomTabBarController.swift */,
 			);
 			path = TabBarController;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				AA2F9E712114424900D58745 /* BottomViewController.swift in Sources */,
 				AA6B877721183ED70057356F /* TabBarHostViewController.swift in Sources */,
 				AA1840682119A694003102B0 /* CustomStatusBarStyleNavigationController.swift in Sources */,
+				F270B89A26691B05003700FC /* CustomTabBarController.swift in Sources */,
 				AA1B5E672112E569002D1AF8 /* LifeCycleViewController.swift in Sources */,
 				AAA3C80E21127E2E009FF881 /* ViewManagementViewController.swift in Sources */,
 				AA0EBAEF2116BF4F0066C954 /* NavigationHostViewController.swift in Sources */,

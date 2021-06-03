@@ -65,10 +65,10 @@ using</string>
             </objects>
             <point key="canvasLocation" x="6743" y="-892"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Custom Tab Bar Controller-->
         <scene sceneID="ScQ-tD-dgR">
             <objects>
-                <tabBarController id="jot-5N-yTy" sceneMemberID="viewController">
+                <tabBarController id="jot-5N-yTy" customClass="CustomTabBarController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Lq-Zq-vdn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -80,6 +80,11 @@ using</string>
                         <segue destination="hJW-qc-27j" kind="relationship" relationship="viewControllers" id="9Gr-Rl-Sej"/>
                         <segue destination="Ivu-Zp-fwI" kind="relationship" relationship="viewControllers" id="Ytu-fg-T2j"/>
                         <segue destination="M2S-wK-0uZ" kind="relationship" relationship="viewControllers" id="bLy-Gj-pAU"/>
+                        <segue destination="5iQ-gM-5KH" kind="relationship" relationship="viewControllers" id="lX3-Gx-VwE"/>
+                        <segue destination="GqT-Db-AUX" kind="relationship" relationship="viewControllers" id="FsR-pG-Nj2"/>
+                        <segue destination="58D-ND-u4m" kind="relationship" relationship="viewControllers" id="MUu-db-LFP"/>
+                        <segue destination="1zb-DF-rPc" kind="relationship" relationship="viewControllers" id="Ba2-C2-cMn"/>
+                        <segue destination="jeY-60-2nl" kind="relationship" relationship="viewControllers" id="IQw-Kh-a9c"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kga-Uj-5pa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -256,11 +261,11 @@ using</string>
             <objects>
                 <viewController title="Sixth" id="5iQ-gM-5KH" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g5V-g3-1aQ">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sixth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chQ-a0-FfF">
-                                <rect key="frame" x="141" y="392" width="108.33333333333331" height="60"/>
+                                <rect key="frame" x="141" y="365" width="108.33333333333331" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -273,6 +278,7 @@ using</string>
                             <constraint firstItem="chQ-a0-FfF" firstAttribute="centerY" secondItem="g5V-g3-1aQ" secondAttribute="centerY" id="bv8-3p-vaO"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="3M9-iB-0Rt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OJ5-G0-sOw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -283,11 +289,11 @@ using</string>
             <objects>
                 <viewController title="Seventh" id="GqT-Db-AUX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j5r-cc-zp8">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seventh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERN-5T-zUM">
-                                <rect key="frame" x="108" y="392" width="174" height="60"/>
+                                <rect key="frame" x="108" y="365" width="174" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -300,6 +306,7 @@ using</string>
                             <constraint firstItem="ERN-5T-zUM" firstAttribute="centerX" secondItem="j5r-cc-zp8" secondAttribute="centerX" id="XqJ-ig-COD"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="PgT-9R-P6q"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIQ-bA-gJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -310,11 +317,11 @@ using</string>
             <objects>
                 <viewController title="Eighth" id="58D-ND-u4m" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W8A-D7-SBw">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eighth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaI-sP-ZzA">
-                                <rect key="frame" x="126.66666666666667" y="392" width="136.66666666666663" height="60"/>
+                                <rect key="frame" x="126.66666666666667" y="365" width="136.66666666666663" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -327,6 +334,7 @@ using</string>
                             <constraint firstItem="FaI-sP-ZzA" firstAttribute="centerY" secondItem="W8A-D7-SBw" secondAttribute="centerY" id="S7C-z4-ewl"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="qgR-Wu-ji2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWV-qy-ejp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -337,11 +345,11 @@ using</string>
             <objects>
                 <viewController title="Ninth" id="1zb-DF-rPc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ygs-xH-k4M">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ninth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNl-cF-5Au">
-                                <rect key="frame" x="137" y="392" width="116.33333333333331" height="60"/>
+                                <rect key="frame" x="137" y="365" width="116.33333333333331" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -354,6 +362,7 @@ using</string>
                             <constraint firstItem="DNl-cF-5Au" firstAttribute="centerY" secondItem="ygs-xH-k4M" secondAttribute="centerY" id="vWu-jP-Fwv"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="downloads" id="QTD-SJ-Eo4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5T-9l-lLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -364,11 +373,11 @@ using</string>
             <objects>
                 <viewController title="Tenth" id="jeY-60-2nl" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HB6-xr-UNj">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URp-Se-00z">
-                                <rect key="frame" x="136" y="392" width="118.33333333333331" height="60"/>
+                                <rect key="frame" x="136" y="365" width="118.33333333333331" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -381,6 +390,7 @@ using</string>
                             <constraint firstItem="URp-Se-00z" firstAttribute="centerY" secondItem="HB6-xr-UNj" secondAttribute="centerY" id="MqH-AL-toQ"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="hA9-9v-fsy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjs-nB-Jti" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
