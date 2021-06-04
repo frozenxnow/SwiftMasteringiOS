@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wl9-0Y-FPf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wl9-0Y-FPf">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -44,6 +44,9 @@ using</string>
                                                 <rect key="frame" x="144.66666666666666" y="0.0" width="124.99999999999997" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="Segue"/>
+                                                <connections>
+                                                    <segue destination="D6Y-aP-Ucc" kind="presentation" id="hWu-PC-nh6"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -64,19 +67,48 @@ using</string>
             </objects>
             <point key="canvasLocation" x="-102" y="159"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NwD-d4-wYK">
+            <objects>
+                <navigationController id="wgt-Cg-RhT" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6LK-nm-4dr">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tQV-XP-OGO" kind="relationship" relationship="rootViewController" id="aTB-TY-W0I"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MT5-pd-XVO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1671" y="-134"/>
+        </scene>
+        <!--Custom Split View Controller-->
+        <scene sceneID="98N-vR-QbT">
+            <objects>
+                <splitViewController allowDoubleColumnStyle="YES" id="D6Y-aP-Ucc" customClass="CustomSplitViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="wgt-Cg-RhT" kind="relationship" relationship="masterViewController" id="aql-qo-gty"/>
+                        <segue destination="jEy-P5-lGl" kind="relationship" relationship="detailViewController" id="G5R-RN-Umv"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R4G-Qz-oCC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="763" y="171"/>
+        </scene>
         <!--Color Detail View Controller-->
         <scene sceneID="yDL-tw-dTx">
             <objects>
                 <viewController storyboardIdentifier="ColorDetailViewController" id="jEy-P5-lGl" customClass="ColorDetailViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FAd-NG-ZUf">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwt-vq-efR">
-                                <rect key="frame" x="16" y="59" width="358" height="731"/>
+                                <rect key="frame" x="16" y="71" width="358" height="665"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ax-4c-jYY">
-                                        <rect key="frame" x="0.0" y="651" width="358" height="80"/>
+                                        <rect key="frame" x="0.0" y="585" width="358" height="80"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zvh-1E-YvI">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="80"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,14 +158,14 @@ using</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9FH-bd-h7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3385" y="855"/>
+            <point key="canvasLocation" x="2665" y="585"/>
         </scene>
         <!--Material Colors-->
         <scene sceneID="GBH-xZ-fzW">
             <objects>
                 <tableViewController storyboardIdentifier="ColorListTableViewController" id="tQV-XP-OGO" customClass="ColorListTableViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="X2w-ks-QZU">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -153,6 +185,9 @@ using</string>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="jEy-P5-lGl" kind="showDetail" id="T0J-yM-ibG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -171,9 +206,12 @@ using</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyV-4j-qC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hb1-EC-E9V" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3385" y="71"/>
+            <point key="canvasLocation" x="2665" y="-134"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="G5R-RN-Umv"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

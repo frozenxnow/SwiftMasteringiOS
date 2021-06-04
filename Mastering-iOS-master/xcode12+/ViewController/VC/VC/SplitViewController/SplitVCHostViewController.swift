@@ -33,6 +33,13 @@ class SplitVCHostViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // segue 실행되기 직전 호출
+        if let vc = segue.destination as? CustomSplitViewController {
+            vc.setupDefaultValue()
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

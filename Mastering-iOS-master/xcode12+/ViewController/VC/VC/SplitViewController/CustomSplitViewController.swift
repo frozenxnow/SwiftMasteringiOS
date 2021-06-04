@@ -33,7 +33,16 @@ class CustomSplitViewController: UISplitViewController {
     
     
     func setupDefaultValue() {
+        // master view controller를 상수에 바인딩: view controller 배열의 첫번째 요소(navi controller에 임베드 되어있다
+        guard let nav = viewControllers.first as? UINavigationController, let masterVC = nav.viewControllers.first as? ColorListTableViewController else { return }
         
+        // detail view controller를 상수에 바인딩: view controller 배열 마지막에 저장되어 있다
+        guard let detailVC = viewControllers.last as? ColorDetailViewController else {
+            return
+        }
+        
+        // detail view에 표시되는 데이터는 color 속성에 저장, master view에 표시되는 데이터는 list 속성에 저장
+        detailVC.color = masterVC.list.first
     }
 }
 
