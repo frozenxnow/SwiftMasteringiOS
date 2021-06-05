@@ -45,7 +45,7 @@ using</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                                 <state key="normal" title="Segue"/>
                                                 <connections>
-                                                    <segue destination="D6Y-aP-Ucc" kind="presentation" id="hWu-PC-nh6"/>
+                                                    <segue destination="x4S-Qv-gCG" kind="presentation" id="0kU-s2-wKY"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -68,33 +68,33 @@ using</string>
             <point key="canvasLocation" x="-102" y="159"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="NwD-d4-wYK">
+        <scene sceneID="Hpl-CE-jRQ">
             <objects>
-                <navigationController id="wgt-Cg-RhT" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6LK-nm-4dr">
+                <navigationController id="68J-dk-akf" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="b8j-zs-syQ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="tQV-XP-OGO" kind="relationship" relationship="rootViewController" id="aTB-TY-W0I"/>
+                        <segue destination="tQV-XP-OGO" kind="relationship" relationship="rootViewController" id="s4n-ei-dQy"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MT5-pd-XVO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J7f-ZS-ugb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1671" y="-134"/>
+            <point key="canvasLocation" x="1451" y="-131"/>
         </scene>
-        <!--Custom Split View Controller-->
-        <scene sceneID="98N-vR-QbT">
+        <!--Split View Controller-->
+        <scene sceneID="zgS-gp-JG6">
             <objects>
-                <splitViewController allowDoubleColumnStyle="YES" id="D6Y-aP-Ucc" customClass="CustomSplitViewController" customModule="VC" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController allowDoubleColumnStyle="YES" id="x4S-Qv-gCG" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="wgt-Cg-RhT" kind="relationship" relationship="masterViewController" id="aql-qo-gty"/>
-                        <segue destination="jEy-P5-lGl" kind="relationship" relationship="detailViewController" id="G5R-RN-Umv"/>
+                        <segue destination="jEy-P5-lGl" kind="relationship" relationship="detailViewController" id="isG-L5-Myc"/>
+                        <segue destination="68J-dk-akf" kind="relationship" relationship="masterViewController" id="Lxp-De-xUY"/>
                     </connections>
                 </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R4G-Qz-oCC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pxr-ss-eq4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="763" y="171"/>
+            <point key="canvasLocation" x="660" y="159"/>
         </scene>
         <!--Color Detail View Controller-->
         <scene sceneID="yDL-tw-dTx">
@@ -158,7 +158,7 @@ using</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9FH-bd-h7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2665" y="585"/>
+            <point key="canvasLocation" x="2245" y="582"/>
         </scene>
         <!--Material Colors-->
         <scene sceneID="GBH-xZ-fzW">
@@ -185,9 +185,6 @@ using</string>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="jEy-P5-lGl" kind="showDetail" id="T0J-yM-ibG"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -206,12 +203,9 @@ using</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyV-4j-qC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hb1-EC-E9V" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2665" y="-134"/>
+            <point key="canvasLocation" x="2245" y="-180"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="G5R-RN-Umv"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
