@@ -23,7 +23,10 @@
 import UIKit
 
 class PriorityViewController: UIViewController {   
-   @IBAction func togglePriority(_ sender: Any) {
-      
+    @IBOutlet weak var width1: NSLayoutConstraint!
+    @IBOutlet weak var width2: NSLayoutConstraint!
+    @IBAction func togglePriority(_ sender: Any) {
+        width1.priority = width1.priority.rawValue < 999 ? UILayoutPriority(rawValue: 999) : UILayoutPriority(rawValue: 800)
+        width2.priority = width2.priority.rawValue < 999 ? UILayoutPriority(rawValue: 999) : UILayoutPriority(rawValue: 800)
    }
 }

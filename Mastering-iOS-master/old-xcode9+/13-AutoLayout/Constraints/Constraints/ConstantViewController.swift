@@ -25,7 +25,11 @@ import UIKit
 class ConstantViewController: UIViewController {
    @IBOutlet weak var redView: UIView!
    
-   @IBAction func updateFrame(_ sender: Any) {
-      
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+    
+    @IBAction func updateFrame(_ sender: Any) {
+        heightConstraint.constant = 100
+        widthConstraint.constant = 100
    }
 }
