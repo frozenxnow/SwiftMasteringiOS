@@ -47,6 +47,7 @@ class LayoutMarginsViewController: UIViewController {
    }
    
    
+    // RedView의 margin을 30pt로 지정하는 코드
    func setupMargins() {
       if #available(iOS 11.0, *) {
          redView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 30, leading: 30, bottom: 30, trailing: 30)
