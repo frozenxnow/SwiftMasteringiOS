@@ -285,7 +285,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="fW5-Kq-KcB"/>
+                        <viewLayoutGuide key="safeArea" id="gZi-s2-gFC"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottomMargin" secondItem="4gn-sU-BT9" secondAttribute="bottom" id="BBC-ps-PI6"/>
