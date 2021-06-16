@@ -311,7 +311,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfU-30-LyE">
-                                <rect key="frame" x="20" y="96" width="374" height="591"/>
+                                <rect key="frame" x="20" y="101" width="374" height="581"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.1450980392" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -323,6 +323,7 @@
                             <constraint firstItem="vfU-30-LyE" firstAttribute="top" secondItem="oWJ-1f-oVZ" secondAttribute="topMargin" id="K1V-w3-Lbb"/>
                             <constraint firstItem="vfU-30-LyE" firstAttribute="leading" secondItem="oWJ-1f-oVZ" secondAttribute="leadingMargin" id="oDd-zA-UpO"/>
                         </constraints>
+                        <directionalEdgeInsets key="directionalLayoutMargins" top="5" leading="5" bottom="5" trailing="5"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ij-Jg-VQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
