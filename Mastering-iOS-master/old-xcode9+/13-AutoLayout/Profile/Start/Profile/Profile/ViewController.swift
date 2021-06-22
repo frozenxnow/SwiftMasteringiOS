@@ -24,8 +24,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
-   override func viewDidLoad() {
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var emailButton: UIButton!
+    override func viewDidLoad() {
+    
+        emailButton.layer.cornerRadius = 3
+        emailButton.layer.borderWidth = 1
+        emailButton.layer.borderColor = UIColor.lightGray.cgColor
+        
+        profileImageView.layer.cornerRadius = profileImageView.bounds.width * 0.5
       super.viewDidLoad()
-      // Do any additional setup after loading the view, typically from a nib.
+    
    }
 }
