@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="landscape" appearance="light"/>
+    <device id="retina6_0" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -13,23 +13,30 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AdaptiveLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="844" height="390"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlQ-Nh-s3e">
-                                <rect key="frame" x="16" y="394" width="704" height="0.0"/>
+                                <rect key="frame" x="329" y="20" width="455" height="329"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="M6Q-tg-GMI">
-                                <rect key="frame" x="16" y="0.0" width="650" height="365"/>
+                                <rect key="frame" x="60" y="0.0" width="248" height="20"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="248" id="cs1-FA-5Cc"/>
                                     <constraint firstAttribute="height" constant="220" id="rmT-Hg-U0s"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cs1-FA-5Cc"/>
+                                    </mask>
+                                </variation>
                                 <variation key="heightClass=compact">
                                     <mask key="constraints">
+                                        <include reference="cs1-FA-5Cc"/>
                                         <exclude reference="rmT-Hg-U0s"/>
                                     </mask>
                                 </variation>
@@ -40,15 +47,33 @@
                         <constraints>
                             <constraint firstItem="M6Q-tg-GMI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6dQ-2f-gXc"/>
                             <constraint firstItem="VlQ-Nh-s3e" firstAttribute="top" secondItem="M6Q-tg-GMI" secondAttribute="bottom" constant="29" id="7gj-uQ-bdb"/>
+                            <constraint firstItem="M6Q-tg-GMI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BaC-dn-6EW"/>
+                            <constraint firstItem="VlQ-Nh-s3e" firstAttribute="leading" secondItem="M6Q-tg-GMI" secondAttribute="trailing" constant="21" id="DyV-2D-H17"/>
+                            <constraint firstItem="VlQ-Nh-s3e" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Egh-SG-uaO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="M6Q-tg-GMI" secondAttribute="trailing" constant="16" id="OjR-91-hGg"/>
+                            <constraint firstItem="VlQ-Nh-s3e" firstAttribute="top" secondItem="M6Q-tg-GMI" secondAttribute="bottom" id="Qyt-Wi-Yml"/>
                             <constraint firstItem="M6Q-tg-GMI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="TVP-l5-nGl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VlQ-Nh-s3e" secondAttribute="trailing" constant="16" id="esW-KY-FsQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VlQ-Nh-s3e" secondAttribute="bottom" constant="20" id="m2M-OD-cap"/>
                             <constraint firstItem="VlQ-Nh-s3e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uv5-pG-Dvs"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="BaC-dn-6EW"/>
+                                <exclude reference="DyV-2D-H17"/>
+                                <exclude reference="Egh-SG-uaO"/>
+                                <exclude reference="Qyt-Wi-Yml"/>
+                            </mask>
+                        </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <exclude reference="OjR-91-hGg"/>
+                                <include reference="BaC-dn-6EW"/>
+                                <exclude reference="7gj-uQ-bdb"/>
+                                <include reference="DyV-2D-H17"/>
+                                <include reference="Egh-SG-uaO"/>
+                                <include reference="Qyt-Wi-Yml"/>
+                                <exclude reference="uv5-pG-Dvs"/>
                             </mask>
                         </variation>
                     </view>
@@ -58,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.28185907046478" y="132"/>
+            <point key="canvasLocation" x="135.781990521327" y="130.76923076923077"/>
         </scene>
     </scenes>
     <resources>
