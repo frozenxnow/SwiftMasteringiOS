@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -13,18 +13,21 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AdaptiveLayout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlQ-Nh-s3e">
-                                <rect key="frame" x="16" y="249" width="382" height="467"/>
+                                <rect key="frame" x="16" y="293" width="358" height="497"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                </variation>
                             </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="M6Q-tg-GMI">
-                                <rect key="frame" x="16" y="0.0" width="382" height="220"/>
+                                <rect key="frame" x="16" y="44" width="358" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="248" id="eFr-WV-jnd"/>
                                     <constraint firstAttribute="height" constant="220" id="rmT-Hg-U0s"/>
@@ -37,6 +40,11 @@
                                 <variation key="heightClass=compact">
                                     <mask key="constraints">
                                         <include reference="eFr-WV-jnd"/>
+                                        <exclude reference="rmT-Hg-U0s"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
                                         <exclude reference="rmT-Hg-U0s"/>
                                     </mask>
                                 </variation>
@@ -57,10 +65,12 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VlQ-Nh-s3e" secondAttribute="bottom" constant="20" id="m2M-OD-cap"/>
                             <constraint firstItem="VlQ-Nh-s3e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uv5-pG-Dvs"/>
                             <constraint firstItem="VlQ-Nh-s3e" firstAttribute="leading" secondItem="M6Q-tg-GMI" secondAttribute="trailing" constant="21" id="yrP-HH-2rP"/>
+                            <constraint firstItem="M6Q-tg-GMI" firstAttribute="height" secondItem="VlQ-Nh-s3e" secondAttribute="height" multiplier="1.57385" id="z8C-e2-ame"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="hSf-Nm-L6L"/>
+                                <exclude reference="z8C-e2-ame"/>
                                 <exclude reference="X1N-iG-Udw"/>
                                 <exclude reference="yrP-HH-2rP"/>
                             </mask>
@@ -73,6 +83,11 @@
                                 <include reference="X1N-iG-Udw"/>
                                 <exclude reference="uv5-pG-Dvs"/>
                                 <include reference="yrP-HH-2rP"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="z8C-e2-ame"/>
                             </mask>
                         </variation>
                     </view>
