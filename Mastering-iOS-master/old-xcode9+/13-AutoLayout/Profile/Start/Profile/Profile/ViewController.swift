@@ -26,6 +26,20 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var nameLabel: UILabel!
+
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        // size class가 compact라면
+        if newCollection.verticalSizeClass == .compact {
+            nameLabel.textAlignment = .left
+        } else {
+            nameLabel.textAlignment = .center
+        }
+    }
+    
+    
     override func viewDidLoad() {
     
         emailButton.layer.cornerRadius = 3
