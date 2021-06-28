@@ -31,8 +31,8 @@ class FillParentViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      layoutWithInitializer()
-      //layoutWithVisualFormatLanguage()
+//      layoutWithInitializer()
+      layoutWithVisualFormatLanguage()
       //layoutWithAnchor()
    }
 }
@@ -60,42 +60,29 @@ extension FillParentViewController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Visual Format Language를 사용해 코드로 제약 추가
 extension FillParentViewController {
    func layoutWithVisualFormatLanguage() {
-      
+    blueView.translatesAutoresizingMaskIntoConstraints = false
+    
+    // 수평, 수직을 동시에 표현할 수 없어서 각각 해야함
+    let horzFmt = "|[b]|" // H: 생략해도 됨
+    let vertFmt = "V:|[b]|"
+    
+    let views: [String: Any] = ["b": blueView] // views dictionary
+    
+    // 수평 방향의 제약
+    let horzConstraints = NSLayoutConstraint.constraints(withVisualFormat: horzFmt, options: [], metrics: nil, views: views)
+    
+    let vertConstraints = NSLayoutConstraint.constraints(withVisualFormat: vertFmt, options: [], metrics: nil, views: views)
+    
+    // NSLayoutConstraint.constraints 함수는 배열을 리턴한다
+    // 이 배열을 받아서 활성화시키면 제약이 적용됨
+    NSLayoutConstraint.activate(horzConstraints + vertConstraints)
    }
+    
+    // 더욱 직관적이고 코드가 짧아 가독성이 높다
+    // 문자열에서 사용하는 view의 이름은 dictionary의 key로 존재해야한다는 점이 중요
 }
 
 
@@ -138,6 +125,7 @@ extension FillParentViewController {
       
    }
 }
+
 
 
 
