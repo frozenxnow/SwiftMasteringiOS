@@ -32,8 +32,8 @@ class FillParentViewController: UIViewController {
       super.viewDidLoad()
       
 //      layoutWithInitializer()
-      layoutWithVisualFormatLanguage()
-      //layoutWithAnchor()
+//      layoutWithVisualFormatLanguage()
+      layoutWithAnchor()
    }
 }
 
@@ -82,95 +82,20 @@ extension FillParentViewController {
    }
     
     // 더욱 직관적이고 코드가 짧아 가독성이 높다
-    // 문자열에서 사용하는 view의 이름은 dictionary의 key로 존재해야한다는 점이 중요
+    // 문자열에서 사용하는 view의 이름은 dictionary의 key로 존재해야한다는 점이 중요 ** 위 예제에서는 ["b": blueView]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // NSLayoutAnchor를 사용해 코드로 제약 추가
 extension FillParentViewController {
    func layoutWithAnchor() {
-      
+    blueView.translatesAutoresizingMaskIntoConstraints = false
+    
+    // 앞의 두 방법보다 더 직관적이고 간단하다
+    blueView.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor).isActive = true
+    blueView.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor).isActive = true
+    blueView.topAnchor.constraint(equalTo: bottomContainer.topAnchor).isActive = true
+    blueView.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor).isActive = true
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -312,18 +312,30 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5by-ZF-33Q">
                                 <rect key="frame" x="0.0" y="44" width="414" height="345"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Amb-yT-IgX">
-                                        <rect key="frame" x="254" y="100" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Amb-yT-IgX">
+                                        <rect key="frame" x="294" y="225" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.1137254902" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="RfD-Bs-p6w"/>
+                                            <constraint firstAttribute="height" constant="100" id="qdI-Wa-Aru"/>
+                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7n-gM-uwm">
-                                        <rect key="frame" x="116" y="100" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7n-gM-uwm">
+                                        <rect key="frame" x="8" y="8" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.1450980392" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="aRM-7m-S5x"/>
+                                            <constraint firstAttribute="width" constant="100" id="ydF-DP-PQ4"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="U7n-gM-uwm" firstAttribute="top" secondItem="5by-ZF-33Q" secondAttribute="topMargin" id="1Iu-9r-Kxk"/>
+                                    <constraint firstItem="U7n-gM-uwm" firstAttribute="leading" secondItem="5by-ZF-33Q" secondAttribute="leadingMargin" id="RbR-to-URQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="Amb-yT-IgX" secondAttribute="bottom" constant="20" id="SOi-mc-sXv"/>
+                                    <constraint firstAttribute="trailing" secondItem="Amb-yT-IgX" secondAttribute="trailing" constant="20" id="Xea-Pp-rMI"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VH-gT-9bv">
                                 <rect key="frame" x="0.0" y="391" width="414" height="345"/>
