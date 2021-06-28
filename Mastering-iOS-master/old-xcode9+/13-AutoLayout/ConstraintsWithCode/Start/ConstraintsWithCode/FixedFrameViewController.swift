@@ -97,6 +97,23 @@ extension FixedFrameViewController {
    func layoutWithAnchor() {
     redView.translatesAutoresizingMaskIntoConstraints = false
     blueView.translatesAutoresizingMaskIntoConstraints = false
+    
+    bottomContainer.layoutMarginsGuide.leadingAnchor.constraint(equalTo: redView.leadingAnchor).isActive = true
+    bottomContainer.layoutMarginsGuide.topAnchor.constraint(equalTo: redView.topAnchor).isActive = true
+
+//    redView.layoutMarginsGuide.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor).isActive = true
+//    redView.layoutMarginsGuide.topAnchor.constraint(equalTo: bottomContainer.topAnchor).isActive = true
+    
+    redView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    redView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    
+    
+    blueView.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -20).isActive = true
+    blueView.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -20).isActive = true
+    
+    blueView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    blueView.heightAnchor.constraint(equalToConstant: 100).isActive = true
    }
 }
+
 
