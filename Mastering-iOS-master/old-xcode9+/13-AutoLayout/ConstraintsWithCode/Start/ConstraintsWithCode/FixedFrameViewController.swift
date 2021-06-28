@@ -34,9 +34,9 @@ class FixedFrameViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      layoutWithInitializer()
-      //layoutWithVisualFormatLanguage()
-      //layoutWithAnchor()
+//      layoutWithInitializer()
+//      layoutWithVisualFormatLanguage()
+      layoutWithAnchor()
    }
 }
 
@@ -54,8 +54,8 @@ extension FixedFrameViewController {
     NSLayoutConstraint.activate([leading, top, width, height])
     
     
-    let trailing = NSLayoutConstraint(item: blueView, attribute: .trailing, relatedBy: .equal, toItem: bottomContainer, attribute: .trailingMargin, multiplier: 1.0, constant: 0.0)
-    let bottom = NSLayoutConstraint(item: blueView, attribute: .bottom, relatedBy: .equal, toItem: bottomContainer, attribute: .bottomMargin, multiplier: 1.0, constant: 0.0)
+    let trailing = NSLayoutConstraint(item: blueView, attribute: .trailing, relatedBy: .equal, toItem: bottomContainer, attribute: .trailing, multiplier: 1.0, constant: -20)
+    let bottom = NSLayoutConstraint(item: blueView, attribute: .bottom, relatedBy: .equal, toItem: bottomContainer, attribute: .bottom, multiplier: 1.0, constant: -20)
     
     width = NSLayoutConstraint(item: blueView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
     height = NSLayoutConstraint(item: blueView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
@@ -69,6 +69,25 @@ extension FixedFrameViewController {
    func layoutWithVisualFormatLanguage() {
     redView.translatesAutoresizingMaskIntoConstraints = false
     blueView.translatesAutoresizingMaskIntoConstraints = false
+    
+    var horzFmt = "|-[red(100)]"
+    var vertFmt = "V:|-[red(100)]"
+    
+    let views: [String: Any] = ["red": redView, "blue": blueView]
+    
+    var horzConstraints = NSLayoutConstraint.constraints(withVisualFormat: horzFmt, options: [], metrics: nil, views: views)
+    var vertConstraints = NSLayoutConstraint.constraints(withVisualFormat: vertFmt, options: [], metrics: nil, views: views)
+    
+    NSLayoutConstraint.activate(horzConstraints + vertConstraints)
+    
+    horzFmt = "[blue(100)]-20-|"
+    vertFmt = "V:[blue(100)]-20-|"
+    
+    horzConstraints = NSLayoutConstraint.constraints(withVisualFormat: horzFmt, options: [], metrics: nil, views: views)
+    vertConstraints = NSLayoutConstraint.constraints(withVisualFormat: vertFmt, options: [], metrics: nil, views: views)
+    
+    NSLayoutConstraint.activate(horzConstraints + vertConstraints)
+    
    }
 }
 
