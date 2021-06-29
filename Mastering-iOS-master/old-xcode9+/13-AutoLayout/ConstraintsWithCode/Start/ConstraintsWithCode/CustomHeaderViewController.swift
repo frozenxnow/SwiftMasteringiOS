@@ -51,8 +51,8 @@ class CustomHeaderViewController: UIViewController {
       super.viewDidLoad()
       
 //      layoutWithInitializer()
-      layoutWithVisualFormatLanguage()
-      //layoutWithAnchor()
+//      layoutWithVisualFormatLanguage()
+      layoutWithAnchor()
    }
 }
 
@@ -107,7 +107,20 @@ extension CustomHeaderViewController {
 
 extension CustomHeaderViewController {
    func layoutWithAnchor() {
+    blueView.translatesAutoresizingMaskIntoConstraints = false
     
+    blueView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    blueView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    blueView.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
+    
+    topToSuperview = blueView.topAnchor.constraint(equalTo: view.topAnchor)
+    topToSuperview?.isActive = true
+    
+    if #available(iOS 11.0, *) {
+        topToSafeArea = blueView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+    } else {
+        topToSafeArea = blueView.bottomAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor)
+    }
    }
 }
 
