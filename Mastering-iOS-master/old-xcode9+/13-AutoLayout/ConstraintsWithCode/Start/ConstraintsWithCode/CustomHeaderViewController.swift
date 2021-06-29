@@ -33,16 +33,25 @@ class CustomHeaderViewController: UIViewController {
    
    @IBAction func updateTopConstraint(_ sender: UISwitch) {
       // superview : off일때, safearea: on일때
-    topToSuperview?.isActive = !sender.isOn
-    topToSafeArea?.isActive = sender.isOn
+//    topToSuperview?.isActive = !sender.isOn
+//    topToSafeArea?.isActive = sender.isOn
+    
+    if sender.isOn {
+        // 이전의 제약을 비활성하고, 추가하고자 하는 제약을 활성화해야한다
+        topToSuperview?.isActive = false
+        topToSafeArea?.isActive = true
+    } else {
+        topToSafeArea?.isActive = false
+        topToSuperview?.isActive = true
+    }
    }
    
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      layoutWithInitializer()
-      //layoutWithVisualFormatLanguage()
+//      layoutWithInitializer()
+      layoutWithVisualFormatLanguage()
       //layoutWithAnchor()
    }
 }
@@ -79,14 +88,26 @@ extension CustomHeaderViewController {
 
 extension CustomHeaderViewController {
    func layoutWithVisualFormatLanguage() {
-
+    blueView.translatesAutoresizingMaskIntoConstraints = false
+    
+    // VFL : 모든 제약을 추가할 수 없다. safeArea를 직접 표현할 수 없다. superView 기준으로 한 것만 추가하도록 한다
+    
+    let horzFmt = "|[blue]|"
+    let vertFmt = "V:|[blue(100)]"
+    let views: [String: Any] = ["blue": blueView]
+    
+    let horzConstraint = NSLayoutConstraint.constraints(withVisualFormat: horzFmt, options: [], metrics: nil, views: views)
+    let vertConstraint = NSLayoutConstraint.constraints(withVisualFormat: vertFmt, options: [], metrics: nil, views: views)
+    
+    NSLayoutConstraint.activate(horzConstraint + vertConstraint)
+    
    }
 }
 
 
 extension CustomHeaderViewController {
    func layoutWithAnchor() {
-
+    
    }
 }
 
