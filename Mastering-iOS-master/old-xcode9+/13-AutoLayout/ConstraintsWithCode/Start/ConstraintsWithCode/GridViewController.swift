@@ -35,52 +35,55 @@ class GridViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      //layoutWithInitializer()
+      layoutWithInitializer()
       //layoutWithVisualFormatLanguage()
-      layoutWithAnchor()
+//      layoutWithAnchor()
    }
 }
-
-
-
-
-
-
-
-
 
 extension GridViewController {
    func layoutWithInitializer() {
-     
+     // 생성자 방식으로 구현
+    redView.translatesAutoresizingMaskIntoConstraints = false
+    blueView.translatesAutoresizingMaskIntoConstraints = false
+    yellowView.translatesAutoresizingMaskIntoConstraints = false
+    blackView.translatesAutoresizingMaskIntoConstraints = false
+    
+    // 공통으로 사용하는 상수
+    let margin: CGFloat = 10
+    
+    var leading = NSLayoutConstraint(item: redView, attribute: .leading, relatedBy: .equal, toItem: bottomContainer, attribute: .leading, multiplier: 1.0, constant: margin)
+    var top = NSLayoutConstraint(item: redView, attribute: .top, relatedBy: .equal, toItem: bottomContainer, attribute: .top, multiplier: 1.0, constant: margin)
+    
+    var trailing = NSLayoutConstraint(item: redView, attribute: .trailing, relatedBy: .equal, toItem: blueView, attribute: .leading, multiplier: 1.0, constant: -margin)
+    var bottom = NSLayoutConstraint(item: redView, attribute: .bottom, relatedBy: .equal, toItem: yellowView, attribute: .top, multiplier: 1.0, constant: -margin)
+    
+    NSLayoutConstraint.activate([leading, top, trailing, bottom])
+    
+    top = NSLayoutConstraint(item: blueView, attribute: .bottom, relatedBy: .equal, toItem: blackView, attribute: .top, multiplier: 1.0, constant: -margin)
+    
+    trailing = NSLayoutConstraint(item: blueView, attribute: .trailing, relatedBy: .equal, toItem: bottomContainer, attribute: .trailing, multiplier: 1.0, constant: -margin)
+    
+    bottom = NSLayoutConstraint(item: blueView, attribute: .bottom, relatedBy: .equal, toItem: blackView, attribute: .top, multiplier: 1.0, constant: -margin)
+    
+    NSLayoutConstraint.activate([top, trailing, bottom])
+    
+    leading = NSLayoutConstraint(item: yellowView, attribute: .leading, relatedBy: .equal, toItem: bottomContainer, attribute: .leading, multiplier: 1.0, constant: margin)
+    
+    bottom = NSLayoutConstraint(item: yellowView, attribute: .bottom, relatedBy: .equal, toItem: bottomContainer, attribute: .bottom, multiplier: 1.0, constant: -margin)
+    
+    trailing = NSLayoutConstraint(item: yellowView, attribute: .trailing, relatedBy: .equal, toItem: blackView, attribute: .leading, multiplier: 1.0, constant: -margin)
+    
+    NSLayoutConstraint.activate([leading, bottom, trailing])
+    
+    trailing = NSLayoutConstraint(item: blackView, attribute: .trailing, relatedBy: .equal, toItem: bottomContainer, attribute: .trailing, multiplier: 1.0, constant: -margin)
+    
+    bottom = NSLayoutConstraint(item: blackView, attribute: .bottom, relatedBy: .equal, toItem: bottomContainer, attribute: .bottom, multiplier: 1.0, constant: -margin)
+    
+    NSLayoutConstraint.activate([trailing, bottom])
    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 extension GridViewController {
@@ -88,33 +91,6 @@ extension GridViewController {
      
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 extension GridViewController {
