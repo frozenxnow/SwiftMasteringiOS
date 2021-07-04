@@ -35,8 +35,8 @@ class GridViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      layoutWithInitializer()
-      //layoutWithVisualFormatLanguage()
+//      layoutWithInitializer()
+      layoutWithVisualFormatLanguage()
 //      layoutWithAnchor()
    }
 }
@@ -98,7 +98,44 @@ extension GridViewController {
 
 extension GridViewController {
    func layoutWithVisualFormatLanguage() {
-     
+    
+    redView.translatesAutoresizingMaskIntoConstraints = false
+    blueView.translatesAutoresizingMaskIntoConstraints = false
+    yellowView.translatesAutoresizingMaskIntoConstraints = false
+    blackView.translatesAutoresizingMaskIntoConstraints = false
+    
+    // 공통으로 사용하는 상수
+    let margin: CGFloat = 10
+    
+    // 수평, 수직 각 두개씩: 동일선상에 놓이는 뷰만 하나의 포맷문자열에서 표시할 수 있다 ex. 수평의 경우 : [red, blue] / [yellow, black]
+    
+    let horzFmt1 = "|-m-[red]-m-[blue(==red)]-m-|"
+    let horzFmt2 = "|-m-[yellow]-m-[black(==yellow)]-m-|"
+    
+    let vertFmt1 = "V:|-m-[red]-m-[yellow(==red)]-m-|"
+    let vertFmt2 = "V:|-m-[blue]-m-[black(==blue)]-m-|"
+    
+    // Views Dictionary
+    let views: [String: Any] = ["red": redView, "blue": blueView, "yellow": yellowView, "black": blackView]
+    // Metrics Dictionary (동일하게 쓰이는 margin 값)
+    let metrics: [String: Any] = ["m": margin]
+    
+    var horzConstraints = NSLayoutConstraint.constraints(withVisualFormat: horzFmt1, options: [], metrics: metrics, views: views)
+    
+    NSLayoutConstraint.activate(horzConstraints)
+    
+    horzConstraints = NSLayoutConstraint.constraints(withVisualFormat: horzFmt2, options: [], metrics: metrics, views: views)
+    
+    NSLayoutConstraint.activate(horzConstraints)
+    
+    var vertConstraints = NSLayoutConstraint.constraints(withVisualFormat: vertFmt1, options: [], metrics: metrics, views: views)
+    
+    NSLayoutConstraint.activate(vertConstraints)
+    
+    vertConstraints = NSLayoutConstraint.constraints(withVisualFormat: vertFmt2, options: [], metrics: metrics, views: views)
+    
+    NSLayoutConstraint.activate(vertConstraints)
+    
    }
 }
 
