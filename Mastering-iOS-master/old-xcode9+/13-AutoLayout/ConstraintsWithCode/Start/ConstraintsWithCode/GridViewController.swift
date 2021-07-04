@@ -36,8 +36,8 @@ class GridViewController: UIViewController {
       super.viewDidLoad()
       
 //      layoutWithInitializer()
-      layoutWithVisualFormatLanguage()
-//      layoutWithAnchor()
+//      layoutWithVisualFormatLanguage()
+      layoutWithAnchor()
    }
 }
 
@@ -142,7 +142,39 @@ extension GridViewController {
 
 extension GridViewController {
    func layoutWithAnchor() {
-     
+        redView.translatesAutoresizingMaskIntoConstraints = false
+        blueView.translatesAutoresizingMaskIntoConstraints = false
+        yellowView.translatesAutoresizingMaskIntoConstraints = false
+        blackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 공통으로 사용하는 상수
+        let margin: CGFloat = 10
+    
+    redView.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: margin).isActive = true
+    redView.topAnchor.constraint(equalTo: bottomContainer.topAnchor, constant: margin).isActive = true
+    
+    redView.trailingAnchor.constraint(equalTo: blueView.leadingAnchor, constant: -margin).isActive = true
+    redView.bottomAnchor.constraint(equalTo: yellowView.topAnchor, constant: -margin).isActive = true
+    
+    blueView.topAnchor.constraint(equalTo: bottomContainer.topAnchor, constant: margin).isActive = true
+    blueView.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -margin).isActive = true
+    blueView.bottomAnchor.constraint(equalTo: blackView.topAnchor, constant: -margin).isActive = true
+    
+    yellowView.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: margin).isActive = true
+    yellowView.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -margin).isActive = true
+    yellowView.trailingAnchor.constraint(equalTo: blackView.leadingAnchor, constant: -margin).isActive = true
+    
+    blackView.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor, constant: -margin).isActive = true
+    blackView.trailingAnchor.constraint(equalTo: bottomContainer.trailingAnchor, constant: -margin).isActive = true
+    
+    // 네 뷰의 크기가 동일하도록 제약 추가
+    blueView.widthAnchor.constraint(equalTo: redView.widthAnchor).isActive = true
+    yellowView.widthAnchor.constraint(equalTo: redView.widthAnchor).isActive = true
+    blackView.widthAnchor.constraint(equalTo: redView.widthAnchor).isActive = true
+    
+    blueView.heightAnchor.constraint(equalTo: redView.heightAnchor).isActive = true
+    yellowView.heightAnchor.constraint(equalTo: redView.heightAnchor).isActive = true
+    blackView.heightAnchor.constraint(equalTo: redView.heightAnchor).isActive = true
    }
 }
 
