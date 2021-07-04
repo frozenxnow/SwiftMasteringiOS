@@ -60,7 +60,7 @@ extension GridViewController {
     
     NSLayoutConstraint.activate([leading, top, trailing, bottom])
     
-    top = NSLayoutConstraint(item: blueView, attribute: .bottom, relatedBy: .equal, toItem: blackView, attribute: .top, multiplier: 1.0, constant: -margin)
+    top = NSLayoutConstraint(item: blueView, attribute: .top, relatedBy: .equal, toItem: bottomContainer, attribute: .top, multiplier: 1.0, constant: margin)
     
     trailing = NSLayoutConstraint(item: blueView, attribute: .trailing, relatedBy: .equal, toItem: bottomContainer, attribute: .trailing, multiplier: 1.0, constant: -margin)
     
@@ -81,7 +81,17 @@ extension GridViewController {
     bottom = NSLayoutConstraint(item: blackView, attribute: .bottom, relatedBy: .equal, toItem: bottomContainer, attribute: .bottom, multiplier: 1.0, constant: -margin)
     
     NSLayoutConstraint.activate([trailing, bottom])
+    
+    // 중복 코드를 줄이기 위해 UIView배열 생성
+    let list: [UIView] = [blueView, yellowView, blackView]
+    for v in list {
+        let equalWidth = NSLayoutConstraint(item: v, attribute: .width, relatedBy: .equal, toItem: redView, attribute: .width, multiplier: 1.0, constant: 0.0)
+        let equalHeight = NSLayoutConstraint(item: v, attribute: .height, relatedBy: .equal, toItem: redView, attribute: .height, multiplier: 1.0, constant: 0.0)
+        
+        NSLayoutConstraint.activate([equalWidth, equalHeight])
+    }
    }
+    
 
 }
 
