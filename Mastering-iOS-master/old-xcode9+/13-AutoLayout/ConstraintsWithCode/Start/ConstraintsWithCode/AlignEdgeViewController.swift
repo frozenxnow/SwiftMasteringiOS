@@ -62,8 +62,8 @@ class AlignEdgeViewController: UIViewController {
         bottomContainer.layoutMargins = current
     }
     
-      layoutWithInitializer()
-      //layoutWithVisualFormatLanguage()
+//      layoutWithInitializer()
+      layoutWithVisualFormatLanguage()
       //layoutWithAnchor()
    }
 }
@@ -83,103 +83,79 @@ extension AlignEdgeViewController {
     NSLayoutConstraint.activate([leading, top, trailing])
     
     // 앞으로 AnchorView 기준으로
-    top = NSLayoutConstraint(item: nameInputField, attribute: .top, relatedBy: .equal, toItem: nameTitleLabel, attribute: .bottom, multiplier: 1.0, constant: 10.0)
+    top = NSLayoutConstraint(item: nameInputField, attribute: .top, relatedBy: .equal, toItem: anchorView, attribute: .bottom, multiplier: 1.0, constant: 10.0)
     leading = NSLayoutConstraint(item: nameInputField, attribute: .leading, relatedBy: .equal, toItem: anchorView, attribute: .leading, multiplier: 1.0, constant: 0.0)
     trailing = NSLayoutConstraint(item: nameInputField, attribute: .trailing, relatedBy: .equal, toItem: anchorView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
     
     NSLayoutConstraint.activate([top, leading, trailing])
     
     
-    top = NSLayoutConstraint(item: emailTitleLabel, attribute: .top, relatedBy: .equal, toItem: nameTitleLabel, attribute: .bottom, multiplier: 1.0, constant: 20.0)
+    top = NSLayoutConstraint(item: emailTitleLabel, attribute: .top, relatedBy: .equal, toItem: nameInputField, attribute: .bottom, multiplier: 1.0, constant: 20.0)
     leading = NSLayoutConstraint(item: emailTitleLabel, attribute: .leading, relatedBy: .equal, toItem: anchorView, attribute: .leading, multiplier: 1.0, constant: 0.0)
     trailing = NSLayoutConstraint(item: emailTitleLabel, attribute: .trailing, relatedBy: .equal, toItem: anchorView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
     
     NSLayoutConstraint.activate([top, leading, trailing])
     
-    top = NSLayoutConstraint(item: emailInputField, attribute: .top, relatedBy: .equal, toItem: nameTitleLabel, attribute: .bottom, multiplier: 1.0, constant: 10.0)
+    top = NSLayoutConstraint(item: emailInputField, attribute: .top, relatedBy: .equal, toItem: emailTitleLabel, attribute: .bottom, multiplier: 1.0, constant: 10.0)
     leading = NSLayoutConstraint(item: emailInputField, attribute: .leading, relatedBy: .equal, toItem: anchorView, attribute: .leading, multiplier: 1.0, constant: 0.0)
     trailing = NSLayoutConstraint(item: emailInputField, attribute: .trailing, relatedBy: .equal, toItem: anchorView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
     
     NSLayoutConstraint.activate([top, leading, trailing])
     
     
+    leading = NSLayoutConstraint(item: confirmButton, attribute: .leading, relatedBy: .equal, toItem: anchorView, attribute: .leading, multiplier: 1.0, constant: 0.0)
+    
+    trailing = NSLayoutConstraint(item: confirmButton, attribute: .trailing, relatedBy: .equal, toItem: anchorView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+    
+    // top 제약 : constant가 10 이상
+    top = NSLayoutConstraint(item: confirmButton, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: emailInputField, attribute: .bottom, multiplier: 1.0, constant: 10)
+    
+    let bottom = NSLayoutConstraint(item: confirmButton, attribute: .bottom, relatedBy: .equal, toItem: bottomContainer, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+    let height = NSLayoutConstraint(item: confirmButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 40.0)
+    
+    NSLayoutConstraint.activate([leading, trailing, top, bottom, height])
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 extension AlignEdgeViewController {
+    
    func layoutWithVisualFormatLanguage() {
-     
+        nameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameInputField.translatesAutoresizingMaskIntoConstraints = false
+        emailTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        emailInputField.translatesAutoresizingMaskIntoConstraints = false
+        confirmButton.translatesAutoresizingMaskIntoConstraints = false
+    
+    let views: [String: Any] = [ "nameTitle": nameTitleLabel,
+                                 "nameInput": nameInputField,
+                                 "emailTitle": emailTitleLabel,
+                                 "emailInput": emailInputField,
+                                 "btn": confirmButton ]
+    
+    let horzFmt = "|-[nameTitle]-|"
+    let horzConstraints = NSLayoutConstraint.constraints(withVisualFormat: horzFmt, options: [], metrics: nil, views: views)
+    
+    NSLayoutConstraint.activate(horzConstraints)
+    
+    let vertFmt = "V:|-[nameTitle]-10-[nameInput]-20-[emailTitle]-10-[emailInput]-(>=10)-[btn(40)]|"
+    let vertConstraints = NSLayoutConstraint.constraints(withVisualFormat: vertFmt, options: [.alignAllLeading, .alignAllTrailing], metrics: nil, views: views)
+    
+    NSLayoutConstraint.activate(vertConstraints)
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 extension AlignEdgeViewController {
    func layoutWithAnchor() {
-      
+     nameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+     nameInputField.translatesAutoresizingMaskIntoConstraints = false
+     emailTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+     emailInputField.translatesAutoresizingMaskIntoConstraints = false
+     confirmButton.translatesAutoresizingMaskIntoConstraints = false
+     
    }
 }
+
 
 
 
