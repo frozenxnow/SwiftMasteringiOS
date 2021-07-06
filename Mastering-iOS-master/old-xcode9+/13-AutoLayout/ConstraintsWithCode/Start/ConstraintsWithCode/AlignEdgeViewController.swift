@@ -63,8 +63,8 @@ class AlignEdgeViewController: UIViewController {
     }
     
 //      layoutWithInitializer()
-      layoutWithVisualFormatLanguage()
-      //layoutWithAnchor()
+//      layoutWithVisualFormatLanguage()
+      layoutWithAnchor()
    }
 }
 
@@ -153,8 +153,29 @@ extension AlignEdgeViewController {
      emailInputField.translatesAutoresizingMaskIntoConstraints = false
      confirmButton.translatesAutoresizingMaskIntoConstraints = false
      
+    nameTitleLabel.leftAnchor.constraint(equalTo: bottomContainer.layoutMarginsGuide.leftAnchor).isActive = true
+    nameTitleLabel.rightAnchor.constraint(equalTo: bottomContainer.layoutMarginsGuide.rightAnchor).isActive = true
+    nameTitleLabel.topAnchor.constraint(equalTo: bottomContainer.layoutMarginsGuide.topAnchor).isActive = true
+    
+    nameInputField.topAnchor.constraint(equalTo: nameTitleLabel.bottomAnchor, constant: 10.0).isActive = true
+    nameInputField.leftAnchor.constraint(equalTo: anchorView.leftAnchor).isActive = true
+    nameInputField.rightAnchor.constraint(equalTo: anchorView.rightAnchor).isActive = true
+    
+    emailTitleLabel.topAnchor.constraint(equalTo: nameInputField.bottomAnchor, constant: 20.0).isActive = true
+    emailTitleLabel.leftAnchor.constraint(equalTo: anchorView.leftAnchor).isActive = true
+    emailTitleLabel.rightAnchor.constraint(equalTo: anchorView.rightAnchor).isActive = true
+    
+    emailInputField.topAnchor.constraint(equalTo: emailTitleLabel.bottomAnchor, constant: 10.0).isActive = true
+    emailInputField.leftAnchor.constraint(equalTo: anchorView.leftAnchor).isActive = true
+    emailInputField.rightAnchor.constraint(equalTo: anchorView.rightAnchor).isActive = true
+    
+    confirmButton.leftAnchor.constraint(equalTo: anchorView.leftAnchor).isActive = true
+    confirmButton.rightAnchor.constraint(equalTo: anchorView.rightAnchor).isActive = true
+    confirmButton.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+    confirmButton.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor).isActive = true
    }
 }
+
 
 
 
