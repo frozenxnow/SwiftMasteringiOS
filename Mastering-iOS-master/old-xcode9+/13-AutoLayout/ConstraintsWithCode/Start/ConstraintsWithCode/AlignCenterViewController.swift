@@ -35,93 +35,77 @@ class AlignCenterViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      layoutWithInitializer()
-      //layoutWithVisualFormatLanguage()
-      //layoutWithAnchor()
+//      layoutWithInitializer()
+//      layoutWithVisualFormatLanguage()
+      layoutWithAnchor()
    }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 extension AlignCenterViewController {
    func layoutWithInitializer() {
-     
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    bottomLineView.translatesAutoresizingMaskIntoConstraints = false
+    
+    var centerX = NSLayoutConstraint(item: titleLabel, attribute: .centerX, relatedBy: .equal, toItem: bottomContainer, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+    let centerY = NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: bottomContainer, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+    
+    NSLayoutConstraint.activate([centerX, centerY])
+    
+    centerX = NSLayoutConstraint(item: bottomLineView, attribute: .centerX, relatedBy: .equal, toItem: titleLabel, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+    let top = NSLayoutConstraint(item: bottomLineView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1.0, constant: 10.0)
+    let width = NSLayoutConstraint(item: bottomLineView, attribute: .width, relatedBy: .equal, toItem: titleLabel, attribute: .width, multiplier: 1.0, constant: 0.0)
+    let height = NSLayoutConstraint(item: bottomLineView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 5.0)
+    NSLayoutConstraint.activate([centerX, top, width, height])
+    
+    
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 extension AlignCenterViewController {
    func layoutWithVisualFormatLanguage() {
+    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    bottomLineView.translatesAutoresizingMaskIntoConstraints = false
       
+    // centerX, centerY 불가능...... 필요한 것은 적절히 섞어서 사용한다.
+    titleLabel.centerXAnchor.constraint(equalTo: bottomContainer.centerXAnchor).isActive = true
+    titleLabel.centerYAnchor.constraint(equalTo: bottomContainer.centerYAnchor).isActive = true
+
+    // 수직으로 배치된 상황에서 equalHeight는 추가할 수 있지만 equalWidth는 추가할수 없다.
+    bottomLineView.widthAnchor.constraint(equalTo: titleLabel.widthAnchor).isActive = true
+    
+    
+    let vertFmt = "V:[lbl]-10-[line(==5)]"
+    let views: [String: Any] = ["lbl": titleLabel, "line": bottomLineView]
+    
+    // option 파라미터를 사용해야한다.
+    let vertConstraints = NSLayoutConstraint.constraints(withVisualFormat: vertFmt, options: .alignAllCenterX, metrics: nil, views: views)
+    
+    NSLayoutConstraint.activate(vertConstraints)
+    
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 extension AlignCenterViewController {
    func layoutWithAnchor() {
-     
+    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    bottomLineView.translatesAutoresizingMaskIntoConstraints = false
+      
+    titleLabel.centerXAnchor.constraint(equalTo: bottomContainer.centerXAnchor).isActive = true
+    titleLabel.centerYAnchor.constraint(equalTo: bottomContainer.centerYAnchor).isActive = true
+
+    bottomLineView.widthAnchor.constraint(equalTo: titleLabel.widthAnchor).isActive = true
+    
+    // 수직여백, 수평 가운데 정렬제약, 높이 5point 제약
+    bottomLineView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10.0).isActive = true
+    
+    bottomLineView.centerXAnchor.constraint(equalTo: titleLabel.centerXAnchor).isActive = true
+    bottomLineView.heightAnchor.constraint(equalToConstant: 5.0).isActive = true
+    
+    
+    
    }
 }
 
