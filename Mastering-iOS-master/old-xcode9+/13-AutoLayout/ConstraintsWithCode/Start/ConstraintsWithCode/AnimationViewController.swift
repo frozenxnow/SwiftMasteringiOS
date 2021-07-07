@@ -35,14 +35,18 @@ class AnimationViewController: UIViewController {
    
    
    @IBAction func animate(_ sender: Any) {
+    
+    widthConstraint.constant = CGFloat(arc4random_uniform(91)) + 10
+    heightConstraint.constant = CGFloat(arc4random_uniform(91)) + 10
+    
+    centerXConstraint.constant = CGFloat(arc4random_uniform(10)) - 50
+    centerYConstraint.constant = CGFloat(arc4random_uniform(101)) - 50
+    
       UIView.animate(withDuration: 0.3) { [weak self] in
+        
          guard let strongSelf = self else { return }
-
-         var frame = strongSelf.redView.frame
-         let rnd = CGFloat(arc4random_uniform(91)) + 10
-         frame.size = CGSize(width: rnd, height: rnd)
-
-         strongSelf.redView.frame = frame
+        strongSelf.view.layoutIfNeeded()
+         
       }
    }
    

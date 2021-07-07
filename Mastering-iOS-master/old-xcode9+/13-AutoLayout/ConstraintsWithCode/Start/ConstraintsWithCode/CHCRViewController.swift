@@ -28,11 +28,15 @@ class CHCRViewController: UIViewController {
    
    @IBOutlet weak var bottomLabel: UILabel!
    
-   
+   // CH, CR의 속성은 view의 속성이다
+    // 이 속성을 변경할 수 있는 메소드는 UIView class에 구현되어 있다
+    
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      
+    // top lable의 ch 변경 (기본값인 251로 설정되어 있음)
+    let p = UILayoutPriority(250)
+    topLabel.setContentHuggingPriority(p, for: .vertical)
    }
 }
 
