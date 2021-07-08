@@ -26,11 +26,11 @@ class IdentifierViewController: UIViewController {
 
    @IBOutlet weak var redView: UIView!
    
-   
    override func viewDidLoad() {
       super.viewDidLoad()
       
       let leading = redView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+    leading.identifier = "codeLeading"
       leading.isActive = true
    }
 }
