@@ -28,6 +28,12 @@ class StackViewAlignmentViewController: UIViewController {
    
    @IBAction func alignmentChanged(_ sender: UISegmentedControl) {
      
+    // 열거형의 멤버들을 배열에 저장
+    let options: [UIStackView.Alignment] = [.fill, .top, .center, .bottom]
+    
+    UIView.animate(withDuration: 0.3) {
+        self.horizontalStackView.alignment = options[sender.selectedSegmentIndex]
+    }
    }
    
    

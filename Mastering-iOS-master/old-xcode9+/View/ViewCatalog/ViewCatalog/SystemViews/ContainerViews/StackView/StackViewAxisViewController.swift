@@ -29,7 +29,7 @@ class StackViewAxisViewController: UIViewController {
    
    @IBAction func toggleAxis(_ sender: Any) {
       // 버튼을 탭하면 배치 방향을 toggle하도록 구현
-    // animation 지원하기 때문에 이렇게 추가하면 애니메이션 효과도 사용 가능 
+    // animation 지원하기 때문에 이렇게 추가하면 애니메이션 효과도 사용 가능
     UIView.animate(withDuration: 0.3) {
         if self.stackView.axis == .horizontal {
             self.stackView.axis = .vertical
