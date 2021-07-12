@@ -29,8 +29,12 @@ class StackViewSpacingViewController: UIViewController {
    @IBOutlet weak var spacingLabel: UILabel!
    @IBOutlet weak var spacingSlider: UISlider!
    
+    // 범위: -30 ~ +30
    @IBAction func spacingChanged(_ sender: UISlider) {
-      
+    UIView.animate(withDuration: 0.3) {
+        self.horizontalStackView.spacing = CGFloat(sender.value)
+    }
+    updateLabel()
    }
    
    private func updateLabel() {
@@ -42,5 +46,11 @@ class StackViewSpacingViewController: UIViewController {
       
       updateLabel()
       spacingSlider.value = Float(horizontalStackView.spacing)
+    
+        // redView, blueView의 spacing을 60으로
+        // 두번째 파라미터로는 왼쪽뷰를 전달
+    horizontalStackView.setCustomSpacing(60, after: redView)
+    // CustomSpacing의 우선순위가 slider로부터 전달받는 값보다 더 높기 때문에
+    // slider가 업데이트 되어도 redView, blueView의 spacing은 60으로 고정된다 
    }
 }
