@@ -32,12 +32,20 @@ class StackViewArrangedSubviewsViewController: UIViewController {
     stackView.addArrangedSubview(v)
     // 배열의 끝(오른쪽)에 arrangesubview에 추가
     
+    UIView.animate(withDuration: 0.3) {
+        self.stackView.layoutIfNeeded()
+    }
+    
    }
    
    @IBAction func insert(_ sender: Any) {
       let v = generateView()
     stackView.insertArrangedSubview(v, at: 0)
     // 배열의 처음(왼쪽)에 arrangesubview에 추가
+    
+    UIView.animate(withDuration: 0.3) {
+        self.stackView.layoutIfNeeded()
+    }
    }
    
    @IBAction func remove(_ sender: Any) {
@@ -48,15 +56,30 @@ class StackViewArrangedSubviewsViewController: UIViewController {
     let index = Int.random(in: 0..<stackView.arrangedSubviews.count)
     // 랜덤 view를 삭제
     let v = stackView.arrangedSubviews[index]
-    stackView.removeArrangedSubview(v)
+//    stackView.removeArrangedSubview(v)
+    // arrangedSubview에서는 삭제하지만 subviews에서는 삭제하지 않는 메서드
+    
+    // 두 배열에서 모두 삭제하고싶다면
+//    v.removeFromSuperview() method를 사용해야한다.
+    
+    // 애니메이션 추가 (위의 코드로는 안된다)
+    UIView.animate(withDuration: 0.3) {
+        v.isHidden = true
+    } completion: { finished in
+        self.stackView.removeArrangedSubview(v)
+    }
+    
    }
-   
-   
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      
+    let v = generateView()
+    v.frame = stackView.bounds
+    stackView.addSubview(v)
+    // 이렇게 서브뷰에 바로 추가할 때는 프레임에 대한 정의가 있어야한다.
+    // arrangedSubviews에 추가할 때는 subview가 프레임을 관리함
+    
    }
 }
 
