@@ -27,15 +27,28 @@ class StackViewArrangedSubviewsViewController: UIViewController {
    @IBOutlet weak var stackView: UIStackView!
    
    @IBAction func add(_ sender: Any) {
-      
+    let v = generateView()
+      // 새로운 arranged subview 생성
+    stackView.addArrangedSubview(v)
+    // 배열의 끝(오른쪽)에 arrangesubview에 추가
+    
    }
    
    @IBAction func insert(_ sender: Any) {
-      
+      let v = generateView()
+    stackView.insertArrangedSubview(v, at: 0)
+    // 배열의 처음(왼쪽)에 arrangesubview에 추가
    }
    
    @IBAction func remove(_ sender: Any) {
-      
+      // 배열이 비어있는지 확인
+    guard stackView.arrangedSubviews.count > 0 else { return }
+    
+    // 배열이 비어있지 않다면 인덱스의 랜덤 값을 구해
+    let index = Int.random(in: 0..<stackView.arrangedSubviews.count)
+    // 랜덤 view를 삭제
+    let v = stackView.arrangedSubviews[index]
+    stackView.removeArrangedSubview(v)
    }
    
    
@@ -55,7 +68,7 @@ extension StackViewArrangedSubviewsViewController {
       let g = CGFloat(arc4random_uniform(256)) / 255
       let b = CGFloat(arc4random_uniform(256)) / 255
       v.backgroundColor = UIColor(red: r, green: g, blue: b, alpha: 1.0)
-      
+      // random color를 background에 넣어 return
       return v
    }
 }
