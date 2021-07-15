@@ -31,14 +31,22 @@ class CustomSplitViewController: UISplitViewController {
    }
    
    func setupDefaultValue() {
-      
-   }
+    // 마스터VC는 네비게이션C에 임베드 되어있다
+        guard let nav = viewControllers.first as? UINavigationController, let masterVC = nav.viewControllers.first as? ColorListTableViewController else { return }
+        guard let detailVC = viewControllers.last as? ColorDetailViewController else { return }
+        
+        // master VC -> List 속성에 저장
+        // detail VC -> Color 속성에 저장
+        detailVC.color = masterVC.list.first
+    }
+
 }
 
-
-
 extension CustomSplitViewController: UISplitViewControllerDelegate {
-   
+    // horz size class가 compact로 바뀔 때마다 호출된다
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return true // detailVC가 화면에서 사라지고 masterVC가 표시된다
+    }
 }
 
 

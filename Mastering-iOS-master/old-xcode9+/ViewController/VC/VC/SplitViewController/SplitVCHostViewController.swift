@@ -24,13 +24,30 @@ import UIKit
 
 class SplitVCHostViewController: UIViewController {
    @IBAction func presentSplitViewController(_ sender: Any) {
-      
+      // masterVC, detailVC는 스토리보드 id를 사용해 생성한다
+//    if #available(iOS 13.0, *) {
+//        guard let masterVC = storyboard?.instantiateViewController(identifier: "ColorListTableViewController") else { return }
+//    }
+//    let nav = UINavigationController(rootViewController:masterVC)
+//
+//    if #available(iOS 13.0, *) {
+//        guard let detailVC = storyboard?.instantiateViewController(identifier: "ColorDetailViewController") else { return }
+//    }
+//    let splitVC = CustomSplitViewController()
+//    splitVC.viewControllers = [nav, detailVC]
+    
+//    present(splitVC, animated: true, completion: nil)
    }
    
    @IBAction func unwindToSplitHost(_ sender: UIStoryboardSegue) {
       
    }
    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CustomSplitViewController {
+            vc.setupDefaultValue()
+        }
+    }
    
    override func viewDidLoad() {
       super.viewDidLoad()
