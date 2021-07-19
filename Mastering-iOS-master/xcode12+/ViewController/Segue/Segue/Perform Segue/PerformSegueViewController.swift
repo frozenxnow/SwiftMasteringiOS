@@ -44,6 +44,19 @@ class PerformSegueViewController: UIViewController {
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // trigger가 segue 실행을 요청하고 실제 segue 객체가 생성되기 전 호출
+        // true: segue 실행
+        // false: 바로 종료
+        // segue 객체와 DestinationVC 생성되기 전이기 때문에 prepare함수처럼 구현 불가능
+        
+        // switch On 상태일때 push 탭 가능(segue 실행), Off : return false(종료)
+        if identifier == "conditionalSegue" {
+            return grantedSwitch.isOn
+        }
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
