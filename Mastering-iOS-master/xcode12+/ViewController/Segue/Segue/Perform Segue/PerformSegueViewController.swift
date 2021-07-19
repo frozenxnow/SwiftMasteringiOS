@@ -30,9 +30,19 @@ class PerformSegueViewController: UIViewController {
     
     
     @IBAction func perform(_ sender: Any) {
-        
+        // sender에는 트리거를 전달하는 컨트롤 입력
+        performSegue(withIdentifier: "manualSegue", sender: self)
+        // segue를 찾으면 정상적으로 동작, 찾지 못하면 crash 발생
     }
     
+    
+    // segue 객체와 destinationVC가 생성되고 트랜지션이 실행되기 직전에 호출
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // type casting 필요
+        if let vc = segue.destination as? MessageViewController {
+            vc.segueName = segue.identifier
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

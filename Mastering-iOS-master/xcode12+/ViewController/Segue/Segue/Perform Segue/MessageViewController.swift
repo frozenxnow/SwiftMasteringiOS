@@ -29,7 +29,6 @@ class MessageViewController: UIViewController {
     
     var segueName: String?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
