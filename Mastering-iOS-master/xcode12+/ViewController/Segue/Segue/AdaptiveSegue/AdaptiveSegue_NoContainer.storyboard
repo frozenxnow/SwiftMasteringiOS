@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ldv-Ot-ELT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ldv-Ot-ELT">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,21 +24,35 @@
                                         <rect key="frame" x="0.0" y="0.0" width="133" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Push Segue"/>
+                                        <connections>
+                                            <segue destination="DX5-rR-lOv" kind="show" id="CY9-Q7-hhA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bw-Uu-zhs">
                                         <rect key="frame" x="0.0" y="56" width="133" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Replace Segue"/>
+                                        <connections>
+                                            <segue destination="DX5-rR-lOv" kind="showDetail" id="NOp-uA-AA3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88x-KY-i6z">
                                         <rect key="frame" x="0.0" y="112" width="133" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Modal Segue"/>
+                                        <connections>
+                                            <segue destination="DX5-rR-lOv" kind="presentation" id="OjJ-4Z-lcP"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEE-RE-9wI">
                                         <rect key="frame" x="0.0" y="168" width="133" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Popover Segue"/>
+                                        <connections>
+                                            <segue destination="DX5-rR-lOv" kind="popoverPresentation" popoverAnchorView="hEE-RE-9wI" id="rRQ-se-GLi">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -60,17 +74,17 @@
             <objects>
                 <viewController id="DX5-rR-lOv" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EzZ-Vx-DXP">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello :)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIN-8M-WyS">
-                                <rect key="frame" x="121.33333333333333" y="392" width="147.33333333333337" height="60"/>
+                                <rect key="frame" x="121.33333333333333" y="365" width="147.33333333333337" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3F-TU-vmM">
-                                <rect key="frame" x="310" y="60" width="64" height="64"/>
+                                <rect key="frame" x="310" y="16" width="64" height="64"/>
                                 <state key="normal" image="close"/>
                                 <connections>
                                     <segue destination="32Z-4x-HdG" kind="unwind" unwindAction="unwindToHost:" id="bjo-tM-ubm"/>
@@ -86,13 +100,17 @@
                             <constraint firstItem="KIN-8M-WyS" firstAttribute="centerX" secondItem="EzZ-Vx-DXP" secondAttribute="centerX" id="YpW-KR-qQm"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="pZJ-Cp-6yf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3U-gc-Jsh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="32Z-4x-HdG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="770" y="81"/>
+            <point key="canvasLocation" x="780" y="85"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="rRQ-se-GLi"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="close" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
