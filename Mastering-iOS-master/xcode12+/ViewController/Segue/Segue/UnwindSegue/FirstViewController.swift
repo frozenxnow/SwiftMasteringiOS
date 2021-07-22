@@ -29,27 +29,16 @@ class FirstViewController: UIViewController {
         print(#function, type(of: unwindSegue.source), "==>", type(of: unwindSegue.description))
     }
     
+    override func canPerformUnwindSegueAction(_ action: Selector, from fromViewController: UIViewController, sender: Any?) -> Bool {
+        // VC계층을 따라 올라가면서 segue와 연결되어 있는 action을 실행할 수 있는지 확인, true 리턴시 실제로 실행, 모두 false 리턴하면 실행되지 않음
+        print(type(of: self), #function)
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

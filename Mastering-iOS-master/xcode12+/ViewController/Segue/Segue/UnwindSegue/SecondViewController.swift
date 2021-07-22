@@ -25,6 +25,9 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
+    @IBAction func unwindToSecond(_ unwindSegue: UIStoryboardSegue) {
+        print(#function, type(of: unwindSegue.source), "==>", type(of: unwindSegue.description))
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

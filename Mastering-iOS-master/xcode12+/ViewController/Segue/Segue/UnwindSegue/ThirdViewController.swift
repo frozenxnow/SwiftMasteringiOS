@@ -25,6 +25,18 @@ import UIKit
 
 class ThirdViewController: UIViewController {
     
+    // unwide segue와 연결된 action을 추가할 수 있는지 확인
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        print(type(of: self), #function)
+        return true
+        // true 리턴 : unwind와 연결된 action을 실행할 수 있는 VC 탐색
+        // 둘 이상의 VC가 검색된다면 identifier로 구분
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(type(of: self), #function)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
