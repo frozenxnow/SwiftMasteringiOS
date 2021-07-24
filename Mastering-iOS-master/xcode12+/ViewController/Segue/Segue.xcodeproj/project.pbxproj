@@ -26,6 +26,8 @@
 		AAC41100211B7D7D0092834A /* PerformSegue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAC410FF211B7D7D0092834A /* PerformSegue.storyboard */; };
 		AAC41102211B80BB0092834A /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC41101211B80BB0092834A /* MessageViewController.swift */; };
 		AADAA1F625ED249700C79F6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAA1F525ED249700C79F6F /* SceneDelegate.swift */; };
+		F25D546E26AAFFE5006E972F /* HalfEmbedingSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25D546D26AAFFE5006E972F /* HalfEmbedingSegue.swift */; };
+		F25D547126AB03FE006E972F /* HalfEmbedingUnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25D547026AB03FE006E972F /* HalfEmbedingUnwindSegue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		AAC410FF211B7D7D0092834A /* PerformSegue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PerformSegue.storyboard; sourceTree = "<group>"; };
 		AAC41101211B80BB0092834A /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		AADAA1F525ED249700C79F6F /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F25D546D26AAFFE5006E972F /* HalfEmbedingSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfEmbedingSegue.swift; sourceTree = "<group>"; };
+		F25D547026AB03FE006E972F /* HalfEmbedingUnwindSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfEmbedingUnwindSegue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 			children = (
 				AA8A1DCD211C4FE200D82EB4 /* CustomSegue.storyboard */,
 				AA8A1DD0211C505100D82EB4 /* CustomSegueViewController.swift */,
+				F25D546D26AAFFE5006E972F /* HalfEmbedingSegue.swift */,
+				F25D547026AB03FE006E972F /* HalfEmbedingUnwindSegue.swift */,
 			);
 			path = CustomSegue;
 			sourceTree = "<group>";
@@ -223,9 +229,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F25D547126AB03FE006E972F /* HalfEmbedingUnwindSegue.swift in Sources */,
 				AA8A1DC7211C225500D82EB4 /* SecondViewController.swift in Sources */,
 				AA8A1DC5211C223A00D82EB4 /* FirstViewController.swift in Sources */,
 				AAC410FE211B7D490092834A /* PerformSegueViewController.swift in Sources */,
+				F25D546E26AAFFE5006E972F /* HalfEmbedingSegue.swift in Sources */,
 				AA8A1DC9211C25F800D82EB4 /* ThirdViewController.swift in Sources */,
 				AA8A1DCB211C260B00D82EB4 /* FourthViewController.swift in Sources */,
 				AADAA1F625ED249700C79F6F /* SceneDelegate.swift in Sources */,
