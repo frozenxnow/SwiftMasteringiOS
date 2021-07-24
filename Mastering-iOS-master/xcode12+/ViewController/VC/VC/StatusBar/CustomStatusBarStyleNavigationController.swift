@@ -23,5 +23,17 @@
 import UIKit
 
 class CustomStatusBarStyleNavigationController: UINavigationController {
+    // child VC에 의해 설정되도록 하기
+    override var childViewControllerForStatusBarHidden: UIViewController? {
+        return topViewController // 마지막 child가 status bar style 선택한다
+    }
     
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return topViewController // status bar style을 결졍할 child 선택
+    }
+    
+    // top view controller가 home indicator 설정하도록 오버라이드
+    override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
+        return topViewController
+    }
 }

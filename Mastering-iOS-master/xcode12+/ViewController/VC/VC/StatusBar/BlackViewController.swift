@@ -25,6 +25,15 @@ import UIKit
 
 class BlackViewController: UIViewController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return false // size class에 관계 없이 항상 표시
+        // true: 가로로 회전했을 때 상태바 보이지 않음
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

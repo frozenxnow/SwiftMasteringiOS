@@ -25,7 +25,21 @@ import UIKit
 
 class WhiteViewController: UIViewController {
     
+    var style = UIStatusBarStyle.default
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return style
+    }
+    
+    @IBAction func toggleStyle(_ sender: Any) {
+        style = style == .default ? .lightContent : .default
+        setNeedsStatusBarAppearanceUpdate()
+        
+        let color = style == .default ? UIColor.white : UIColor.darkGray
+        UIView.animate(withDuration: 0.3) {
+            self.view.backgroundColor = color
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

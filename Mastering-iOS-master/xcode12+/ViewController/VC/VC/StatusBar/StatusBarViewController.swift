@@ -25,14 +25,46 @@ import UIKit
 
 class StatusBarViewController: UIViewController {
     
+    // 임시 속성 추가
+    var hidden = false
+    
+    override var prefersStatusBarHidden: Bool {
+        return hidden
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide // slide animation 사용
+    }
+    
     
     @IBAction func toggleVisibility(_ sender: Any) {
+//        prefersStatusBarHidden = !prefersStatusBarHidden // error , read-only
+        hidden = !hidden // 여기까지 한다고 업데이트가 되는건 아니다
+        
+        UIView.animate(withDuration: 0.3) {
+            // 업데이트 되었음을 시스템이 인지할 수 있도록 호출하는 특별한 메서드
+            self.setNeedsStatusBarAppearanceUpdate() // VC에서 status bar와 연관된 것들 스캔하여 업데이트
+        }
+        
         
     }
     
     
+    var style = UIStatusBarStyle.default
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return style
+    }
+    
     @IBAction func toggleStyle(_ sender: Any) {
+        style = style == .default ? .lightContent : .default
+       
         
+        let color = style == .default ? UIColor.white : UIColor.darkGray
+        UIView.animate(withDuration: 0.3) {
+            self.view.backgroundColor = color
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
     
     

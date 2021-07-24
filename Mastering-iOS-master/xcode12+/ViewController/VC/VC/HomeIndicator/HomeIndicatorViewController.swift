@@ -25,6 +25,14 @@ import UIKit
 
 class HomeIndicatorViewController: UIViewController {
     
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true // home indicator 표시 여부를 아이폰이 직접 선택
+        // 기본: false, home indicator를 항상 표시
+    }
+    
+    // 이 클래스와 연결된 씬은 navi controller에 임베드 되어있어 한가지 작업이 더 필요하다 : custom navi controller 클래스에서 작업한다 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
