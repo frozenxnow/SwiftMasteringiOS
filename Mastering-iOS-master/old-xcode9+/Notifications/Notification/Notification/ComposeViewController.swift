@@ -40,10 +40,13 @@ class ComposeViewController: UIViewController {
         return
     }
     
-    // 파라미터1: 노티피케이션 이름 (위에서 extension으로 추가했음)
-    // 파라미터2: 노티피케이션을 전달하는 객체의 이름
-    // 파라미터3: 노티피케이션과 연관된 데이터 값을 dictionary 형태로 전달 (번거롭지만 무조건 딕셔너리)
-    NotificationCenter.default.post(name: NSNotification.Name.NewValueDidInput, object: nil, userInfo: ["NewValue": text])
+    // background thread에서 noti를 전달하도록 DispatchQueue.global().async 안에 메서드 추가 
+    DispatchQueue.global().async {
+        // 파라미터1: 노티피케이션 이름 (위에서 extension으로 추가했음)
+        // 파라미터2: 노티피케이션을 전달하는 객체의 이름
+        // 파라미터3: 노티피케이션과 연관된 데이터 값을 dictionary 형태로 전달 (번거롭지만 무조건 딕셔너리)
+        NotificationCenter.default.post(name: NSNotification.Name.NewValueDidInput, object: nil, userInfo: ["NewValue": text])
+    }
     
       dismiss(animated: true, completion: nil)
    }

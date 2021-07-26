@@ -28,11 +28,17 @@ class NotificationCenterViewController: UIViewController {
     // 옵저버의 셀렉터로 들어가는 메서드는 노티피케이션 형태의 파라미터를 받는다
     @objc func process(notification: Notification) {
         
+        // thread를 확인하는 코드
+        print(Thread.isMainThread ? "Main Thread" : "Background Thread")
+        
+        
         guard let value = notification.userInfo?["NewValue"] as? String else {
             return
         }
         
-        self.valueLabel.text = value
+        DispatchQueue.main.async {
+            self.valueLabel.text = value
+        }
         
         print("#1", #function)
     }
@@ -58,8 +64,10 @@ class NotificationCenterViewController: UIViewController {
 
    }
    
+    
+    // 소멸자: iOS 9 이하 버전, 특정 시점에 더이상 noti를 전달하지 않는 경우 observer를 직접 해제하는 코드를 작성한다
    deinit {
-    NotificationCenter.default.removeObserver(self)
+    NotificationCenter.default.removeObserver(self) // 인스턴스와 관련된 모든 observer 해제 (9 이하에서 실행O)
       print(#function)
    }
 }

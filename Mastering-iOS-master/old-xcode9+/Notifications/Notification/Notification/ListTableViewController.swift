@@ -25,12 +25,14 @@ import UIKit
 class ListTableViewController: UITableViewController {
    
    @objc func postNotification() {
+    // notification을 보내는 코드 (아래 selector)
     NotificationCenter.default.post(name: NSNotification.Name.NewValueDidInput, object: nil, userInfo: ["NewValue":"dummy"])
    }
 
    override func viewDidLoad() {
       super.viewDidLoad()
       
+    // navigation bar 오른쪽에 버튼을 추가하고 이 버튼과 postNotification method를 연결
       navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postNotification))
    }
 }
