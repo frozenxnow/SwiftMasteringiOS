@@ -27,9 +27,12 @@ class SimpleUIViewAnimationViewController: UIViewController {
    @IBOutlet weak var redView: UIView!
    
    @IBAction func reset(_ sender: Any?) {
-      redView.backgroundColor = UIColor.red
-      redView.alpha = 1.0
-      redView.frame = CGRect(x: 50, y: 100, width: 50, height: 50)
+    UIView.animate(withDuration: 0.3) {
+        self.redView.backgroundColor = UIColor.red
+        self.redView.alpha = 1.0
+        self.redView.frame = CGRect(x: 50, y: 100, width: 50, height: 50)
+    }
+
    }
    
    @IBAction func animate(_ sender: Any) {
@@ -37,28 +40,24 @@ class SimpleUIViewAnimationViewController: UIViewController {
     frame.origin = view.center
     frame.size = CGSize(width: 100, height: 100)
     
+    UIView.animate(withDuration: 0.3, animations: {
+        self.redView.frame = frame
+        
+        self.redView.alpha = 0.5
+        self.redView.backgroundColor = UIColor.blue
+        }, completion: { finished in
+            self.reset(nil)
+        })
+        
+    }
+
+    override func viewDidLoad() {
+       super.viewDidLoad()
+       
+       reset(nil)
+    }
     
-    UIView.animate(withDuration: 0.3) {
-            self.redView.frame = frame
-            
-            self.redView.alpha = 0.5
-            self.redView.backgroundColor = UIColor.blue
-        
-        
-    } completion: { finished in
-        self.reset(nil)}
-
-   }
-   
-   override func viewDidLoad() {
-      super.viewDidLoad()
-      
-      reset(nil)
-   }
 }
-
-
-
 
 
 
