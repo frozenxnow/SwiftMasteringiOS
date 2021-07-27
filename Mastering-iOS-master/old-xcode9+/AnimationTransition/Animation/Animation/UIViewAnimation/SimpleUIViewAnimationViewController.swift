@@ -33,7 +33,21 @@ class SimpleUIViewAnimationViewController: UIViewController {
    }
    
    @IBAction func animate(_ sender: Any) {
-      
+    var frame = redView.frame
+    frame.origin = view.center
+    frame.size = CGSize(width: 100, height: 100)
+    
+    
+    UIView.animate(withDuration: 0.3) {
+            self.redView.frame = frame
+            
+            self.redView.alpha = 0.5
+            self.redView.backgroundColor = UIColor.blue
+        
+        
+    } completion: { finished in
+        self.reset(nil)}
+
    }
    
    override func viewDidLoad() {
