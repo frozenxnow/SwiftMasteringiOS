@@ -32,7 +32,9 @@ class AnimationOptionsViewController: UIViewController {
    }
    
    @IBAction func stop(_ sender: Any) {
-      
+     // animation 중지, reset method 호출
+    redView.layer.removeAllAnimations()
+    reset(nil)
    }
    
    @IBAction func animate(_ sender: Any) {
@@ -44,6 +46,8 @@ class AnimationOptionsViewController: UIViewController {
          self.redView.alpha = 0.5
          self.redView.backgroundColor = UIColor.blue
       }
+    
+    UIView.animateKeyframes(withDuration: 1, delay: 0.0, options: [.calculationModeLinear, .repeat, .autoreverse], animations: animations, completion: nil)
    }
    
    override func viewDidLoad() {

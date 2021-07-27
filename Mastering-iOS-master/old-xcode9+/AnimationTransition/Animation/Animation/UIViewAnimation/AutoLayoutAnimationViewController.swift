@@ -31,11 +31,20 @@ class AutoLayoutAnimationViewController: UIViewController {
    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
    
    @IBAction func animate(_ sender: Any) {
-      let targetFrame = CGRect(x: view.center.x - 100, y: view.center.y - 100, width: 200, height: 200)
-
-      UIView.animate(withDuration: 0.3) {
-         self.redView.frame = targetFrame
-      }
+//      let targetFrame = CGRect(x: view.center.x - 100, y: view.center.y - 100, width: 200, height: 200)
+//
+//      UIView.animate(withDuration: 0.3) {
+//         self.redView.frame = targetFrame
+//      }
+    
+    self.widthConstraint.constant = 200
+    self.heightConstraint.constant = 200
+    
+    redView.setNeedsUpdateConstraints()
+    
+    UIView.animate(withDuration: 0.3) {
+        self.view.layoutIfNeeded()
+    }
    }
 }
 

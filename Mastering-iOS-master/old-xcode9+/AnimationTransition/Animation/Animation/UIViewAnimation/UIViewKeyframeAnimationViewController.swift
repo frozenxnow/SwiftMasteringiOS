@@ -43,17 +43,29 @@ class UIViewKeyframeAnimationViewController: UIViewController {
    
    
    @IBAction func animate(_ sender: Any) {
-      UIView.animate(withDuration: 1, animations: {
-         self.phase1()
-      }, completion: { finished in
-         UIView.animate(withDuration: 1, animations: {
+//      UIView.animate(withDuration: 1, animations: {
+//         self.phase1()
+//      }, completion: { finished in
+//         UIView.animate(withDuration: 1, animations: {
+//            self.phase2()
+//         }, completion: { finished in
+//            UIView.animate(withDuration: 1, animations: {
+//               self.phase3()
+//            })
+//         })
+//      })
+    UIView.animateKeyframes(withDuration: 3, delay: 0, options: [], animations: {
+        // keyframe 추가하는 메서드 작성 (시작시간, 실행시간, 애니메이션), 시간은 전체 시간에 대한 상대적인 값으로 0~1 저장
+        UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.3, animations: {
+            self.phase1()
+        })
+        UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.3, animations: {
             self.phase2()
-         }, completion: { finished in
-            UIView.animate(withDuration: 1, animations: {
-               self.phase3()
-            })
-         })
-      })      
+        })
+        UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4, animations: {
+            self.phase3()
+        })
+    }, completion: nil)
    }
 }
 

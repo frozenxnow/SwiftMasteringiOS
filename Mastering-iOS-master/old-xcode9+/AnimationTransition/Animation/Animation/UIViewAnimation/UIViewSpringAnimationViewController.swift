@@ -35,7 +35,10 @@ class UIViewSpringAnimationViewController: UIViewController {
    
    @IBAction func animate(_ sender: Any) {
       let targetFrame = CGRect(x: view.center.x - 100, y: view.center.y - 100, width: 200, height: 200)
-      
+    
+    UIView.animate(withDuration: 3, delay: 0.0, usingSpringWithDamping: CGFloat(dampingSlider.value), initialSpringVelocity: CGFloat(velocitySlider.value), options: [], animations: {
+        self.redView.frame = targetFrame
+    }, completion: nil)
    }
    
    override func viewDidLoad() {
