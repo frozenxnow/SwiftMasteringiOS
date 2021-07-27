@@ -26,9 +26,15 @@ class SystemNotificationViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
+   
+    // observer 추가
     NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillChangeStatusBarFrame, object: nil, queue: OperationQueue.main) { (noti) in
         print(noti.userInfo)
     }
-   }   
+   }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("remove observer")
+    }
 }

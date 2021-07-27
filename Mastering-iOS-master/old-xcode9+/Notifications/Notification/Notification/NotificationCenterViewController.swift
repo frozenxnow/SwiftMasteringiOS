@@ -31,7 +31,6 @@ class NotificationCenterViewController: UIViewController {
         // thread를 확인하는 코드
         print(Thread.isMainThread ? "Main Thread" : "Background Thread")
         
-        
         guard let value = notification.userInfo?["NewValue"] as? String else {
             return
         }
@@ -42,7 +41,11 @@ class NotificationCenterViewController: UIViewController {
         
         print("#1", #function)
     }
+    
+    var token: NSObjectProtocol?
+    
    override func viewDidLoad() {
+    
       super.viewDidLoad()
     
     // 옵저버 등록 방법 1
@@ -50,6 +53,7 @@ class NotificationCenterViewController: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(process(notification:)), name: NSNotification.Name.NewValueDidInput, object: nil)
 
     // 옵저버 등록 방법 2
+    // 3. OperationQueue.main: 메인 큐에에서만 클로저 실행
     NotificationCenter.default.addObserver(forName: NSNotification.Name.NewValueDidInput, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
         print(Thread.isMainThread ? "MainThread" : "BackgroundThread")
         
@@ -67,6 +71,12 @@ class NotificationCenterViewController: UIViewController {
     
     // 소멸자: iOS 9 이하 버전, 특정 시점에 더이상 noti를 전달하지 않는 경우 observer를 직접 해제하는 코드를 작성한다
    deinit {
+    
+    // 등록된 observer를 해제하는 코드
+    if let token = token {
+        NotificationCenter.default.removeObserver(token)
+    }
+    
     NotificationCenter.default.removeObserver(self) // 인스턴스와 관련된 모든 observer 해제 (9 이하에서 실행O)
       print(#function)
    }
