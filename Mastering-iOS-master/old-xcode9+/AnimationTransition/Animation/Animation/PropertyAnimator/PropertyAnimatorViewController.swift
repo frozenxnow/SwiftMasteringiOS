@@ -38,23 +38,49 @@ class PropertyAnimatorViewController: UIViewController {
    }
    
    @IBAction func pause(_ sender: Any) {
-      
+    animator?.pauseAnimation() // 일시중지
+    print(animator?.fractionComplete)
    }
    
    @IBAction func animate(_ sender: Any) {
-
+//    animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 7, delay: 0, options: [], animations: {
+//        self.moveAndResize()
+//    }) { position in
+//        switch position {
+//        case .start:
+//            print("Start")
+//        case .end:
+//            print("End")
+//        case .current:
+//            print("Current")
+//        }
+//    }
+    
+    // 생성자를 사용하기: 직접 start animation을 해주어야한다 
+    animator = UIViewPropertyAnimator(duration: 7, curve: .linear, animations: {
+        self.moveAndResize()
+    })
+    
+    animator?.addCompletion({ (position) in
+        print("DONE \(position)")
+    })
    }
    
    @IBAction func resume(_ sender: Any) {
-
+    animator?.startAnimation()
    }
    
    @IBAction func stop(_ sender: Any) {
-
+    animator?.stopAnimation(true) // true: 애니메이션 중지, Inactive 상태, false: stopped 상태
+    // 주로 false(중지) 일때 , finish method 함께 전달
+    animator?.finishAnimation(at: .current)
    }
    
    @IBAction func add(_ sender: Any) {
-
+    // stopped 상태에서 호출하면 절대 안됨. active/inactive 상태에서 호출
+    animator?.addAnimations({
+        self.redView.backgroundColor = UIColor.blue
+    }, delayFactor: 0)
    }
    
    override func viewDidLoad() {

@@ -39,7 +39,8 @@ class InteractiveAnimationViewController: UIViewController {
    }
    
    @IBAction func sliderChanged(_ sender: UISlider) {
-      
+      // slider를 통해 애니메이션 제어하는 코드
+    animator?.fractionComplete = CGFloat(sender.value)
    }
    
    override func viewDidLoad() {
