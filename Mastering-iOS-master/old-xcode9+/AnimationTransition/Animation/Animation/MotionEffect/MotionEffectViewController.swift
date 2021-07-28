@@ -35,7 +35,7 @@ class MotionEffectViewController: UIViewController {
     x.minimumRelativeValue = -100 // offset이 -1일때 사용할 최소값
     x.maximumRelativeValue = 100 // offset이 1일때 사용할 최대값
     
-//    targetImageView.addMotionEffect(x) 
+//    targetImageView.addMotionEffect(x)
     
     let y = UIInterpolatingMotionEffect(keyPath: "cencer.y", type: .tiltAlongVerticalAxis)
     y.minimumRelativeValue = -100

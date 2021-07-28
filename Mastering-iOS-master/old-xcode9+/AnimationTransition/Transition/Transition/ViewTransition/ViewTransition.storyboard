@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v5s-iv-W6P">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="v5s-iv-W6P">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAr-Eh-mmW">
-                                <rect key="frame" x="57" y="144" width="260" height="438"/>
+                                <rect key="frame" x="57" y="124" width="260" height="458"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8D4-3C-lag">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="438"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="458"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMl-qm-m4g">
-                                                <rect key="frame" x="73" y="100" width="114" height="239"/>
+                                                <rect key="frame" x="73" y="109.5" width="114" height="239"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="200"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -38,10 +36,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="idS-SP-UAq">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="438"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="458"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCC-qZ-Sno">
-                                                <rect key="frame" x="86" y="100" width="89" height="239"/>
+                                                <rect key="frame" x="85.5" y="109.5" width="89" height="239"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="200"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -67,6 +65,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="xab-ne-xDo"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xab-ne-xDo" firstAttribute="bottom" secondItem="uAr-Eh-mmW" secondAttribute="bottom" constant="85" id="2bg-0V-282"/>
@@ -74,7 +73,6 @@
                             <constraint firstItem="uAr-Eh-mmW" firstAttribute="top" secondItem="xab-ne-xDo" secondAttribute="top" constant="80" id="Hzh-GM-xpR"/>
                             <constraint firstItem="uAr-Eh-mmW" firstAttribute="leading" secondItem="xab-ne-xDo" secondAttribute="leading" constant="57" id="hxc-tM-kRk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="xab-ne-xDo"/>
                     </view>
                     <navigationItem key="navigationItem" title="View Transition" id="5oS-vQ-KJk">
                         <barButtonItem key="rightBarButtonItem" systemItem="play" id="ONQ-Bl-5iv">
