@@ -28,7 +28,24 @@ class MotionEffectViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
+    
+    // image의 x축에 motion effect 추가(1: motion effect를 적용할 속성에 대한 keyPath, 2: motion effect 종류(적용할 축))
+    let x = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+    // motion effect 크기
+    x.minimumRelativeValue = -100 // offset이 -1일때 사용할 최소값
+    x.maximumRelativeValue = 100 // offset이 1일때 사용할 최대값
+    
+//    targetImageView.addMotionEffect(x) 
+    
+    let y = UIInterpolatingMotionEffect(keyPath: "cencer.y", type: .tiltAlongVerticalAxis)
+    y.minimumRelativeValue = -100
+    y.maximumRelativeValue = 100
+    // motion effect를 추가하기
+    
+    let group = UIMotionEffectGroup()
+    group.motionEffects = [x, y]
+    targetImageView.addMotionEffect(group)
+    
    }
 }
 
