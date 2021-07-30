@@ -25,33 +25,8 @@ import UIKit
 class PresentationContextViewController: UIViewController {
    
    @IBAction func switchChanged(_ sender: UISwitch) {
-      
+      // on일때 현재 페이지를 presentation context로 지정
+    definesPresentationContext = sender.isOn
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
