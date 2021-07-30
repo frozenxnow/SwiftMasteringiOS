@@ -28,6 +28,13 @@ class PresentationStyleViewController: UIViewController {
       let sb = UIStoryboard(name: "Presentation", bundle: nil)
       let modalVC = sb.instantiateViewController(withIdentifier: "ModalViewController")
       
+    let style = UIModalPresentationStyle(rawValue: sender.tag) ?? .fullScreen
+    modalVC.modalPresentationStyle = style
+    
+    if let pc = modalVC.popoverPresentationController {
+        pc.sourceView = sender
+        modalVC.preferredContentSize = CGSize(width: 500, height: 300)
+    }
       
       printPresentationStyle(for: modalVC)
       present(modalVC, animated: true, completion: nil)

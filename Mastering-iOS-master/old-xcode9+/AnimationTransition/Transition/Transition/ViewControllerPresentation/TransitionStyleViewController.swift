@@ -24,14 +24,17 @@ import UIKit
 
 class TransitionStyleViewController: UIViewController {
    
-   var selectedTransitionStyle = UIModalTransitionStyle.coverVertical
+   var selectedTransitionStyle = UIModalTransitionStyle.coverVertical // 선택하는 표시방법이 저장되는 변수
    
    @IBAction func styleChanged(_ sender: UISegmentedControl) {
       selectedTransitionStyle = UIModalTransitionStyle(rawValue: sender.selectedSegmentIndex) ?? .coverVertical
    }
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      
+      // segue를 동적으로 설정하고싶다면 prepare단계(VC표시 이전)에서 세팅한다
+    let presentedVC = segue.destination
+    
+    presentedVC.modalTransitionStyle = selectedTransitionStyle
    }
    
    
@@ -39,6 +42,7 @@ class TransitionStyleViewController: UIViewController {
       let sb = UIStoryboard(name: "Presentation", bundle: nil)
       let modalVC = sb.instantiateViewController(withIdentifier: "ModalViewController")
       
+    modalVC.modalTransitionStyle = selectedTransitionStyle
       
       present(modalVC, animated: true, completion: nil)
    }
