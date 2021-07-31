@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+// 프리젠테이션 컨트롤러에 필요한 기본 구성
+
 class SimplePresentationController: UIPresentationController {
     let dimmingView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
@@ -58,6 +61,61 @@ class SimplePresentationController: UIPresentationController {
         containerView.addSubview(closeButton)
         closeButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         
-        //
+        // top 제약을 생성하고 Constant 값을 -80으로 설정하고
+        closeButtonTopConstraint = closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: -80)
+        closeButtonTopConstraint?.isActive = true
+        
+        // 제약 적용
+        containerView.layoutIfNeeded()
+        
+        // 60으로 바꾸고 애니메이션 실행: 트랜지션 코디네이터 활용
+        closeButtonTopConstraint?.constant = 60
+        guard let coordinator = presentedViewController.transitionCoordinator else {
+            dimmingView.alpha = 1.0
+            presentingViewController.view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            containerView.layoutIfNeeded()
+            return
+        }
+        
+        coordinator.animate(alongsideTransition: { (context) in
+            self.dimmingView.alpha = 1.0
+            self.presentingViewController.view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            containerView.layoutIfNeeded()
+        }, completion: nil)
+
+        
+    }
+    override func presentationTransitionDidEnd(_ completed: Bool) {
+        print("\n\n")
+        print(String(describing: type(of: self)), #function)
+    }
+    
+    override func dismissalTransitionWillBegin() {
+        print("\n\n")
+        print(String(describing: type(of: self)), #function)
+        
+        closeButtonTopConstraint?.constant =  -80
+        
+        guard let coordinator = presentedViewController.transitionCoordinator else {
+            dimmingView.alpha = 1.0
+            presentingViewController.view.transform = CGAffineTransform.identity
+            containerView?.layoutIfNeeded()
+            return
+        }
+        
+        coordinator.animate(alongsideTransition: { (context) in
+            self.dimmingView.alpha = 1.0
+            self.presentingViewController.view.transform = CGAffineTransform.identity
+            self.containerView?.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    override func dismissalTransitionDidEnd(_ completed: Bool) {
+        print("\n\n")
+        print(String(describing: type(of: self)), #function)
+    }
+    
+    override func containerViewDidLayoutSubviews() {
+        print(String(describing: type(of: self)), #function)
     }
 }
