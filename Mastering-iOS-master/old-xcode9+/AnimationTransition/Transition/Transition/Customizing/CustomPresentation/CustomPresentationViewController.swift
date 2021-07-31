@@ -25,7 +25,9 @@ import UIKit
 class CustomPresentationViewController: UIViewController {
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      
+      // storyboard의 modal을 custom으로 바꾸고 delegate 구현
+    segue.destination.modalPresentationStyle = .custom
+    segue.destination.transitioningDelegate = self
    }
    
    override func viewDidLoad() {
@@ -35,6 +37,12 @@ class CustomPresentationViewController: UIViewController {
 }
 
 
+extension CustomPresentationViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        // 기본 컨트롤러 대신 이게 사용된다
+        return SimplePresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
 
 
 

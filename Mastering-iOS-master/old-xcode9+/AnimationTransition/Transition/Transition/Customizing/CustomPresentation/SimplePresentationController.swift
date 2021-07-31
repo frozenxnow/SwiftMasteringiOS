@@ -18,12 +18,18 @@ class SimplePresentationController: UIPresentationController {
     let closeButton = UIButton(type: .custom)
     var closeButtonTopConstraint: NSLayoutConstraint?
     
+    let workaroundView = UIView()
+    
     // 지정생성자 오버라이딩
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         // 반드시 상위 구현을 호출해야함
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
         
-        closeButton.setImage(UIImage(named: "cloase"), for: .normal)
+        if #available(iOS 13.0, *) {
+            closeButton.setImage(UIImage(systemName: "trash"), for: .normal)
+        } else {
+            closeButton.setImage(UIImage(named: "trash"), for: .normal)
+        }
         closeButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
     }
     
@@ -57,6 +63,10 @@ class SimplePresentationController: UIPresentationController {
         dimmingView.alpha = 0.0
         dimmingView.frame = containerView.bounds
         containerView.insertSubview(dimmingView, at: 0)
+        
+        workaroundView.frame = dimmingView.bounds
+        workaroundView.isUserInteractionEnabled = false
+        containerView.insertSubview(workaroundView, aboveSubview: dimmingView)
         
         containerView.addSubview(closeButton)
         closeButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
@@ -115,7 +125,25 @@ class SimplePresentationController: UIPresentationController {
         print(String(describing: type(of: self)), #function)
     }
     
+    override func containerViewWillLayoutSubviews() {
+        print(String(describing: type(of: self)), #function)
+
+        presentedView?.frame = frameOfPresentedViewInContainerView
+        dimmingView.frame = containerView!.bounds
+    }
+    
     override func containerViewDidLayoutSubviews() {
         print(String(describing: type(of: self)), #function)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        presentingViewController.view.transform = CGAffineTransform.identity
+        
+        // 다시 축소된 프레임으로 animate
+        coordinator.animate(alongsideTransition: { (context) in
+            self.presentingViewController.view.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }, completion: nil)
     }
 }
