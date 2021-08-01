@@ -28,6 +28,7 @@
 		AA928B37213D326800306725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA928B36213D326800306725 /* Assets.xcassets */; };
 		AA928B3A213D326800306725 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA928B38213D326800306725 /* LaunchScreen.storyboard */; };
 		F2B6A4AD26B59A56006D11A0 /* SimplePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B6A4AC26B59A56006D11A0 /* SimplePresentationController.swift */; };
+		F2B6A4B026B65C8E006D11A0 /* ZoomAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B6A4AF26B65C8E006D11A0 /* ZoomAnimationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		AA928B39213D326800306725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA928B3B213D326800306725 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2B6A4AC26B59A56006D11A0 /* SimplePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePresentationController.swift; sourceTree = "<group>"; };
+		F2B6A4AF26B65C8E006D11A0 /* ZoomAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAnimationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				AA308EFE213F51BA006FD282 /* CustomTransition.storyboard */,
 				AA308F00213F51CF006FD282 /* CustomTransitionViewController.swift */,
 				AA6CA503213F56650018ED50 /* ImageViewController.swift */,
+				F2B6A4AF26B65C8E006D11A0 /* ZoomAnimationController.swift */,
 			);
 			path = CustomTransition;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				AA83968A213E7CDB0067B36F /* PresentationViewController.swift in Sources */,
 				AA839686213E4E6F0067B36F /* PresentationStyleViewController.swift in Sources */,
 				AA83968C213E80680067B36F /* ModalViewController.swift in Sources */,
+				F2B6A4B026B65C8E006D11A0 /* ZoomAnimationController.swift in Sources */,
 				AA6CA504213F56650018ED50 /* ImageViewController.swift in Sources */,
 				AA883EDD213EF56400DFB871 /* CustomPresentationViewController.swift in Sources */,
 			);

@@ -28,14 +28,19 @@ class CustomTransitionViewController: UIViewController {
    
    @IBOutlet weak var listCollectionView: UICollectionView!
    
-   
+   let animator = ZoomAnimationController()
+    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if let vc = segue.destination as? ImageViewController {
          if let cell = sender as? UICollectionViewCell, let indexPath = listCollectionView.indexPath(for: cell) {
             vc.image = list[indexPath.item]
             
+            animator.targetImage = list[indexPath.item]
+            animator.targetIndexPath = indexPath
          }
       }
+    
+    segue.destination.transitioningDelegate = self
    }
    
    override func viewDidLoad() {
@@ -46,7 +51,14 @@ class CustomTransitionViewController: UIViewController {
 }
 
 
-
+extension CustomTransitionViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        // 프리젠테이션에 사용할 애니메이터가 필요할 때마다 호출
+        // presenting 속성을 통해 presentation과 dismissal을 구분한다
+        animator.presenting = true
+        return animator
+    }
+}
 
 
 extension CustomTransitionViewController: UICollectionViewDataSource {
