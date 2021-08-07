@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import SampleFramework
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let obj = SampleObj()
+        obj.openFunc()
     }
-
+    
+    @IBAction func tapButtonTest(_ sender: UIButton) {
+        self.present(SampleViewController(), animated: true, completion: nil)
+    }
+    
 
 }
 

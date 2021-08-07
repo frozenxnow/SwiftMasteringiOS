@@ -20,6 +20,9 @@
                                 <rect key="frame" x="100" y="433" width="216" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Custom Framework Test Button"/>
+                                <connections>
+                                    <action selector="tapButtonTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ebq-gX-QmB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

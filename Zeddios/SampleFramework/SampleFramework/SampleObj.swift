@@ -6,3 +6,17 @@
 //
 
 import Foundation
+import UIKit
+
+open class SampleObj: NSObject {
+    open func openFunc() {
+        self.hideFunc()
+    }
+    
+    func hideFunc() {
+        print(#function)
+    }
+}
+
+
+
