@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var myTableView: UITableView!
     
-    var arr = [String]()
+    var arr = ["견", "나도전", "오르페우스"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +32,13 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! MyTableViewCell
+        cell.myLablel.text = arr[indexPath.row]
+        cell.myImageView.image = UIImage(named: "book")
+        cell.myLablel.sizeToFit()
         return cell
         
     }
-    
     
 }
 

@@ -16,18 +16,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLm-II-wTS">
-                        <rect key="frame" x="214" y="34" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLm-II-wTS">
+                        <rect key="frame" x="220" y="33.5" width="40" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jJs-vE-v7r">
-                        <rect key="frame" x="31" y="20" width="137" height="49"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jJs-vE-v7r">
+                        <rect key="frame" x="30" y="19" width="140" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="3AD-xg-GNV"/>
+                            <constraint firstAttribute="height" constant="50" id="rDh-hu-44V"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="jJs-vE-v7r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="8uc-f7-FqZ"/>
+                    <constraint firstItem="jJs-vE-v7r" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B8r-SZ-TFj"/>
+                    <constraint firstItem="oLm-II-wTS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gvq-zL-XEg"/>
+                    <constraint firstItem="oLm-II-wTS" firstAttribute="leading" secondItem="jJs-vE-v7r" secondAttribute="trailing" constant="50" id="oro-I0-mf6"/>
+                    <constraint firstAttribute="trailing" secondItem="oLm-II-wTS" secondAttribute="trailing" constant="60" id="uLI-SS-Px7"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
