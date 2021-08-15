@@ -21,7 +21,7 @@
 //
 
 import UIKit
-
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,14 +29,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
    
+    
+    // 권한 요청은 여기에서 구현
+    UNUserNotificationCenter.current().requestAuthorization(options: [UNAuthorizationOptions.badge, .sound, .alert]) { (granted, error) in
+        if granted {
+            UNUserNotificationCenter.current().delegate = self
+        }
+        
+        print("granted \(granted)")
+    }
+    
       return true
    }
 
 }
 
 
-
-
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+}
 
 
 
