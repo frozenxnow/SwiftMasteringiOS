@@ -21,14 +21,39 @@
 //
 
 import UIKit
+import  UserNotifications
 
+// 메시지를 입력하고 시간을 선택한 다음 버튼을 탭하면 로컬노티피케이션 예약
 class LocalNotificationViewController: UIViewController {
    var interval: TimeInterval = 1
    
    @IBOutlet weak var inputField: UITextField!
    
    @IBAction func schedule(_ sender: Any) {
-      
+      // local noti 예약
+    let content = UNMutableNotificationContent() // 인스턴스 생성(속성을 사용해 noti생성)
+    content.title = "Hello"
+    content.body = inputField.text ?? "Empty body"
+    content.badge = 123
+    content.sound = UNNotificationSound.default()
+    // 위 모든것은 권한 허가가 필요함
+    
+    // 트리거를 통해 로컬노티가 전달되는 조건을 지정
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+    
+    // UNNotificationRequest 인스턴스 생성
+    let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
+
+    // 실제 예약 요청
+    UNUserNotificationCenter.current().add(request) { (error) in
+        if let error = error {
+            print(error)
+        } else {
+            print("Done")
+        }
+    }
+    
+    inputField.text = nil
    }
    
    override func viewDidLoad() {

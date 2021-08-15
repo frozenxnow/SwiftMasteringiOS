@@ -30,12 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
    
     
-    // 권한 요청은 여기에서 구현
+    // 권한 요청은 여기에서 구현(옵션: 뱃지를 띄우고 권한 요청 경고창과 함께 사운드 재생, 클로저: 허가 여부와 오류정보 전달)
     UNUserNotificationCenter.current().requestAuthorization(options: [UNAuthorizationOptions.badge, .sound, .alert]) { (granted, error) in
         if granted {
+            // 권한을 허가한 경우 델리게이트를 설정한다
             UNUserNotificationCenter.current().delegate = self
         }
-        
+        // 허가 상태를 콘솔에 출력
         print("granted \(granted)")
     }
     
